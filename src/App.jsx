@@ -1,18 +1,19 @@
-import { useState } from 'react'
-<link href="/dist/styles.css" rel="stylesheet"></link>
+import { useState } from "react";
+import Navbar from "./components/Navbar";
+import FindYourJobs from "./components/FindYourJobs";
+<link href="/dist/styles.css" rel="stylesheet"></link>;
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   return (
     <>
-      <div>
-      <h1 class="text-3xl font-bold underline text-center">
-    Inter Dude
-  </h1>
+      <div className="flex flex-col">
+        <Navbar/>
+        <FindYourJobs/>
       </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
