@@ -2,9 +2,9 @@ import { useState } from "react";
 import JobCard from "./JobCard";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-const Internship = [
+const Job = [
   {
-    title: "Internship",
+    title: "Job",
     Post: "Web Developer",
     company: "Connex India",
     location: "Delhi",
@@ -12,7 +12,7 @@ const Internship = [
     duration: "6 months",
   },
   {
-    title: "Internship",
+    title: "Job",
     Post: "Frontend Developer",
     company: "TechCorp",
     location: "Mumbai",
@@ -20,7 +20,7 @@ const Internship = [
     duration: "4 months",
   },
   {
-    title: "Internship",
+    title: "Job",
     Post: "Backend Developer",
     company: "SoftSolutions",
     location: "Bangalore",
@@ -28,7 +28,7 @@ const Internship = [
     duration: "6 months",
   },
   {
-    title: "Internship",
+    title: "Job",
     Post: "React Developer",
     company: "Innovate",
     location: "Pune",
@@ -36,7 +36,7 @@ const Internship = [
     duration: "5 months",
   },
   {
-    title: "Internship",
+    title: "Job",
     Post: "Full Stack Developer",
     company: "DevHub",
     location: "Hyderabad",
@@ -44,7 +44,7 @@ const Internship = [
     duration: "6 months",
   },
   {
-    title: "Internship",
+    title: "Job",
     Post: "Software Engineer",
     company: "Coders Inc.",
     location: "Chennai",
@@ -52,7 +52,7 @@ const Internship = [
     duration: "3 months",
   },
   {
-    title: "Internship",
+    title: "Job",
     Post: "Software Engineer",
     company: "Coders Inc.",
     location: "Chennai",
@@ -60,7 +60,7 @@ const Internship = [
     duration: "3 months",
   },
   {
-    title: "Internship",
+    title: "Job",
     Post: "Software Engineer",
     company: "Coders Inc.",
     location: "Chennai",
@@ -68,7 +68,7 @@ const Internship = [
     duration: "3 months",
   },
   {
-    title: "Internship",
+    title: "Job",
     Post: "Software Engineer",
     company: "Coders Inc.",
     location: "Chennai",
@@ -76,7 +76,7 @@ const Internship = [
     duration: "3 months",
   },
   {
-    title: "Internship",
+    title: "Job",
     Post: "Software Engineer",
     company: "Coders Inc.",
     location: "Chennai",
@@ -84,40 +84,7 @@ const Internship = [
     duration: "3 months",
   },
   {
-    title: "Internship",
-    Post: "Software Engineer",
-    company: "Coders Inc.",
-    location: "Chennai",
-    stipend: "25,000/month",
-    duration: "3 months",
-  },
-
-  {
-    title: "Internship",
-    Post: "Software Engineer",
-    company: "Coders Inc.",
-    location: "Chennai",
-    stipend: "25,000/month",
-    duration: "3 months",
-  },
-  {
-    title: "Internship",
-    Post: "Software Engineer",
-    company: "Coders Inc.",
-    location: "Chennai",
-    stipend: "25,000/month",
-    duration: "3 months",
-  },
-  {
-    title: "Internship",
-    Post: "Software Engineer",
-    company: "Coders Inc.",
-    location: "Chennai",
-    stipend: "25,000/month",
-    duration: "3 months",
-  },
-  {
-    title: "Internship",
+    title: "Job",
     Post: "Software Engineer",
     company: "Coders Inc.",
     location: "Chennai",
@@ -129,11 +96,11 @@ const Internship = [
 
 const ITEMS_PER_PAGE = 4;
 
-const LatestInternship = () => {
+const LatestJob = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextSlide = () => {
-    if (currentIndex + ITEMS_PER_PAGE < Internship.length) {
+    if (currentIndex + ITEMS_PER_PAGE < Job.length) {
       setCurrentIndex((prev) => prev + ITEMS_PER_PAGE);
     }
   };
@@ -145,13 +112,13 @@ const LatestInternship = () => {
   };
 
   // Progress Bar Calculation
-  const progress = ((currentIndex + ITEMS_PER_PAGE) / Internship.length) * 92;
+  const progress = ((currentIndex + ITEMS_PER_PAGE) / Job.length) * 92;
 
   return (
-    <div>
+    <div className="mt-20">
       <div className="flex flex-col justify-around items-center ">
         <div className="text-3xl font-bold">
-          Latest internship on Intern Dude
+          Latest Job on Intern Dude
         </div>
         <div className="flex justify-around items-center mt-10">
           <div className="w-auto border-1 border-blue-700 rounded-xl pl-2 pr-2 pt-1 pb-1 bg-gray-100 mr-2 font-semibold cursor-pointer">
@@ -181,7 +148,7 @@ const LatestInternship = () => {
         <div className="flex justify-around items-center mt-10">
           {/* Card 1 */}
           <div className="flex justify-between items-center gap-5">
-            {Internship.slice(currentIndex, currentIndex + ITEMS_PER_PAGE).map(
+            {Job.slice(currentIndex, currentIndex + ITEMS_PER_PAGE).map(
               (job, index) => (
                 <JobCard key={index} {...job} />
               )
@@ -208,7 +175,7 @@ const LatestInternship = () => {
 
             <button
               onClick={nextSlide}
-              disabled={currentIndex + ITEMS_PER_PAGE >= Internship.length}
+              disabled={currentIndex + ITEMS_PER_PAGE >= Job.length}
               className="p-2 rounded-full border"
             >
               <ChevronRight />
@@ -219,4 +186,4 @@ const LatestInternship = () => {
   );
 };
 
-export default LatestInternship;
+export default LatestJob;

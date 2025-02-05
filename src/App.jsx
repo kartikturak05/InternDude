@@ -2,6 +2,8 @@ import { useState } from "react";
 import Navbar from "./components/Navbar";
 import FindYourJobs from "./components/FindYourJobs";
 import LatestInternship from "./components/LatestInternship";
+import LatestJob from "./components/LatestJob";
+import TopCompaniesHiring from "./components/TopCompaniesHiring";
 <link href="/dist/styles.css" rel="stylesheet"></link>;
 
 function App() {
@@ -13,6 +15,8 @@ function App() {
         <Navbar/>
         <FindYourJobs/>
         <LatestInternship/>
+        <LatestJob/>
+        <TopCompaniesHiring/>
       </div>
     </>
   );
