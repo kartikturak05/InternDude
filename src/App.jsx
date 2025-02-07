@@ -6,15 +6,18 @@ import Navbar from "./components/Navbar";
 <link href="/dist/styles.css" rel="stylesheet"></link>;
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [showOptions, setShowOptions] = useState("");
 
   return (
     <>
-    <Navbar/>
-    <Routes>
+    <div onClick={() => setShowOptions("")}>
+    <Navbar setShowOptions={setShowOptions} showOptions={showOptions}/>
+    <Routes className="relative">
       <Route path="/" element={<Home />} />
       <Route path="/signup" element={<SignUp />} />
       </Routes>
+    </div>
+    
     </>
   );
 }
