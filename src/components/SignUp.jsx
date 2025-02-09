@@ -1,20 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaArrowRight } from "react-icons/fa6";
 import { CgMail } from "react-icons/cg";
 import { MdLock } from "react-icons/md";
 import { IoMdCall } from "react-icons/io";
 import { FcGoogle } from "react-icons/fc";
 import { FaEyeSlash, FaRegEye } from "react-icons/fa";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+  sendSignInLinkToEmail,
+} from "firebase/auth";
+import { auth } from "./firebase";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
-const EmailVerification = ({email}) => {
+const EmailVerification = ({ email }) => {
   return (
     <>
       <div className="flex flex-col items-center justify-center w-full h-full">
         <div className="text-xl font-semibold mb-2">
           A verification link has been sent to{" "}
-          <span className="text-sm ">
-            {email}
-          </span>
+          <span className="text-sm ">{email}</span>
         </div>
         <div className="text-cl mb-2 ">
           Please click on the link that has just been sent to your email account
@@ -35,6 +43,84 @@ const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [Continue, setContinue] = useState(true);
+  const [userDetails, setUserDetails] = useState(null);
+  const navigate = useNavigate();
+
+  const onContinueClick = async () => {
+    console.log(email, password);
+
+    if (isSignup) {
+      try {
+        // await createUserWithEmailAndPassword(auth, email, password);
+        // const user = auth.currentUser;
+        // console.log(user);
+
+      setContinue(!Continue)
+
+
+        await sendSignInLinkToEmail(auth, email,{
+
+          // this is the URL that where we will redirect back to after clicking on the link in gmail
+          url:'http://localhost:5173/',
+          handleCodeInApp:true,
+        }).then(() => {
+          console.log("Email sent successfully");
+          toast.success("Email sent successfully");
+        });
+        // console.log("User registered successfully");
+        // toast.success("User registered successfully");
+      } catch (error) {
+        console.log(error);
+        toast.error("Email Already Registered", {
+          position: "bottom-right",
+        });
+      }
+    } else {
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        const user = auth.currentUser;
+        console.log(user);
+        console.log("User logged in successfully");
+        toast.success("User logged in successfully");
+      } catch (error) {
+        console.log(error);
+        toast.error("Invalid Email or password", {
+          position: "bottom-right",
+        });
+      }
+    }
+  };
+
+  const googleSignIn = async () => {
+    // Google Sign In
+    try {
+      const provider = new GoogleAuthProvider();
+      const user = await signInWithPopup(auth, provider).then((result) => {
+        const user = result.user;
+        console.log(user);
+        console.log("User logged in successfully");
+        toast.success("User logged in successfully");
+        navigate("/");
+      });
+      close(user);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fetchUserData = async () => {
+    auth.onAuthStateChanged(async (user) => {
+      console.log(user);
+      setUserDetails(user);
+    });
+  };
+
+  useEffect(() => {
+    fetchUserData();
+  }, []);
+
+  // write await auth.signOut() to sign out the user
+
   return (
     <div className="h-auto sm:p-20 w-full flex justify-center ">
       {Continue ? (
@@ -101,7 +187,7 @@ const SignUp = () => {
             {/* Continue Button */}
             <button
               className="flex items-center justify-center bg-violet-900 text-white font-semibold text-base py-3 mt-6 w-full rounded-xl hover:bg-violet-800 cursor-pointer"
-              onClick={() => setContinue(!Continue)}
+              onClick={() => onContinueClick()}
             >
               <span className="mr-3">Continue</span>
               <FaArrowRight size={17} />
@@ -120,10 +206,13 @@ const SignUp = () => {
             </div>
 
             {/* Other Sign In Options */}
-            <button className="w-full flex items-center justify-center border border-white text-white font-semibold rounded-xl text-base py-3 mt-2 hover:bg-white hover:text-black">
+            <button className="w-full cursor-pointer flex items-center justify-center border border-white text-white font-semibold rounded-xl text-base py-3 mt-2 hover:bg-white hover:text-black">
               <IoMdCall size={23} className="mr-2" /> Sign in with Phone
             </button>
-            <button className="w-full flex items-center justify-center border border-white text-white font-semibold rounded-xl text-base py-3 mt-2 hover:bg-white hover:text-black">
+            <button
+              className="w-full cursor-pointer flex items-center justify-center border border-white text-white font-semibold rounded-xl text-base py-3 mt-2 hover:bg-white hover:text-black"
+              onClick={() => googleSignIn()}
+            >
               <FcGoogle size={23} className="mr-2" /> Sign in with Google
             </button>
 
@@ -151,7 +240,7 @@ const SignUp = () => {
           </div>
         </div>
       ) : (
-        <EmailVerification email={email}/>
+        <EmailVerification email={email} />
       )}
     </div>
   );

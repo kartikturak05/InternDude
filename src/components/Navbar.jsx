@@ -2,20 +2,38 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { IoIosArrowDown } from "react-icons/io";
 import SetPreference from "./SetPreference";
+import { auth } from "./firebase";
+import { toast } from "react-toastify";
 
 const Navbar = ({ setShowOptions, showOptions }) => {
   const [Internship, setInternship] = useState(false);
   const [Jobs, setJobs] = useState(false);
   const navigate = useNavigate();
+    const [userDetails, setUserDetails] = useState(null);
 
+  
+ // to change the navbar options
   useEffect(() => {
     if (Internship) {
       setShowOptions("Internship");
     } else if (Jobs) {
       setShowOptions("Jobs");
     }
-  }
-    , [Internship, Jobs]);
+  }, [Internship, Jobs]);
+
+  // to check if user is already login or not 
+  const fetchUserData = async()=> {
+      auth.onAuthStateChanged(async(user) => { 
+          console.log(user)
+          setUserDetails(user)
+      })
+    };
+  
+    useEffect(()=> {
+      fetchUserData();
+    },[]);
+
+
   return (
     <div className="">
       <div className="w-full bg-white shadow-md">
@@ -58,20 +76,37 @@ const Navbar = ({ setShowOptions, showOptions }) => {
             <div className=" pl-2 pr-2 pt-1 pb-1 border-1 text-center border-[#1F509A] rounded-sm  text-[#1F509A] mr-5 text-base font-bold cursor-pointer hover:text-gray-700 ">
               Contact Us
             </div>
-            <div
-              className="pl-8 pr-8 pt-1 pb-1 bg-blue-800 text-white font-bold rounded-sm text-base cursor-pointer"
-              onClick={() => navigate("/signup")}
-            >
-              Sign Up
-            </div>
-            <select
+            {userDetails ? (
+              <>
+                <div
+                className="pl-8 pr-8 pt-1 pb-1 bg-blue-800 text-white font-bold rounded-sm text-base cursor-pointer"
+                onClick={() => {
+                  auth.signOut();
+                  toast.success("User logged out successfully");
+                }}
+              >
+                log Out
+              </div>
+
+              <select
               name="profile"
               id=""
               className="text-base text-gray-900 font-normal pt-2 pb-2 pl-5 pr-1 cursor-pointer hover:text-gray-700"
             >
-              <option value="For Employeer">For Employeer</option>
+              <option value="For Employeer">{userDetails.displayName}</option>
               <option value="For Student">For Student</option>
             </select>
+              </>
+              
+            ) : (
+              <div
+                className="pl-8 pr-8 pt-1 pb-1 bg-blue-800 text-white font-bold rounded-sm text-base cursor-pointer"
+                onClick={() => navigate("/signup")}
+              >
+                  Sign Up
+                </div>
+              )}
+            
           </div>
         </div>
       </div>
