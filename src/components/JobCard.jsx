@@ -3,8 +3,13 @@ import { CiLocationOn } from "react-icons/ci";
 import { CiMoneyCheck1 } from "react-icons/ci";
 import { MdCurrencyRupee } from "react-icons/md";
 import { CiCalendar } from "react-icons/ci";
+import { MdVerified } from "react-icons/md";
+import { span } from "framer-motion/client";
+import JobDescription from "./JobDescription";
+import { useNavigate } from "react-router-dom";
 
-const JobCard = ({ title, Post, company, location, stipend, duration }) => {
+const JobCard = ({ title, Post, company, location, stipend, duration,paymentVerified}) => {
+  const navigate = useNavigate();
   return (
     <div>
       <div className="flex flex-col gap-3 border border-gray-300 rounded-2xl p-5 shadow-md bg-white transition-all hover:shadow-lg w-[300px]">
@@ -20,6 +25,17 @@ const JobCard = ({ title, Post, company, location, stipend, duration }) => {
         <div className="text-gray-600 text-sm">{company}</div>
 
         <div className="w-full h-[1px] bg-gray-300"></div>
+
+        {/* Payment Verified */}
+        <div className="flex items-center text-gray-700 text-sm">
+          {paymentVerified ? (
+            <div className="bg-green-500 text-white px-2 py-1 rounded-lg mr-2 flex flex-row items-center">
+              <div className="mr-2"><MdVerified/></div> <div>Payment Verified</div> 
+            </div>
+          ) : (
+           <span></span>
+          )}
+        </div> 
 
         {/* Location */}
         <div className="flex items-center text-gray-700 text-sm">
@@ -41,7 +57,9 @@ const JobCard = ({ title, Post, company, location, stipend, duration }) => {
         </div>
 
         <div className="w-full items-center justify-center flex">
-          <div className="bg-blue-900 text-white font-bold text-lg rounded-lg pl-4 pr-4 pt-1 pb-1 ">
+          <div className="bg-blue-900 text-white font-bold text-lg rounded-lg pl-4 pr-4 pt-1 pb-1 cursor-pointer" onClick={()=>  {
+            navigate("/InternshipDetails");
+          }}>
             Apply
           </div>
         </div>

@@ -10,7 +10,7 @@ const SearchBar = () => {
         <input
           type="text"
           placeholder="Enter skills / designations / companies"
-          className=" w-full outline-none bg-transparent text-[#486B9F] placeholder-[#486B9F]"
+          className=" w-full outline-none bg-transparent text-[#486B9F] placeholder-[#486B9F] text-medium font-medium"
         />
       </div>
 
