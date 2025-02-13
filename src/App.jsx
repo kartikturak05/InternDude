@@ -18,7 +18,7 @@ function App() {
         {/* Apply blur effect when showOptions is truthy */}
         <div className={`transition-all duration-300 ${showOptions ? "blur-xs pointer-events-none" : ""}`}>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Home setShowOptions={setShowOptions}/>} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/InternshipDetails" element={<JobDescription />} />
           </Routes>

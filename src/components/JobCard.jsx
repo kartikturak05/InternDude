@@ -8,7 +8,7 @@ import { span } from "framer-motion/client";
 import JobDescription from "./JobDescription";
 import { useNavigate } from "react-router-dom";
 
-const JobCard = ({ title, Post, company, location, stipend, duration,paymentVerified}) => {
+const JobCard = ({ title, Post, company, location, stipend, duration,paymentVerified,setShowJobDescription,setShowOptions}) => {
   const navigate = useNavigate();
   return (
     <div>
@@ -58,7 +58,9 @@ const JobCard = ({ title, Post, company, location, stipend, duration,paymentVeri
 
         <div className="w-full items-center justify-center flex">
           <div className="bg-blue-900 text-white font-bold text-lg rounded-lg pl-4 pr-4 pt-1 pb-1 cursor-pointer" onClick={()=>  {
-            navigate("/InternshipDetails");
+            // navigate("/InternshipDetails");
+            setShowOptions("blur");
+            setShowJobDescription(true);
           }}>
             Apply
           </div>

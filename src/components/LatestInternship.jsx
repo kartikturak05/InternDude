@@ -129,7 +129,7 @@ const Internship = [
 
 const ITEMS_PER_PAGE = 4;
 
-const LatestInternship = () => {
+const LatestInternship = ({setShowJobDescription,setShowOptions}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextSlide = () => {
@@ -183,7 +183,7 @@ const LatestInternship = () => {
           <div className="flex justify-between items-center gap-5">
             {Internship.slice(currentIndex, currentIndex + ITEMS_PER_PAGE).map(
               (job, index) => (
-                <JobCard key={index} {...job} />
+                <JobCard key={index} {...job} setShowJobDescription={setShowJobDescription} setShowOptions={setShowOptions}/>
               )
             )}
           </div>
