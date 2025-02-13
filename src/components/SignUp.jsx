@@ -57,126 +57,148 @@ const SignUp = () => {
   }, [auth, navigate]);
 
   const handleAuth = async () => {
-    if (!email || !password) {
-      toast.error("Please enter both email and password");
-      return;
-    }
+    if (showPhoneInput && !showOtpInput) {
+      if(!phone || phone.length < 10) { 
+        toast.error("Please enter a valid phone number");
+        return;
+      }
+      await onSignup(); // Send OTP
+    } else if (showOtpInput) {
+      await onOTPVerify(); // Verify OTP
+    }  else if (showEmailInput == true && showPasswordInput == true) {
+      if (!email || !password) {
+        toast.error("Please enter both email and password");
+        return;
+      }
 
-    setLoading(true);
-    try {
-      if (isSignup) {
-        // Create user account
-        const userCredential = await createUserWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
-        const user = userCredential.user;
+      setLoading(true);
+      try {
+        if (isSignup) {
+          // Create user account
+          const userCredential = await createUserWithEmailAndPassword(
+            auth,
+            email,
+            password
+          );
+          const user = userCredential.user;
 
-        // Send verification email
-        await sendEmailVerification(user, {
-          url: window.location.origin, // Redirect URL after verification
-        });
-
-        toast.success(
-          "Verification email sent! Please check your inbox and spam folder."
-        );
-        toast.info(
-          "After verifying your email, you can sign in with your credentials."
-        );
-
-        // Sign out the user - they need to verify email first
-        await auth.signOut();
-      } else {
-        // For sign in
-        const userCredential = await signInWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
-        const user = userCredential.user;
-
-        if (!user.emailVerified) {
-          toast.error("Please verify your email before signing in.");
-          // Optionally resend verification email
+          // Send verification email
           await sendEmailVerification(user, {
-            url: window.location.origin,
+            url: window.location.origin, // Redirect URL after verification
           });
-          toast.info("Verification email sent again. Please check your inbox.");
-          await auth.signOut();
-          return;
-        }
 
-        toast.success("Logged in successfully!");
-        navigate("/");
+          toast.success(
+            "Verification email sent! Please check your inbox and spam folder."
+          );
+          toast.info(
+            "After verifying your email, you can sign in with your credentials."
+          );
+
+          // Sign out the user - they need to verify email first
+          await auth.signOut();
+        } else {
+          // For sign in
+          const userCredential = await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+          );
+          const user = userCredential.user;
+
+          if (!user.emailVerified) {
+            toast.error("Please verify your email before signing in.");
+            // Optionally resend verification email
+            await sendEmailVerification(user, {
+              url: window.location.origin,
+            });
+            toast.info(
+              "Verification email sent again. Please check your inbox."
+            );
+            await auth.signOut();
+            return;
+          }
+
+          toast.success("Logged in successfully!");
+          navigate("/");
+        }
+      } catch (error) {
+        console.error(error);
+        switch (error.code) {
+          case "auth/email-already-in-use":
+            toast.error("Email already registered. Please sign in instead.");
+            break;
+          case "auth/invalid-email":
+            toast.error("Invalid email address.");
+            break;
+          case "auth/weak-password":
+            toast.error("Password should be at least 6 characters.");
+            break;
+          case "auth/user-not-found":
+          case "auth/wrong-password":
+            toast.error("Invalid email or password.");
+            break;
+          default:
+            toast.error(error.message || "Authentication failed");
+        }
+      } finally {
+        setLoading(false);
       }
-    } catch (error) {
-      console.error(error);
-      switch (error.code) {
-        case "auth/email-already-in-use":
-          toast.error("Email already registered. Please sign in instead.");
-          break;
-        case "auth/invalid-email":
-          toast.error("Invalid email address.");
-          break;
-        case "auth/weak-password":
-          toast.error("Password should be at least 6 characters.");
-          break;
-        case "auth/user-not-found":
-        case "auth/wrong-password":
-          toast.error("Invalid email or password.");
-          break;
-        default:
-          toast.error(error.message || "Authentication failed");
-      }
-    } finally {
-      setLoading(false);
     }
   };
 
   const setupRecaptcha = () => {
-  if (!window.recaptchaVerifier) {
-    window.recaptchaVerifier = new RecaptchaVerifier(auth, "recaptcha-container", {
-      size: "invisible",
-      callback: () => {
-        console.log("reCAPTCHA verified!");
-      },
-      "expired-callback": () => {
-        toast.error("reCAPTCHA expired. Please try again.");
-      },
-    });
-  }
-};
+    if (!window.recaptchaVerifier) {
+      window.recaptchaVerifier = new RecaptchaVerifier(
+        auth,
+        "recaptcha-container",
+        {
+          size: "invisible",
+          callback: () => {
+            console.log("reCAPTCHA verified!");
+          },
+          "expired-callback": () => {
+            toast.error("reCAPTCHA expired. Please try again.");
+          },
+        }
+      );
+    }
+  };
 
   const onSignup = async () => {
     if (!phone || phone.length < 10) {
       toast.error("Please enter a valid phone number");
       return;
     }
-  
+
     try {
-      setupRecaptcha(); 
+      setupRecaptcha();
+      console.log(phone)
       const formattedPhone = phone.startsWith("+") ? phone : `+91${phone}`; // Default to India code
       const appVerifier = window.recaptchaVerifier;
-  
-      const confirmationResult = await signInWithPhoneNumber(auth, formattedPhone, appVerifier);
+
+      const confirmationResult = await signInWithPhoneNumber(
+        auth,
+        formattedPhone,
+        appVerifier
+      );
       window.confirmationResult = confirmationResult;
-  
+
       setShowOtpInput(true);
       toast.success("OTP sent successfully!");
     } catch (error) {
       console.error("Error sending OTP:", error);
-      toast.error(error.message || "Failed to send OTP. Check phone number format.");
+      toast.error(
+        error.message || "Failed to send OTP. Check phone number format."
+      );
     }
   };
-  
 
   const onOTPVerify = async () => {
     if (!otp || otp.length !== 6) {
       toast.error("Please enter a valid 6-digit OTP");
       return;
     }
-  
+
     try {
       setLoading(true);
       const result = await window.confirmationResult.confirm(otp);
@@ -190,7 +212,6 @@ const SignUp = () => {
       setLoading(false);
     }
   };
-  
 
   const googleSignIn = async () => {
     try {
@@ -208,6 +229,7 @@ const SignUp = () => {
 
   return (
     <div className="h-auto sm:p-20 w-full flex justify-center">
+      <div id="recaptcha-container"></div>
       <div
         className="flex flex-col sm:flex-row justify-around items-center w-full max-w-5xl pl-10 rounded-2xl shadow-lg"
         style={{
@@ -322,18 +344,22 @@ const SignUp = () => {
             <hr className="flex-grow border-gray-300" />
           </div>
 
-          <button className="w-full cursor-pointer flex items-center justify-center border border-white text-white font-semibold rounded-xl text-base py-3 mt-2 hover:bg-white hover:text-black" onClick={()=> {
-            if(showPhoneInput){
-              setShowPhoneInput(false);
-              setShowEmailInput(true);
-             setShowPasswordInput(true);
-            }else{
-              setShowEmailInput(false);
-              setShowPhoneInput(true);
-              setShowPasswordInput(false);
-            }
-          }}>
-            <IoMdCall size={23} className="mr-2" /> Sign in with { showPhoneInput ? "Email":"Phone" }
+          <button
+            className="w-full cursor-pointer flex items-center justify-center border border-white text-white font-semibold rounded-xl text-base py-3 mt-2 hover:bg-white hover:text-black"
+            onClick={() => {
+              if (showPhoneInput) {
+                setShowPhoneInput(false);
+                setShowEmailInput(true);
+                setShowPasswordInput(true);
+              } else {
+                setShowEmailInput(false);
+                setShowPhoneInput(true);
+                setShowPasswordInput(false);
+              }
+            }}
+          >
+            <IoMdCall size={23} className="mr-2" /> Sign in with{" "}
+            {showPhoneInput ? "Email" : "Phone"}
           </button>
           <button
             className="w-full cursor-pointer flex items-center justify-center border border-white text-white font-semibold rounded-xl text-base py-3 mt-2 hover:bg-white hover:text-black"
