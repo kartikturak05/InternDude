@@ -6,10 +6,10 @@ import Navbar from "./components/Navbar";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import JobDescription from "./components/JobDescription";
+import PostNewGig from "./components/PostNewGig";
 
 function App() {
   const [showOptions, setShowOptions] = useState("");
-
   return (
     <>
       <div onClick={() => setShowOptions("")} className="relative">
@@ -21,6 +21,8 @@ function App() {
             <Route path="/" element={<Home setShowOptions={setShowOptions}/>} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/InternshipDetails" element={<JobDescription />} />
+            <Route path="/InternshipDetails" element={<JobDescription />} />
+            <Route path="/PostNewGig" element={<PostNewGig />} />
           </Routes>
         </div>
 

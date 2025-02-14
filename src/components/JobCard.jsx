@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { CiLocationOn } from "react-icons/ci";
 import { CiMoneyCheck1 } from "react-icons/ci";
 import { MdCurrencyRupee } from "react-icons/md";
@@ -9,7 +9,15 @@ import JobDescription from "./JobDescription";
 import { useNavigate } from "react-router-dom";
 
 const JobCard = ({ title, Post, company, location, stipend, duration,paymentVerified,setShowJobDescription,setShowOptions}) => {
+
+  const [blur,setBlur]= useState("");
   const navigate = useNavigate();
+
+  useEffect(()=>{
+    if(blur){
+      // setShowOptions("blur");
+    }
+  },[blur])
   return (
     <div>
       <div className="flex flex-col gap-3 border border-gray-300 rounded-2xl p-5 shadow-md bg-white transition-all hover:shadow-lg w-[300px]">
@@ -59,6 +67,7 @@ const JobCard = ({ title, Post, company, location, stipend, duration,paymentVeri
         <div className="w-full items-center justify-center flex">
           <div className="bg-blue-900 text-white font-bold text-lg rounded-lg pl-4 pr-4 pt-1 pb-1 cursor-pointer" onClick={()=>  {
             // navigate("/InternshipDetails");
+            setBlur("blur");
             setShowOptions("blur");
             setShowJobDescription(true);
           }}>
