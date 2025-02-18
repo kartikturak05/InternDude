@@ -19,7 +19,7 @@ const Navbar = ({ setShowOptions, showOptions }) => {
 
   useEffect(()=>{
     setSelected(userDetails?.displayName)
-  },userDetails)
+  },[userDetails])
 
   // to change the navbar options
   useEffect(() => {
@@ -94,9 +94,9 @@ const Navbar = ({ setShowOptions, showOptions }) => {
             >
               Jobs <IoIosArrowDown size={20} />
             </div>
-            <div className="text-base text-gray-900 font-normal pt-2 pb-2 pl-5 pr-5 cursor-pointer hover:text-gray-700 hover:font-semibold">
+            {/* <div className="text-base text-gray-900 font-normal pt-2 pb-2 pl-5 pr-5 cursor-pointer hover:text-gray-700 hover:font-semibold">
               Courses
-            </div>
+            </div> */}
           </div>
           <div className="flex items-center justify-between">
             <div className=" pl-2 pr-2 pt-1 pb-1 border-1 text-center border-[#1F509A] rounded-sm  text-[#1F509A] mr-5 text-base font-bold cursor-pointer hover:text-gray-700 ">
@@ -118,7 +118,7 @@ const Navbar = ({ setShowOptions, showOptions }) => {
                   {/* Selected option (acts like select box) */}
                   <div
                     className="bg-transparent text-gray-700 font-semibold py-2 pl-5 pr-8 cursor-pointer hover:text-gray-700  border-gray-300 rounded-md w-full flex justify-center items-center "
-                    onClick={() => {
+                    onMouseEnter={() => {
                       setIsOpen(!isOpen)
                     }}
                   >
