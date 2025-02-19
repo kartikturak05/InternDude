@@ -291,8 +291,7 @@ const SignUp = () => {
               </div>
             </>
           )}
-
-          {showPhoneInput && (
+          {/* {showPhoneInput && (
             <>
               <label htmlFor="phone" className="w-full text-white mt-4 mb-2">
                 Phone
@@ -327,7 +326,7 @@ const SignUp = () => {
                 renderInput={(props) => <input {...props} />}
               ></OTPInput>
             </>
-          )}
+          )} */}
 
           <button
             className="flex items-center justify-center bg-violet-900 text-white font-semibold text-base py-3 mt-6 w-full rounded-xl hover:bg-violet-800"
@@ -344,7 +343,8 @@ const SignUp = () => {
             <hr className="flex-grow border-gray-300" />
           </div>
 
-          <button
+            {/* Button to select what to choose phone of email */}
+          {/* <button
             className="w-full cursor-pointer flex items-center justify-center border border-white text-white font-semibold rounded-xl text-base py-3 mt-2 hover:bg-white hover:text-black"
             onClick={() => {
               if (showPhoneInput) {
@@ -360,7 +360,7 @@ const SignUp = () => {
           >
             <IoMdCall size={23} className="mr-2" /> Sign in with{" "}
             {showPhoneInput ? "Email" : "Phone"}
-          </button>
+          </button> */}
           <button
             className="w-full cursor-pointer flex items-center justify-center border border-white text-white font-semibold rounded-xl text-base py-3 mt-2 hover:bg-white hover:text-black"
             onClick={googleSignIn}

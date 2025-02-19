@@ -27,10 +27,8 @@ const Navbar = ({ setShowOptions, showOptions }) => {
       setShowOptions("Internship");
     } else if (Jobs) {
       setShowOptions("Jobs");
-    }else if(isOpen){
-      setShowOptions("More")  
     }
-  }, [Internship, Jobs,isOpen]); 
+  }, [Internship, Jobs]); 
   
   //  To redirect to the selected options page
   useEffect(() => {
@@ -63,7 +61,7 @@ const Navbar = ({ setShowOptions, showOptions }) => {
   return (
     <div className="">
       <div className="w-full bg-white shadow-md">
-        <div className="container mx-auto flex justify-around items-center pt-4 pl-5 pr-5 pb-2">
+        <div className="container mx-auto flex justify-between  items-center pt-4 pl-35 pr-35 pb-2">
           <div className="flex justify-between items-center">
             <img
               src="Logo.png"
@@ -74,7 +72,7 @@ const Navbar = ({ setShowOptions, showOptions }) => {
               className={`text-base flex items-center text-gray-900 font-normal pt-2 pb-2 pl-5 pr-5 rounded-xl cursor-pointer hover:text-gray-700 hover:font-semibold ${
                 showOptions === "Internship" ? "bg-gray-300 text-blue-800" : ""
               }`}
-              onClick={() => {
+              onMouseEnter={() => {
                 setShowOptions("Internship");
                 setJobs(false);
                 setInternship(!Internship);
@@ -86,7 +84,7 @@ const Navbar = ({ setShowOptions, showOptions }) => {
               className={`text-base flex items-center text-gray-900 font-normal pt-2 pb-2 pl-5 pr-5 rounded-xl cursor-pointer hover:text-gray-700 hover:font-semibold ${
                 showOptions === "Jobs" ? "bg-gray-300 text-blue-800" : ""
               }`}
-              onClick={() => {
+              onMouseEnter={() => {
                 setShowOptions("Jobs");
                 setInternship(false);
                 setJobs(!Jobs);

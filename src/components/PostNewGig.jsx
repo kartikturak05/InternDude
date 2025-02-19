@@ -1,6 +1,6 @@
-import React, { useEffect, useState,useRef  } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { PiGreaterThanBold } from "react-icons/pi";
-import { AiOutlineCloudUpload, AiOutlineCheckCircle } from 'react-icons/ai';
+import { AiOutlineCloudUpload, AiOutlineCheckCircle } from "react-icons/ai";
 
 const GitOverview = ({ setSaveAndContinue, saveAndContinue }) => {
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -32,7 +32,7 @@ const GitOverview = ({ setSaveAndContinue, saveAndContinue }) => {
   return (
     <>
       {/* Form */}
-      <div className="flex flex-col items-center justify-center border-2 border-gray-400 p-6 rounded-lg mt-5 w-96">
+      <div className="flex flex-col items-center justify-center border-1 border-gray-400 p-6 rounded-lg mt-5 w-96">
         {/* Gig Title */}
         <div>
           <label htmlFor="Title">
@@ -130,51 +130,138 @@ const Pricing = ({ setSaveAndContinue, saveAndContinue }) => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center border-2 border-gray-400 p-6 rounded-lg mt-5 w-2xl">
+    <div className="flex flex-col items-center justify-center border-gray-400 p-6 rounded-xl mt-5 w-2xl">
       {/* Pricing Grid */}
-      <div className="max-w-2xl ">
-        <div className=" flex flex-col border border-gray-300 rounded-lg ">
-          {/* Basic Plan */}
-          <div className="flex flex-row items-center">
-            <div className="font-bold text-md bg-gray-100 px-6 py-3 border-b border-r pt-15 pb-15 pr-5">
-              Basic Plan
+      <div className="max-w-[2000px]">
+        <div className="border rounded-2xl overflow-hidden">
+          {/* Header */}
+          <div className="grid grid-cols-4  text-center font-bold text-gray-500">
+            <div className=" row-span-2  flex items-start justify-center"></div>
+            <div className="border border-gray-500  pt-2 pb-2 pl-1 pr-1 w-38">
+              BASIC
             </div>
-            <div className="px-6 py-3 border-b border-r pt-15 pb-15 pr-5">
-              Describe Your Package
+            <div className="border border-gray-500  pt-2 pb-2 pl-1 pr-1 w-38">
+              STANDARD
             </div>
-            <div className="px-6 py-3 border-b pt-15 pb-15 pr-5">Price</div>
-          </div>
-
-          {/* Standard Plan */}
-          <div className="flex flex-row items-center">
-            <div className="font-bold text-md bg-gray-100 px-6 py-3 border-b border-r pt-15 pb-15 pr-5">
-              Standard
-            </div>
-            <div className="px-6 py-3 border-b border-r pt-15 pb-15 pr-5">
-              Describe Your Package
-            </div>
-
-            <div className="flex flex-col items-center justify-center">
-              <div className="px-6 py-3 border-b pt-5  pr-5">Price</div>
-              <div className="pr-5 pl-2">
-                <input
-                  type="text"
-                  placeholder="Enter Price"
-                  className=" border border-gray-500 rounded-lg pt-2 pb-2"
-                />
-              </div>
+            <div className="border border-gray-500  pt-2 pb-2 pl-1 pr-1 w-38">
+              PREMIUM
             </div>
           </div>
 
-          {/* Premium Plan */}
-          <div className="flex flex-row items-center">
-            <div className="font-bold text-md bg-gray-100 px-6 py-3 border-r pt-15 pb-15 pr-5">
-              Premium
+          {/* Delivery */}
+          <div className="grid grid-cols-4  text-center  w-full text-gray-500">
+            <div className=" row-span-2  flex items-start justify-center"></div>
+            <div className="border-1 border-gray-600 pt-2 pb-2 pl-1 pr-1 w-38">
+              {" "}
+              1 Days Delivery
             </div>
-            <div className="px-6 py-3 border-r pt-15 pb-15 pr-5">
-              Describe Your Package
+            <div className="border-1 border-gray-600 pt-2 pb-2 pl-1 pr-1 w-38">
+              {" "}
+              2 Days Delivery
             </div>
-            <div className="px-6 py-3 pt-15 pb-15 pr-5">Price</div>
+            <div className="border-1 border-gray-600 pt-2 pb-2 pl-1 pr-1 w-38">
+              {" "}
+              3 Days Delivery
+            </div>
+          </div>
+
+          {/* Revisions */}
+          <div className="grid grid-cols-4 text-center border-1  text-gray-500">
+            <div className="py-2 font-semibold pt-2 pb-2 pl-1 pr-1 ">Revisions</div>
+            <div className="">
+              <select
+                name="basicRevision"
+                id="basicRevision"
+                className="border-l-1 border-r-1 w-38 pt-2 pb-2 pr-1 pl-1"
+              >
+                <option value="1">1</option>
+                <option value="2">2</option>
+              </select>
+            </div>
+            <div className="">
+              <select
+                name="standardRevision"
+                id="standardRevision"
+                className="border-l-1 border-r-1 w-38 pt-2 pb-2 pr-1 pl-1"
+              >
+                <option value="1">1</option>
+                <option value="2">2</option>
+              </select>
+            </div>
+            <div className="">
+              <select
+                name="premiumRevision"
+                id="premiumRevision"
+                className="border-l-1   w-38 pt-2 pb-2 pr-1 pl-1"
+              >
+                <option value="1">1</option>
+                <option value="2">2</option>
+              </select>
+            </div>
+          </div>
+
+          {/* No. of concepts */}
+          <div className="grid grid-cols-4 text-center border-1 text-gray-500">
+            <div className="py-2 font-semibold pt-2 pb-2 pl-1 pr-1  border-r-1">No. of concepts</div>
+            <div className="">
+              <select
+                name="basicRevision"
+                id="basicRevision"
+                className="border-l-1 border-r-1 border-gray-500  w-38 pt-2 pb-2 pr-1 pl-1"
+              >
+                <option value="1">1</option>
+                <option value="2">2</option>
+              </select>
+            </div>
+            <div className="">
+              <select
+                name="standardRevision"
+                id="standardRevision"
+                className="border-l-1 border-r-1 border-gray-500  w-38 pt-2 pb-2 pr-1 pl-1"
+              >
+                <option value="1">1</option>
+                <option value="2">2</option>
+              </select>
+            </div>
+            <div className="">
+              <select
+                name="premiumRevision"
+                id="premiumRevision"
+                className="border-l-1  border-gray-500   w-38 pt-2 pb-2 pr-1 pl-1"
+              >
+                <option value="1">1</option>
+                <option value="2">2</option>
+              </select>
+            </div>
+          </div>
+
+          {/* Source File */}
+          <div className="grid grid-cols-4 text-center border-1 text-gray-500">
+            <div className="py-2 font-semibold pt-2 pb-2 pl-1 pr-1  border-r-1">Source File</div>
+            <div className="py-2 border-l-1 border-r-1 border-gray-500">
+              <input type="checkbox" className="w-5 h-5" />
+            </div>
+            <div className="py-2 border-l-1 border-r-1 border-gray-500">
+              <input type="checkbox" className="w-5 h-5" />
+            </div>
+            <div className="py-2 border-l-1  border-gray-500">
+              <input type="checkbox" className="w-5 h-5" />
+            </div>
+          </div>
+
+          {/* Price */}
+          <div className="grid grid-cols-4 text-center border-1 text-gray-500">
+            <div className="py-2 font-semibold pt-2 pb-2 pl-1 pr-1  border-r-1">Price</div>
+            <div className="py-2 border-l-1 border-r-1 border-gray-500">Rs. 500</div>
+            <div className="py-2 border-l-1 border-r-1 border-gray-500">Rs. 1000</div>
+            <div className="py-2 border-l-1  border-gray-500">Rs. 1500</div>
+          </div>
+
+          {/* Add Section Button */}
+          <div className="text-center py-4">
+            <button className=" px-6 py-2 rounded-md font-bold text-gray-500 ">
+              Add Section
+            </button>
           </div>
         </div>
       </div>
@@ -206,7 +293,7 @@ const Description = ({ setSaveAndContinue, saveAndContinue }) => {
   };
   return (
     <>
-      <div className="flex flex-col items-start justify-center border-2 border-gray-400 p-6 rounded-lg mt-5 w-2xl">
+      <div className="flex flex-col items-start justify-center border-1 border-gray-400 p-6 rounded-lg mt-5 w-2xl">
         <div className="font-semibold font-sm text-left">Describe Your Gig</div>
         <div className="w-full h-full">
           <textarea
@@ -240,14 +327,14 @@ const Gallery = ({ setSaveAndContinue, saveAndContinue }) => {
   const handleFile = (file) => {
     if (file) {
       setUploadedFile(file);
-      
+
       // Create a preview URL for images
-      if (file.type.startsWith('image/')) {
+      if (file.type.startsWith("image/")) {
         const url = URL.createObjectURL(file);
         setPreviewUrl(url);
-      } else if (file.type === 'application/pdf') {
+      } else if (file.type === "application/pdf") {
         // For PDFs, we'll just show an icon or text
-        setPreviewUrl('pdf');
+        setPreviewUrl("pdf");
       }
     }
   };
@@ -281,12 +368,12 @@ const Gallery = ({ setSaveAndContinue, saveAndContinue }) => {
     e.preventDefault();
     e.stopPropagation();
     setIsDragging(false);
-    
+
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
       handleFile(e.dataTransfer.files[0]);
     }
   };
-  
+
   const handleClick = () => {
     if (saveAndContinue === "overview") {
       setSaveAndContinue("pricing");
@@ -301,12 +388,16 @@ const Gallery = ({ setSaveAndContinue, saveAndContinue }) => {
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center border-2 border-gray-400 p-6 rounded-lg mt-5 max-w-2xl">
+      <div className="flex flex-col items-center justify-center border-1 border-gray-400 p-6 rounded-lg mt-5 max-w-2xl">
         {!uploadedFile ? (
           <div className="flex items-center justify-center w-96">
-            <div 
+            <div
               ref={dropRef}
-              className={`cursor-pointer ${isDragging ? 'border-2 border-dashed border-blue-500 bg-blue-50' : ''}`}
+              className={`cursor-pointer ${
+                isDragging
+                  ? "border-1 border-dashed border-blue-500 bg-blue-50"
+                  : ""
+              }`}
               onDragOver={handleDragOver}
               onDragEnter={handleDragEnter}
               onDragLeave={handleDragLeave}
@@ -318,8 +409,8 @@ const Gallery = ({ setSaveAndContinue, saveAndContinue }) => {
                     <AiOutlineCloudUpload />
                   </div>
                   <p className="mb-2 text-lg mt-3">
-                    <span className="font-semibold">Select your file</span> or drag
-                    and drop
+                    <span className="font-semibold">Select your file</span> or
+                    drag and drop
                   </p>
                   <p className="text-sm mt-2">png, pdf, jpg, docs Accepted</p>
 
@@ -346,26 +437,28 @@ const Gallery = ({ setSaveAndContinue, saveAndContinue }) => {
               <AiOutlineCheckCircle className="text-2xl mr-2" />
               <span>File successfully uploaded!</span>
             </div>
-            
-            {previewUrl && previewUrl !== 'pdf' ? (
+
+            {previewUrl && previewUrl !== "pdf" ? (
               <div className="mt-4 mb-4">
-                <img 
-                  src={previewUrl} 
-                  alt="Preview" 
-                  className="max-w-full max-h-64 rounded-lg shadow-md" 
+                <img
+                  src={previewUrl}
+                  alt="Preview"
+                  className="max-w-full max-h-64 rounded-lg shadow-md"
                 />
               </div>
             ) : (
               <div className="mt-4 mb-4 p-8 bg-gray-100 rounded-lg">
                 <p className="text-center">{uploadedFile.name}</p>
                 <p className="text-center text-sm text-gray-500 mt-2">
-                  {uploadedFile.type === 'application/pdf' ? 'PDF Document' : 'Document'}
+                  {uploadedFile.type === "application/pdf"
+                    ? "PDF Document"
+                    : "Document"}
                 </p>
               </div>
             )}
-            
+
             <div className="flex gap-4 mt-4">
-              <button 
+              <button
                 className="pt-2 pb-2 pl-5 pr-5 bg-blue-700 text-white rounded-lg cursor-pointer hover:bg-blue-800 transition"
                 onClick={() => {
                   setUploadedFile(null);
@@ -420,7 +513,6 @@ const PostNewGig = () => {
           className={`text-lg ${
             saveAndContinue == "overview" ? "text-gray-900" : "text-gray-500"
           } font-semibold ml-5 mr-5 cursor-pointer`}
-
           onClick={() => setSaveAndContinue("overview")} // Set to overview
         >
           Overview

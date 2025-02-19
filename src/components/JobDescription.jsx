@@ -8,20 +8,23 @@ import { GiSummits } from "react-icons/gi";
 import { TbCoffee } from "react-icons/tb";
 import { FaHandHoldingHeart } from "react-icons/fa";
 import { MdHolidayVillage } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 
 const JobDescription = ({setShowJobDescription}) => {
+  const navigate = useNavigate();
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4 top-10 left-40  z-50 absolute ">
+    <div className="min-h-screen bg-gray-50 py-8 px-4 top-30 left-25 z-50 absolute ">
        {/* Hide Job Description */}
        <div className="absolute right-10 top-10 text-3xl font-semibold cursor-pointer text-blue-900"
         onClick={()=>  {  
-          setShowJobDescription(false);
+          // setShowJobDescription(false);
+          navigate("/");
         }}
        >
           X
         </div>
-      <div className="max-w-6xl mx-auto bg-white rounded-xl shadow-lg">
+      <div className="max-w-7xl mx-auto bg-white rounded-xl shadow-lg">
         {/* Header Section */}
         <div className="border-b pt-5">
           <div className="p-6 flex items-center justify-between">
@@ -38,7 +41,7 @@ const JobDescription = ({setShowJobDescription}) => {
             </div>
             <div className="flex items-center gap-4">
               <button className="p-2 hover:bg-gray-100 rounded-full">
-                <LuShare2 className="w-5 h-5 text-gray-600" />
+                <LuShare2 className="w-5 h-5 text-gray-800" />
               </button>
               <button className="px-6 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors"
              
@@ -55,7 +58,7 @@ const JobDescription = ({setShowJobDescription}) => {
             {/* Description */}
             <section>
               <h2 className="text-2xl font-bold mb-4">Description</h2>
-              <p className="text-gray-600 leading-relaxed">
+              <p className="text-gray-800 leading-relaxed">
                 Connex India is looking for Social Media Marketing expert to
                 help manage our online networks. You will be responsible for
                 monitoring our social media channels, creating content, finding
@@ -67,7 +70,7 @@ const JobDescription = ({setShowJobDescription}) => {
             {/* Responsibilities */}
             <section>
               <h2 className="text-2xl font-bold mb-4">Responsibilities</h2>
-              <div className="space-y-3">
+              <div className="space-y-3 ">
                 {[
                   "Community engagement to ensure that is supported and actively represented online",
                   "Focus on social media content development and publication",
@@ -77,7 +80,7 @@ const JobDescription = ({setShowJobDescription}) => {
                 ].map((item, index) => (
                   <div key={index} className="flex items-start gap-3">
                     <RiVerifiedBadgeFill className="w-5 h-5 text-green-500 flex-shrink-0 mt-1" />
-                    <p className="text-gray-600">{item}</p>
+                    <p className="text-gray-800">{item}</p>
                   </div>
                 ))}
               </div>
@@ -96,7 +99,7 @@ const JobDescription = ({setShowJobDescription}) => {
                 ].map((item, index) => (
                   <div key={index} className="flex items-start gap-3">
                     <RiVerifiedBadgeFill className="w-5 h-5 text-green-500 flex-shrink-0 mt-1" />
-                    <p className="text-gray-600">{item}</p>
+                    <p className="text-gray-800">{item}</p>
                   </div>
                 ))}
               </div>
@@ -113,7 +116,7 @@ const JobDescription = ({setShowJobDescription}) => {
                 ].map((item, index) => (
                   <div key={index} className="flex items-start gap-3">
                     <RiVerifiedBadgeFill className="w-5 h-5 text-green-500 flex-shrink-0 mt-1" />
-                    <p className="text-gray-600">{item}</p>
+                    <p className="text-gray-800">{item}</p>
                   </div>
                 ))}
               </div>
@@ -128,10 +131,10 @@ const JobDescription = ({setShowJobDescription}) => {
               {/* Progress bar */}
               <div className="mb-6">
                 <div className="flex justify-between text-sm mb-2">
-                  <span className="text-gray-600">
+                  <span className="text-gray-800">
                     5 applied of 10 capacity
                   </span>
-                  <span className="text-gray-600">50%</span>
+                  <span className="text-gray-800">50%</span>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-2">
                   <div className="bg-blue-600 h-2 rounded-full w-1/2"></div>
@@ -148,7 +151,7 @@ const JobDescription = ({setShowJobDescription}) => {
                   { label: "Timeline", value: "6 months" },
                 ].map((item, index) => (
                   <div key={index} className="flex justify-between">
-                    <span className="text-gray-600">{item.label}</span>
+                    <span className="text-gray-800">{item.label}</span>
                     <span className="font-medium">{item.value}</span>
                   </div>
                 ))}
@@ -194,52 +197,53 @@ const JobDescription = ({setShowJobDescription}) => {
           <div className="text-3xl font-bold text-gray-700 m-1">
             Perks & Benefits
           </div>
-          <div className="text-sm text-gray-700 m-1 mb-3">
+          <div className="text-md text-gray-700 m-1 mb-3">
             This job Comes with the saveral perks
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            <div className="flex flex-col items-start text-center p-4 w-56  rounded-lg ">
+            
+            <div className="flex flex-col items-start text-center p-4 w-64  rounded-lg ">
               <GiHealthPotion className="w-10 h-10 text-blue-500 mb-2" />
               <div className="font-semibold text-xl mt-2 mb-2">Full Healthcares</div>
-              <div className="text-sm text-gray-800 text-left">
+              <div className="text-md text-gray-800 text-left">
               We believe in thriving communities and that starts with our team being happy and healthy.
               </div>
             </div>
 
-            <div className="flex flex-col items-start text-center p-4 w-56  rounded-lg ">
+            <div className="flex flex-col items-start text-center p-4 w-64  rounded-lg ">
               <MdHolidayVillage   className="w-10 h-10 text-blue-500 mb-2" />
               <div className="font-semibold text-xl mt-2 mb-2">Unlimited Vacation</div>
-              <div className="text-sm text-gray-800 text-left">
+              <div className="text-md text-gray-800 text-left">
               We believe you should have a flexible schedule that makes space for family, wellness, and fun.
               </div>
             </div>
-            <div className="flex flex-col items-start text-center p-4 w-56  rounded-lg ">
+            <div className="flex flex-col items-start text-center p-4 w-64  rounded-lg ">
               <CiVideoOn className="w-10 h-10 text-blue-500 mb-2" />
               <div className="font-semibold text-xl mt-2 mb-2">Skill Development</div>
-              <div className="text-sm text-gray-800 text-left">
+              <div className="text-md text-gray-800 text-left">
               We believe in always learning and leveling up our skills. Whether it's a conference or online course.
               </div>
             </div>
-            <div className="flex flex-col items-start text-center p-4 w-56  rounded-lg ">
+            <div className="flex flex-col items-start text-center p-4 w-64  rounded-lg ">
               <GiSummits  className="w-10 h-10 text-blue-500 mb-2" />
               <div className="font-semibold text-xl mt-2 mb-2">Team Summits</div>
-              <div className="text-sm text-gray-800 text-left">
+              <div className="text-md text-gray-800 text-left">
               Every 6 months we have a full team summit where we have fun, reflect, and plan for the upcoming quarter.
               </div>
             </div>
 
-            <div className="flex flex-col items-start text-center p-4 w-56  rounded-lg ">
+            <div className="flex flex-col items-start text-center p-4 w-64  rounded-lg ">
               <TbCoffee   className="w-10 h-10 text-blue-500 mb-2" />
               <div className="font-semibold text-xl mt-2 mb-2">Remote Working</div>
-              <div className="text-sm text-gray-800 text-left">
+              <div className="text-md text-gray-800 text-left">
               You know how you perform your best. Work from home, coffee shop or anywhere when you feel like it.
               </div>
             </div>
 
-            <div className="flex flex-col items-start text-center p-4 w-56  rounded-lg ">
+            <div className="flex flex-col items-start text-center p-4 w-64  rounded-lg ">
               <FaHandHoldingHeart   className="w-10 h-10 text-blue-500 mb-2" />
               <div className="font-semibold text-xl mt-2 mb-2 ">We give back.</div>
-              <div className="text-sm text-gray-800 text-left">
+              <div className="text-md text-gray-800 text-left">
               We anonymously match any donation our employees make (up to $/€ 600) so they can support the organizations they care about most—times two. 
               </div>
             </div>
@@ -267,7 +271,7 @@ const JobDescription = ({setShowJobDescription}) => {
             </div>
 
             {/* Company Description */}
-            <div className="max-w-md text-gray-700 text-sm">
+            <div className="max-w-md text-gray-700 text-md">
               Connex India is a technology company that builds economic
               infrastructure for the internet. Businesses of every size—from new
               startups to public companies—use our software to accept payments
@@ -309,7 +313,7 @@ const JobDescription = ({setShowJobDescription}) => {
                 <div className="text-lg font-semibold">
                   Social Media Assistant
                 </div>
-                <div className="text-gray-600">Connex India . Delhi, India</div>
+                <div className="text-gray-800">Connex India . Delhi, India</div>
                 <div className="flex flex-row items-center justify-between  mt-3">
                   <div className="mr-3 pl-2 pr-2 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold">
                     Full Time
@@ -334,7 +338,7 @@ const JobDescription = ({setShowJobDescription}) => {
                 <div className="text-lg font-semibold">
                   Social Media Assistant
                 </div>
-                <div className="text-gray-600">Connex India . Delhi, India</div>
+                <div className="text-gray-800">Connex India . Delhi, India</div>
                 <div className="flex flex-row items-center justify-between  mt-3">
                   <div className="mr-3 pl-2 pr-2 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold">
                     Full Time
@@ -358,7 +362,7 @@ const JobDescription = ({setShowJobDescription}) => {
                 <div className="text-lg font-semibold">
                   Social Media Assistant
                 </div>
-                <div className="text-gray-600">Connex India . Delhi, India</div>
+                <div className="text-gray-800">Connex India . Delhi, India</div>
                 <div className="flex flex-row items-center justify-between  mt-3">
                   <div className="mr-3 pl-2 pr-2 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold">
                     Full Time
@@ -382,7 +386,7 @@ const JobDescription = ({setShowJobDescription}) => {
                 <div className="text-lg font-semibold">
                   Social Media Assistant
                 </div>
-                <div className="text-gray-600">Connex India . Delhi, India</div>
+                <div className="text-gray-800">Connex India . Delhi, India</div>
                 <div className="flex flex-row items-center justify-between  mt-3">
                   <div className="mr-3 pl-2 pr-2 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold">
                     Full Time
@@ -406,7 +410,7 @@ const JobDescription = ({setShowJobDescription}) => {
                 <div className="text-lg font-semibold">
                   Social Media Assistant
                 </div>
-                <div className="text-gray-600">Connex India . Delhi, India</div>
+                <div className="text-gray-800">Connex India . Delhi, India</div>
                 <div className="flex flex-row items-center justify-between  mt-3">
                   <div className="mr-3 pl-2 pr-2 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold">
                     Full Time
@@ -430,7 +434,7 @@ const JobDescription = ({setShowJobDescription}) => {
                 <div className="text-lg font-semibold">
                   Social Media Assistant
                 </div>
-                <div className="text-gray-600">Connex India . Delhi, India</div>
+                <div className="text-gray-800">Connex India . Delhi, India</div>
                 <div className="flex flex-row items-center justify-between  mt-3">
                   <div className="mr-3 pl-2 pr-2 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold">
                     Full Time
@@ -454,7 +458,7 @@ const JobDescription = ({setShowJobDescription}) => {
                 <div className="text-lg font-semibold">
                   Social Media Assistant
                 </div>
-                <div className="text-gray-600">Connex India . Delhi, India</div>
+                <div className="text-gray-800">Connex India . Delhi, India</div>
                 <div className="flex flex-row items-center justify-between  mt-3">
                   <div className="mr-3 pl-2 pr-2 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold">
                     Full Time
@@ -478,7 +482,7 @@ const JobDescription = ({setShowJobDescription}) => {
                 <div className="text-lg font-semibold">
                   Social Media Assistant
                 </div>
-                <div className="text-gray-600">Connex India . Delhi, India</div>
+                <div className="text-gray-800">Connex India . Delhi, India</div>
                 <div className="flex flex-row items-center justify-between  mt-3">
                   <div className="mr-3 pl-2 pr-2 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold">
                     Full Time

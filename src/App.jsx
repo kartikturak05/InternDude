@@ -19,6 +19,7 @@ function App() {
         <div className={`transition-all duration-300 ${showOptions ? "blur-xs pointer-events-none" : ""}`}>
           <Routes>
             <Route path="/" element={<Home setShowOptions={setShowOptions}/>} />
+            {/* <Route path="/JobDescriptionn" element={<JobDescription/>} /> */}
             <Route path="/signup" element={<SignUp />} />
             <Route path="/InternshipDetails" element={<JobDescription />} />
             <Route path="/InternshipDetails" element={<JobDescription />} />

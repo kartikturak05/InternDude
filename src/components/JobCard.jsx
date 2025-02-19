@@ -20,7 +20,13 @@ const JobCard = ({ title, Post, company, location, stipend, duration,paymentVeri
   },[blur])
   return (
     <div>
-      <div className="flex flex-col gap-3 border border-gray-300 rounded-2xl p-5 shadow-md bg-white transition-all hover:shadow-lg w-[300px]">
+      <div className="flex flex-col gap-3 border border-gray-300 rounded-2xl p-5 shadow-md bg-white transition-all hover:shadow-lg w-[300px] cursor-pointer" onClick={()=>  {
+            // navigate("/InternshipDetails");
+            // setBlur("blur");
+            // setShowOptions("blur");
+            // setShowJobDescription(true);]
+            navigate("/InternshipDetails");
+          }}>
         {/* Title */}
         <div className="bg-gray-200 text-gray-700 text-sm font-medium w-fit px-3 py-1 rounded-lg">
           {title}
@@ -65,12 +71,7 @@ const JobCard = ({ title, Post, company, location, stipend, duration,paymentVeri
         </div>
 
         <div className="w-full items-center justify-center flex">
-          <div className="bg-blue-900 text-white font-bold text-lg rounded-lg pl-4 pr-4 pt-1 pb-1 cursor-pointer" onClick={()=>  {
-            // navigate("/InternshipDetails");
-            setBlur("blur");
-            setShowOptions("blur");
-            setShowJobDescription(true);
-          }}>
+          <div className="bg-blue-900 text-white font-bold text-lg rounded-lg pl-4 pr-4 pt-1 pb-1 cursor-pointer" >
             Apply
           </div>
         </div>
