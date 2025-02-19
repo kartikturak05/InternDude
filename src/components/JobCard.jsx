@@ -8,7 +8,7 @@ import { span } from "framer-motion/client";
 import JobDescription from "./JobDescription";
 import { useNavigate } from "react-router-dom";
 
-const JobCard = ({ title, Post, company, location, stipend, duration,paymentVerified,setShowJobDescription,setShowOptions}) => {
+const JobCard = ({ title,categories, Post, company, location, stipend, duration,paymentVerified,setShowJobDescription,setShowOptions}) => {
 
   const [blur,setBlur]= useState("");
   const navigate = useNavigate();

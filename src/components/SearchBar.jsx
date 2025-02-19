@@ -1,13 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CiSearch } from "react-icons/ci";
+import useStore from './store'; // Import the Zustand store
 
 const SearchBar = () => {
   const [skills, setSkills] = useState("");
   const [experience, setExperience] = useState("");
-  const [location, setLocation] = useState(""); 
+  const [location, setLocation] = useState("All");
+  
+  const updateLocation = useStore((state) => state.updateLocation);
+
+  useEffect(() => {
+    if(location === ""){
+      updateLocation("All"); // Update Zustand store with default location
+    }
+    updateLocation(location); // Update Zustand store with new location
+    
+  }, [location]);
 
   const handleClick = ()=>{
     console.log(skills, experience, location);
+    updateLocation(location); // Update Zustand store with new location
   }
   return (
     <div className="flex justify-around items-center bg-white shadow-lg px-5 py-5 rounded-full">
@@ -33,12 +45,13 @@ const SearchBar = () => {
           className="outline-none bg-transparent"
           onChange={(e) => setExperience(e.target.value)}
         >
-        </select>
-          <option value="experience">Select Experience</option>
+           <option value="experience">Select Experience</option>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
           <option value="4">4</option>
+        </select>
+         
       </div>
 
       {/* Divider Line */}
