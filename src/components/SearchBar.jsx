@@ -1,25 +1,36 @@
 import React, { useEffect, useState } from "react";
 import { CiSearch } from "react-icons/ci";
-import useStore from './store'; // Import the Zustand store
+// import useStore from './store'; // Import the Zustand store
+import InternshipStore from "../store/InternshipStore";
 
 const SearchBar = () => {
-  const [skills, setSkills] = useState("");
+  const [skills, setSkills] = useState("All");
   const [experience, setExperience] = useState("");
   const [location, setLocation] = useState("All");
   
-  const updateLocation = useStore((state) => state.updateLocation);
+  const updateDesignations = InternshipStore((state) => state.updateDesignations);
+  
+  const updateLocation = InternshipStore((state) => state.updateLocation);
 
   useEffect(() => {
-    if(location === ""){
-      updateLocation("All"); // Update Zustand store with default location
+    if (location === "") {
+      updateLocation("All"); // Set default only when empty
+    } else {
+      updateLocation(location); // Update Zustand store with new location
     }
-    updateLocation(location); // Update Zustand store with new location
-    
-  }, [location]);
+  
+    if (skills === "") {
+      updateDesignations("All"); // Set default only when empty
+    } else {
+      updateDesignations(skills); // Update Zustand store with new skills
+    }
+  }, [location, skills]);
+  
 
   const handleClick = ()=>{
     console.log(skills, experience, location);
     updateLocation(location); // Update Zustand store with new location
+    updateDesignations(skills); // Update Zustand store with new designations
   }
   return (
     <div className="flex justify-around items-center bg-white shadow-lg px-5 py-5 rounded-full">
@@ -46,6 +57,7 @@ const SearchBar = () => {
           onChange={(e) => setExperience(e.target.value)}
         >
            <option value="experience">Select Experience</option>
+          <option value="NoExperience">Fresher</option>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>

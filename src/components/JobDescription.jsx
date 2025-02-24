@@ -16,7 +16,7 @@ const JobDescription = ({setShowJobDescription}) => {
   return (
     <div className="min-h-screen bg-gray-50 py-8 px-4 top-30 left-25 z-50 absolute ">
        {/* Hide Job Description */}
-       <div className="absolute right-10 top-10 text-3xl font-semibold cursor-pointer text-blue-900"
+       <div className="absolute right-8 top-10 text-3xl font-semibold cursor-pointer text-blue-900"
         onClick={()=>  {  
           // setShowJobDescription(false);
           navigate("/");

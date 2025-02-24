@@ -155,7 +155,7 @@ const Navbar = ({ setShowOptions, showOptions }) => {
         </div>
       </div>
       {console.log(showOptions)}
-      {showOptions === "Internship" && <SetPreference />}
+      {showOptions === "Internship" && <SetPreference ShowOptions={showOptions}/>}
       {showOptions === "Jobs" && <SetPreference />}
     </div>
   );

@@ -32,9 +32,9 @@ const GitOverview = ({ setSaveAndContinue, saveAndContinue }) => {
   return (
     <>
       {/* Form */}
-      <div className="flex flex-col items-center justify-center border-1 border-gray-400 p-6 rounded-lg mt-5 w-96">
+      <div className="flex flex-col items-center justify-center border-1 border-gray-400 p-6 rounded-lg mt-5 w-[450px] pl-10 pr-10">
         {/* Gig Title */}
-        <div>
+        <div className="mt-4 w-full">
           <label htmlFor="Title">
             Gig Title <br />
           </label>
