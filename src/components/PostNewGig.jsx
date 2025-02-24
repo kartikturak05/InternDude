@@ -1,10 +1,28 @@
 import React, { useEffect, useState, useRef } from "react";
 import { PiGreaterThanBold } from "react-icons/pi";
 import { AiOutlineCloudUpload, AiOutlineCheckCircle } from "react-icons/ai";
+import { RxCross2 } from "react-icons/rx";
 
 const GitOverview = ({ setSaveAndContinue, saveAndContinue }) => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedSubCategory, setSelectedSubCategory] = useState("");
+  const [tags, setTags] = useState([]);
+  const [input, setInput] = useState("");
+
+  // Function to add tag when Enter is pressed
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" && input.trim() !== "") {
+      e.preventDefault();
+      setTags([...tags, input.trim()]);
+      setInput("");
+    }
+  };
+
+  // Function to remove a tag
+  const removeTag = (index) => {
+    setTags(tags.filter((_, i) => i !== index));
+  };
+
   // Categories and Subcategories
   const categories = {
     "Web Development": ["Frontend", "Backend", "Full Stack", "DevOps"],
@@ -32,7 +50,7 @@ const GitOverview = ({ setSaveAndContinue, saveAndContinue }) => {
   return (
     <>
       {/* Form */}
-      <div className="flex flex-col items-center justify-center border-1 border-gray-400 p-6 rounded-lg mt-5 w-[450px] pl-10 pr-10">
+      <div className="flex flex-col items-center justify-center border-1 border-gray-400 p-6 rounded-lg mt-5 w-[450px] pl-10 pr-10 mb-20">
         {/* Gig Title */}
         <div className="mt-4 w-full">
           <label htmlFor="Title">
@@ -92,16 +110,36 @@ const GitOverview = ({ setSaveAndContinue, saveAndContinue }) => {
         </div>
 
         {/* Git Tags */}
-        <div className="mt-4 w-full">
+          <div className="mt-4 w-full">
           <label htmlFor="GitTags">
             Git Tags <br />
           </label>
+        <div className="border p-2 rounded flex flex-wrap gap-2 w-full mt-2">
+        
+          {tags.map((tag, index) => (
+            <div
+              key={index}
+              className="bg-gray-500 text-white px-2 py-1 rounded flex items-center text-sm "
+            >
+              {tag}
+              <button
+                onClick={() => removeTag(index)}
+                className="ml-2 text-white "
+              >
+                <RxCross2 size={20} />
+                
+              </button>
+            </div>
+          ))}
           <input
             type="text"
-            id="GitTags"
-            placeholder="Website Design"
-            className="pt-2 pb-2 pr-10 pl-2 border border-gray-500 rounded-lg w-full mt-2"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={handleKeyDown}
+            placeholder="Type and press Enter..."
+            className="outline-none border-none p-1 w-full"
           />
+        </div>
         </div>
 
         {/* Save & Continue */}
@@ -167,7 +205,9 @@ const Pricing = ({ setSaveAndContinue, saveAndContinue }) => {
 
           {/* Revisions */}
           <div className="grid grid-cols-4 text-center border-1  text-gray-500">
-            <div className="py-2 font-semibold pt-2 pb-2 pl-1 pr-1 ">Revisions</div>
+            <div className="py-2 font-semibold pt-2 pb-2 pl-1 pr-1 ">
+              Revisions
+            </div>
             <div className="">
               <select
                 name="basicRevision"
@@ -202,7 +242,9 @@ const Pricing = ({ setSaveAndContinue, saveAndContinue }) => {
 
           {/* No. of concepts */}
           <div className="grid grid-cols-4 text-center border-1 text-gray-500">
-            <div className="py-2 font-semibold pt-2 pb-2 pl-1 pr-1  border-r-1">No. of concepts</div>
+            <div className="py-2 font-semibold pt-2 pb-2 pl-1 pr-1  border-r-1">
+              No. of concepts
+            </div>
             <div className="">
               <select
                 name="basicRevision"
@@ -237,7 +279,9 @@ const Pricing = ({ setSaveAndContinue, saveAndContinue }) => {
 
           {/* Source File */}
           <div className="grid grid-cols-4 text-center border-1 text-gray-500">
-            <div className="py-2 font-semibold pt-2 pb-2 pl-1 pr-1  border-r-1">Source File</div>
+            <div className="py-2 font-semibold pt-2 pb-2 pl-1 pr-1  border-r-1">
+              Source File
+            </div>
             <div className="py-2 border-l-1 border-r-1 border-gray-500">
               <input type="checkbox" className="w-5 h-5" />
             </div>
@@ -251,9 +295,15 @@ const Pricing = ({ setSaveAndContinue, saveAndContinue }) => {
 
           {/* Price */}
           <div className="grid grid-cols-4 text-center border-1 text-gray-500">
-            <div className="py-2 font-semibold pt-2 pb-2 pl-1 pr-1  border-r-1">Price</div>
-            <div className="py-2 border-l-1 border-r-1 border-gray-500">Rs. 500</div>
-            <div className="py-2 border-l-1 border-r-1 border-gray-500">Rs. 1000</div>
+            <div className="py-2 font-semibold pt-2 pb-2 pl-1 pr-1  border-r-1">
+              Price
+            </div>
+            <div className="py-2 border-l-1 border-r-1 border-gray-500">
+              Rs. 500
+            </div>
+            <div className="py-2 border-l-1 border-r-1 border-gray-500">
+              Rs. 1000
+            </div>
             <div className="py-2 border-l-1  border-gray-500">Rs. 1500</div>
           </div>
 
@@ -277,46 +327,71 @@ const Pricing = ({ setSaveAndContinue, saveAndContinue }) => {
   );
 };
 
+
 const Description = ({ setSaveAndContinue, saveAndContinue }) => {
   const [description, setDescription] = useState("Website Design");
+  const [spaceCount, setSpaceCount] = useState(0);
+
+  useEffect(() => {
+    console.log("Space Count:", spaceCount);
+  }, [spaceCount]);
+
+  const handleDescriptionChange = (e) => {
+    const text = e.target.value;
+    setDescription(text);
+
+    // Count spaces correctly
+    const spaces = text.split(" ").length - 1;
+    setSpaceCount(spaces);
+  };
 
   const handleClick = () => {
-    if (saveAndContinue == "overview") {
+    if (saveAndContinue === "overview") {
       setSaveAndContinue("pricing");
-    } else if (saveAndContinue == "pricing") {
+    } else if (saveAndContinue === "pricing") {
       setSaveAndContinue("description");
-    } else if (saveAndContinue == "description") {
+    } else if (saveAndContinue === "description") {
       setSaveAndContinue("gallery");
-    } else if (saveAndContinue == "gallery") {
+    } else if (saveAndContinue === "gallery") {
       setSaveAndContinue("completed");
     }
   };
+
   return (
     <>
-      <div className="flex flex-col items-start justify-center border-1 border-gray-400 p-6 rounded-lg mt-5 w-2xl">
-        <div className="font-semibold font-sm text-left">Describe Your Gig</div>
+      <div className="flex flex-col items-start justify-center border border-gray-400 p-6 rounded-lg mt-5 w-xl">
+        <div className="font-semibold text-left">Describe Your Gig</div>
         <div className="w-full h-full">
           <textarea
             name="Description"
             id="description"
             value={description}
-            onChange={(e) => setDescription(e.target.value)}
+            onChange={handleDescriptionChange}
             className="border p-2 border-gray-500 rounded-lg w-full mt-2"
-            rows="13"
+            rows="10"
           ></textarea>
+        </div>
+        <div className="text-sm text-gray-600 text-center ml-2">
+          Max 70-80 words (Spaces Used: {spaceCount})
         </div>
 
         {/* Save & Continue Button */}
       </div>
-      <div
-        className="bg-green-700 text-white pt-2 pb-2 pl-5 pr-5 rounded-lg mt-5 cursor-pointer hover:bg-green-800 transition"
+      <button
+        disabled={spaceCount > 8}
+        className={`mt-5 pt-2 pb-2 pl-5 pr-5 rounded-lg text-white transition ${
+          spaceCount > 70
+            ? "bg-gray-500 cursor-not-allowed"
+            : "bg-green-700 hover:bg-green-800"
+        }`}
         onClick={handleClick}
       >
         Save & Continue
-      </div>
+      </button>
     </>
   );
 };
+
 
 const Gallery = ({ setSaveAndContinue, saveAndContinue }) => {
   const [uploadedFile, setUploadedFile] = useState(null);
