@@ -14,7 +14,7 @@ import Footer from './Footer';
 const Home = ({setShowOptions}) => {
   const [showJobDescription, setShowJobDescription] = useState(false);
   return (
-    <div className="flex flex-col justify-between mb-100 relative">  
+    <div className="flex flex-col justify-between relative">  
 
     {showJobDescription && <JobDescription setShowJobDescription={setShowJobDescription} setShowOptions={setShowOptions}/>}
     {/* <JobDescription/> */}
