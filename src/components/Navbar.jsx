@@ -13,13 +13,20 @@ const Navbar = ({ setShowOptions, showOptions }) => {
   const [userDetails, setUserDetails] = useState(null);
 
   const [selected, setSelected] = useState("");
-  const [selectedOpt,setSelectedOpt] = useState("");
+  const [selectedOpt, setSelectedOpt] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-  const options = ["Profile", "My Applications","Post New Gig","Edit Resume","Help Center","More"];
+  const options = [
+    "Profile",
+    "My Applications",
+    "Post New Gig",
+    "Edit Resume",
+    "Help Center",
+    "More",
+  ];
 
-  useEffect(()=>{
-    setSelected(userDetails?.displayName)
-  },[userDetails])
+  useEffect(() => {
+    setSelected(userDetails?.displayName);
+  }, [userDetails]);
 
   // to change the navbar options
   useEffect(() => {
@@ -28,8 +35,8 @@ const Navbar = ({ setShowOptions, showOptions }) => {
     } else if (Jobs) {
       setShowOptions("Jobs");
     }
-  }, [Internship, Jobs]); 
-  
+  }, [Internship, Jobs]);
+
   //  To redirect to the selected options page
   useEffect(() => {
     if (selectedOpt === "Profile") {
@@ -72,6 +79,7 @@ const Navbar = ({ setShowOptions, showOptions }) => {
               className={`text-base flex items-center text-gray-900 font-normal pt-2 pb-2 pl-5 pr-5 rounded-xl cursor-pointer hover:text-gray-700 hover:font-semibold ${
                 showOptions === "Internship" ? "bg-gray-300 text-blue-800" : ""
               }`}
+              onClick={()=> navigate("/Internships")}
               onMouseEnter={() => {
                 setShowOptions("Internship");
                 setJobs(false);
@@ -117,11 +125,13 @@ const Navbar = ({ setShowOptions, showOptions }) => {
                   <div
                     className="bg-transparent text-gray-700 font-semibold py-2 pl-5 pr-8 cursor-pointer hover:text-gray-700  border-gray-300 rounded-md w-full flex justify-center items-center "
                     onMouseEnter={() => {
-                      setIsOpen(!isOpen)
+                      setIsOpen(!isOpen);
                     }}
                   >
                     {selected}
-                    <span className="text-gray-500 pl-2"><FaAngleDown /></span>
+                    <span className="text-gray-500 pl-2">
+                      <FaAngleDown />
+                    </span>
                   </div>
 
                   {/* Dropdown menu */}
@@ -155,7 +165,9 @@ const Navbar = ({ setShowOptions, showOptions }) => {
         </div>
       </div>
       {console.log(showOptions)}
-      {showOptions === "Internship" && <SetPreference ShowOptions={showOptions}/>}
+      {showOptions === "Internship" && (
+        <SetPreference ShowOptions={showOptions} />
+      )}
       {showOptions === "Jobs" && <SetPreference />}
     </div>
   );
