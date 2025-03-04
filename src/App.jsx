@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import JobDescription from "./components/JobDescription";
 import PostNewGig from "./components/PostNewGig";
 import FindInternShip from "./components/FindInternShip";
+import FindJobs from "./components/FindJobs";
 
 function App() {
   const [showOptions, setShowOptions] = useState("");
@@ -26,6 +27,7 @@ function App() {
             <Route path="/InternshipDetails" element={<JobDescription />} />
             <Route path="/PostNewGig" element={<PostNewGig />} />
             <Route path="/Internships" element={<FindInternShip />} />
+            <Route path="/Jobs" element={<FindJobs />} />
           </Routes>
         </div>
 

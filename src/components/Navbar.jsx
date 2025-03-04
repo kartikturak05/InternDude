@@ -92,6 +92,7 @@ const Navbar = ({ setShowOptions, showOptions }) => {
               className={`text-base flex items-center text-gray-900 font-normal pt-2 pb-2 pl-5 pr-5 rounded-xl cursor-pointer hover:text-gray-700 hover:font-semibold ${
                 showOptions === "Jobs" ? "bg-gray-300 text-blue-800" : ""
               }`}
+              onClick={()=> navigate("/Jobs")}
               onMouseEnter={() => {
                 setShowOptions("Jobs");
                 setInternship(false);
