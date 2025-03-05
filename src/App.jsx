@@ -9,6 +9,7 @@ import JobDescription from "./components/JobDescription";
 import PostNewGig from "./components/PostNewGig";
 import FindInternShip from "./components/FindInternShip";
 import FindJobs from "./components/FindJobs";
+import ProfilePage from "./components/ProfilePage";
 
 function App() {
   const [showOptions, setShowOptions] = useState("");
@@ -28,6 +29,7 @@ function App() {
             <Route path="/PostNewGig" element={<PostNewGig />} />
             <Route path="/Internships" element={<FindInternShip />} />
             <Route path="/Jobs" element={<FindJobs />} />
+            <Route path="/Profile" element={<ProfilePage />} />
           </Routes>
         </div>
 
