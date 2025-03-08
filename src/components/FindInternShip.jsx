@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   IoSearchSharp,
   IoLocationOutline,
@@ -267,6 +267,7 @@ const TrendingInsights = () => {
   );
 };
 
+// Sample Internship Data
 const FindInternship = () => {
   const internships = [
     {
@@ -275,7 +276,31 @@ const FindInternship = () => {
       location: "Remote",
       stipend: "₹10,000",
       duration: "3 months",
+      skills: "frontend",
+      companyType: "startup",
       daysLeft: 4,
+      isEasyApply: true,
+    },
+    {
+      title: "Frontend Developer Intern",
+      company: "Web Creations",
+      location: "Hybrid",
+      stipend: "₹12,000",
+      duration: "4 months",
+      skills: "frontend",
+      companyType: "mid",
+      daysLeft: 6,
+      isEasyApply: false,
+    },
+    {
+      title: "React Developer Intern",
+      company: "Innovatech",
+      location: "Remote",
+      stipend: "₹15,000",
+      duration: "6 months",
+      skills: "frontend",
+      companyType: "mnc",
+      daysLeft: 7,
       isEasyApply: true,
     },
     {
@@ -284,7 +309,31 @@ const FindInternship = () => {
       location: "Hybrid",
       stipend: "₹15,000",
       duration: "6 months",
+      skills: "design",
+      companyType: "mnc",
       daysLeft: 7,
+      isEasyApply: false,
+    },
+    {
+      title: "Graphic Design Intern",
+      company: "Visual Works",
+      location: "On-Site",
+      stipend: "₹8,000",
+      duration: "3 months",
+      skills: "design",
+      companyType: "mid",
+      daysLeft: 5,
+      isEasyApply: true,
+    },
+    {
+      title: "Product Design Intern",
+      company: "Innovative Labs",
+      location: "Remote",
+      stipend: "₹20,000",
+      duration: "6 months",
+      skills: "design",
+      companyType: "startup",
+      daysLeft: 12,
       isEasyApply: false,
     },
     {
@@ -293,10 +342,239 @@ const FindInternship = () => {
       location: "On-Site",
       stipend: "₹12,000",
       duration: "4 months",
+      skills: "marketing",
+      companyType: "mid",
       daysLeft: 2,
       isEasyApply: true,
     },
+    {
+      title: "Digital Marketing Intern",
+      company: "Ads Agency",
+      location: "Hybrid",
+      stipend: "₹10,000",
+      duration: "3 months",
+      skills: "marketing",
+      companyType: "startup",
+      daysLeft: 9,
+      isEasyApply: false,
+    },
+    {
+      title: "Social Media Manager Intern",
+      company: "Trendsetters",
+      location: "Remote",
+      stipend: "₹14,000",
+      duration: "5 months",
+      skills: "marketing",
+      companyType: "mnc",
+      daysLeft: 7,
+      isEasyApply: true,
+    },
+    {
+      title: "Backend Developer Intern",
+      company: "Code Innovations",
+      location: "Remote",
+      stipend: "₹8,000",
+      duration: "3 months",
+      skills: "backend",
+      companyType: "startup",
+      daysLeft: 5,
+      isEasyApply: false,
+    },
+    {
+      title: "Node.js Developer Intern",
+      company: "API Builders",
+      location: "On-Site",
+      stipend: "₹10,000",
+      duration: "4 months",
+      skills: "backend",
+      companyType: "mid",
+      daysLeft: 3,
+      isEasyApply: true,
+    },
+    {
+      title: "Django Developer Intern",
+      company: "Python Coders",
+      location: "Hybrid",
+      stipend: "₹14,000",
+      duration: "6 months",
+      skills: "backend",
+      companyType: "mnc",
+      daysLeft: 6,
+      isEasyApply: false,
+    },
+    {
+      title: "Data Science Intern",
+      company: "AI Research Lab",
+      location: "Hybrid",
+      stipend: "₹20,000",
+      duration: "6 months",
+      skills: "data",
+      companyType: "mnc",
+      daysLeft: 10,
+      isEasyApply: true,
+    },
+    {
+      title: "Machine Learning Intern",
+      company: "DeepMind Tech",
+      location: "Remote",
+      stipend: "₹22,000",
+      duration: "5 months",
+      skills: "data",
+      companyType: "startup",
+      daysLeft: 11,
+      isEasyApply: false,
+    },
+    {
+      title: "Data Analytics Intern",
+      company: "Insight Corp",
+      location: "On-Site",
+      stipend: "₹18,000",
+      duration: "6 months",
+      skills: "data",
+      companyType: "mid",
+      daysLeft: 9,
+      isEasyApply: true,
+    },
+    {
+      title: "Content Writing Intern",
+      company: "Writers Hub",
+      location: "On-Site",
+      stipend: "₹5,000",
+      duration: "2 months",
+      skills: "writing",
+      companyType: "mid",
+      daysLeft: 3,
+      isEasyApply: true,
+    },
+    {
+      title: "Technical Writing Intern",
+      company: "DocuTech",
+      location: "Hybrid",
+      stipend: "₹9,000",
+      duration: "3 months",
+      skills: "writing",
+      companyType: "startup",
+      daysLeft: 7,
+      isEasyApply: false,
+    },
+    {
+      title: "SEO Content Writer Intern",
+      company: "RankBoost",
+      location: "Remote",
+      stipend: "₹7,000",
+      duration: "4 months",
+      skills: "writing",
+      companyType: "mnc",
+      daysLeft: 5,
+      isEasyApply: true,
+    },
+    {
+      title: "Cybersecurity Intern",
+      company: "CyberSecure Pvt Ltd",
+      location: "Remote",
+      stipend: "₹18,000",
+      duration: "5 months",
+      skills: "security",
+      companyType: "mnc",
+      daysLeft: 8,
+      isEasyApply: false,
+    },
+    {
+      title: "Ethical Hacking Intern",
+      company: "Hack Secure",
+      location: "Hybrid",
+      stipend: "₹20,000",
+      duration: "6 months",
+      skills: "security",
+      companyType: "mid",
+      daysLeft: 12,
+      isEasyApply: true,
+    },
+    {
+      title: "Penetration Tester Intern",
+      company: "WhiteHat Labs",
+      location: "On-Site",
+      stipend: "₹22,000",
+      duration: "4 months",
+      skills: "security",
+      companyType: "startup",
+      daysLeft: 10,
+      isEasyApply: false,
+    },
   ];
+
+  const [showInternships, setShowInternships] = useState(4);
+  const handleLoadMore = () => {
+    setShowInternships((prev) =>
+      Math.min(prev + 4, filteredInternships.length)
+    );
+  };
+
+  const [filteredInternships, setFilteredInternships] = useState(internships);
+  const [locations, setLocations] = useState("");
+  const [roles, setRoles] = useState("");
+  const [stipends, setStipends] = useState("");
+  const [durations, setDurations] = useState("");
+  const [skills, setSkills] = useState("");
+  const [companyTypes, setCompanyTypes] = useState("");
+
+  // Filtering Function
+  useEffect(() => {
+    let newFilteredInternships = internships;
+
+    if (locations && locations !== "any") {
+      newFilteredInternships = newFilteredInternships.filter(
+        (internship) =>
+          internship.location.toLowerCase() === locations.toLowerCase()
+      );
+    }
+
+    if (roles && roles !== "any") {
+      newFilteredInternships = newFilteredInternships.filter((internship) =>
+        internship.title.toLowerCase().includes(roles.toLowerCase())
+      );
+    }
+
+    if (stipends && stipends !== "any") {
+      if (stipends === "paid") {
+        newFilteredInternships = newFilteredInternships.filter(
+          (internship) => internship.stipend !== "Unpaid"
+        );
+      } else if (stipends === "unpaid") {
+        newFilteredInternships = newFilteredInternships.filter(
+          (internship) => internship.stipend === "Unpaid"
+        );
+      } else if (stipends === "high") {
+        newFilteredInternships = newFilteredInternships.filter(
+          (internship) =>
+            parseInt(internship.stipend.replace("₹", "").replace(",", "")) >=
+            10000
+        );
+      }
+    }
+
+    if (durations && durations !== "any") {
+      newFilteredInternships = newFilteredInternships.filter(
+        (internship) =>
+          internship.duration.toLowerCase() === durations.toLowerCase()
+      );
+    }
+
+    if (skills && skills !== "any") {
+      newFilteredInternships = newFilteredInternships.filter(
+        (internship) => internship.skills.toLowerCase() === skills.toLowerCase()
+      );
+    }
+
+    if (companyTypes && companyTypes !== "any") {
+      newFilteredInternships = newFilteredInternships.filter(
+        (internship) =>
+          internship.companyType.toLowerCase() === companyTypes.toLowerCase()
+      );
+    }
+
+    setFilteredInternships(newFilteredInternships);
+  }, [locations, roles, stipends, durations, skills, companyTypes]);
 
   return (
     <>
@@ -330,7 +608,12 @@ const FindInternship = () => {
               {/* Location */}
               <div className="p-2 flex border border-gray-300 rounded-md cursor-pointer">
                 <IoLocationSharp className="text-gray-500 mr-2 text-xl" />
-                <select name="location" id="location" className="outline-none">
+                <select
+                  name="location"
+                  id="location"
+                  className="outline-none"
+                  onChange={(e) => setLocations(e.target.value)}
+                >
                   <option value="any">Location</option>
                   <option value="remote">Remote</option>
                   <option value="hybrid">Hybrid</option>
@@ -340,7 +623,12 @@ const FindInternship = () => {
               {/* Role */}
               <div className="p-2 flex border border-gray-300 rounded-md cursor-pointer">
                 <HiOutlineWallet className="text-gray-500 mr-2 text-xl" />
-                <select name="role" id="role" className="outline-none">
+                <select
+                  name="role"
+                  id="role"
+                  className="outline-none"
+                  onChange={(e) => setRoles(e.target.value)}
+                >
                   <option value="any">Role</option>
                   <option value="software">Software Developer</option>
                   <option value="marketing">Marketing</option>
@@ -350,7 +638,12 @@ const FindInternship = () => {
               {/* Stipend */}
               <div className="p-2 flex border border-gray-300 rounded-md cursor-pointer">
                 <IoWalletOutline className="text-gray-500 mr-2 text-xl" />
-                <select name="stipend" id="stipend" className="outline-none">
+                <select
+                  name="stipend"
+                  id="stipend"
+                  className="outline-none"
+                  onChange={(e) => setStipends(e.target.value)}
+                >
                   <option value="any">Stipend</option>
                   <option value="paid">Paid</option>
                   <option value="unpaid">Unpaid</option>
@@ -360,16 +653,26 @@ const FindInternship = () => {
               {/* Duration */}
               <div className="p-2 flex border border-gray-300 rounded-md cursor-pointer">
                 <WiTime3 className="text-gray-500 mr-2 text-xl" />
-                <select name="duration" id="duration" className="outline-none">
+                <select
+                  name="duration"
+                  id="duration"
+                  className="outline-none"
+                  onChange={(e) => setDurations(e.target.value)}
+                >
                   <option value="any">Duration</option>
-                  <option value="1month">1 Month</option>
-                  <option value="3months">3 Months</option>
-                  <option value="6months">6 Months</option>
+                  <option value="1 month">1 Month</option>
+                  <option value="3 months">3 Months</option>
+                  <option value="6 months">6 Months</option>
                 </select>
               </div>
               {/* Skills */}
               <div className="p-2 flex border border-gray-300 rounded-md cursor-pointer">
-                <select name="skills" id="skills" className="outline-none">
+                <select
+                  name="skills"
+                  id="skills"
+                  className="outline-none"
+                  onChange={(e) => setSkills(e.target.value)}
+                >
                   <option value="any">Skills</option>
                   <option value="frontend">Frontend Development</option>
                   <option value="backend">Backend Development</option>
@@ -383,6 +686,7 @@ const FindInternship = () => {
                   name="companyType"
                   id="companyType"
                   className="outline-none"
+                  onChange={(e) => setCompanyTypes(e.target.value)}
                 >
                   <option value="any">Company Type</option>
                   <option value="startup">Startup</option>
@@ -416,16 +720,27 @@ const FindInternship = () => {
                 </div>
 
                 <div>
-                  {internships.map((internship, index) => (
-                    <InternshipCard key={index} {...internship} />
-                  ))}
+                  {filteredInternships.length > 0 ? (
+                    filteredInternships
+                      .slice(0, showInternships)
+                      .map((internship, index) => (
+                        <InternshipCard key={index} {...internship} />
+                      ))
+                  ) : (
+                    <p>No internships found</p>
+                  )}
                 </div>
 
-                <div className="flex justify-center mt-4">
-                  <button className="text-blue-600 border border-blue-600 rounded-md px-4 py-2 hover:bg-blue-50 transition">
-                    Load More
-                  </button>
-                </div>
+                {showInternships < filteredInternships.length && (
+                  <div className="flex justify-center mt-4">
+                    <button
+                      onClick={handleLoadMore}
+                      className="text-blue-600 border border-blue-600 rounded-md px-4 py-2 hover:bg-blue-50 transition cursor-pointer"
+                    >
+                      Load More
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
 
