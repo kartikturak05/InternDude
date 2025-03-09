@@ -2,8 +2,10 @@ import React from "react";
 import { FaLinkedin, FaEnvelope, FaPencilAlt, FaPlus } from "react-icons/fa";
 import { MdLocationOn, MdWork } from "react-icons/md";
 import Footer from "./Footer";
+import { useNavigate } from "react-router-dom";
 
 const ProfilePage = () => {
+  const navigate = useNavigate();
   return (
     <>  
     <div className="max-w-6xl mx-auto bg-white shadow-md rounded-lg overflow-hidden">
@@ -43,7 +45,9 @@ const ProfilePage = () => {
             <button className="bg-blue-500 text-white px-4 py-2 rounded-md text-sm flex items-center">
               <FaPlus className="mr-1" /> Download Resume
             </button>
-            <button className="border border-gray-300 text-gray-700 px-4 py-2 rounded-md text-sm">
+            <button className="border border-gray-300 text-gray-700 px-4 py-2 rounded-md text-sm cursor-pointer hover:bg-gray-100"
+            onClick={()=> navigate("/CreateProfile")}
+            >
               Edit Profile
             </button>
           </div>
