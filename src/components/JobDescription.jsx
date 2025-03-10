@@ -16,7 +16,7 @@ const JobDescription = ({setShowJobDescription}) => {
   return (
     <div className="min-h-screen bg-gray-50 py-8 px-4 top-30 left-25 z-50 absolute ">
        {/* Hide Job Description */}
-       <div className="absolute right-8 top-10 text-3xl font-semibold cursor-pointer text-blue-900"
+       <div className="absolute right-8 top-10 text-3xl font-semibold cursor-pointer text-blue-900 "
         onClick={()=>  {  
           // setShowJobDescription(false);
           navigate("/");
@@ -43,7 +43,8 @@ const JobDescription = ({setShowJobDescription}) => {
               <button className="p-2 hover:bg-gray-100 rounded-full">
                 <LuShare2 className="w-5 h-5 text-gray-800" />
               </button>
-              <button className="px-6 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors"
+              <button className="px-6 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors cursor-pointer"
+              onClick={()=> navigate("/Apply")}
              
               >
                 Apply Now
