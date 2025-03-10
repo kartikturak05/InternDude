@@ -1,16 +1,48 @@
-import React, { useState } from 'react';
-import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
-import { FaCalendarAlt, FaMapMarkerAlt, FaGraduationCap, FaBriefcase, FaUser } from 'react-icons/fa';
+import React, { useState } from "react";
+import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
+import {
+  FaCalendarAlt,
+  FaMapMarkerAlt,
+  FaGraduationCap,
+  FaBriefcase,
+  FaUser,
+} from "react-icons/fa";
+import { IoCheckmarkDoneCircle } from "react-icons/io5";
+import { RxCross1 } from "react-icons/rx";
+import { useNavigate } from "react-router-dom";
 
 // Step 1: Choose Language Component
-const ChooseLanguage = ({ language, setLanguage, searchQuery, setSearchQuery }) => {
+const ChooseLanguage = ({
+  language,
+  setLanguage,
+  searchQuery,
+  setSearchQuery,
+}) => {
   const languages = [
-    "English", "Hindi", "Spanish", "French", "German", "Chinese", "Japanese",
-    "Korean", "Italian", "Portuguese", "Russian", "Arabic", "Dutch", "Turkish",
-    "Bengali", "Urdu", "Tamil", "Telugu", "Marathi", "Gujarati", "Punjabi",
+    "English",
+    "Hindi",
+    "Spanish",
+    "French",
+    "German",
+    "Chinese",
+    "Japanese",
+    "Korean",
+    "Italian",
+    "Portuguese",
+    "Russian",
+    "Arabic",
+    "Dutch",
+    "Turkish",
+    "Bengali",
+    "Urdu",
+    "Tamil",
+    "Telugu",
+    "Marathi",
+    "Gujarati",
+    "Punjabi",
   ];
 
-  const filteredLanguages = languages.filter(lang => 
+  const filteredLanguages = languages.filter((lang) =>
     lang.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
@@ -24,20 +56,29 @@ const ChooseLanguage = ({ language, setLanguage, searchQuery, setSearchQuery }) 
         placeholder="Search for a language"
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
-        className="w-96 h-10 p-4 border-2 border-gray-300 rounded-lg mt-5"
+        className="w-md h-10 p-4 border-2 border-gray-300 rounded-lg mt-5"
       />
 
       {/* Language List with Scrollbar */}
-      <div className="w-96 mt-5 h-60 overflow-y-auto border-2 border-gray-300 rounded-lg">
+      <div className="w-md mt-8 h-60 overflow-y-auto  border-gray-300 rounded-lg">
         <div className="flex flex-col gap-2 p-2">
           {filteredLanguages.map((lang, index) => (
             <div
               key={index}
-              className={`p-2 w-full text-center rounded-lg cursor-pointer hover:bg-gray-200 border-2 
-                ${language === lang ? 'border-blue-500 bg-blue-50' : 'border-gray-300'}`}
+              className={`pt-2 pb-2 pl-5 pr-5 w-full text-center rounded-lg cursor-pointer hover:bg-gray-200 border-2 flex items-center justify-between
+                ${
+                  language === lang
+                    ? "border-gray-500 bg-blue-50"
+                    : "border-gray-300"
+                }`}
               onClick={() => setLanguage(lang)}
             >
+              <div>
               {lang}
+              </div>
+              <div>
+                {language === lang && <span className="text-green-500 "><IoCheckmarkDoneCircle size={20}/></span>}
+              </div>
             </div>
           ))}
         </div>
@@ -50,17 +91,19 @@ const ChooseLanguage = ({ language, setLanguage, searchQuery, setSearchQuery }) 
 const PersonalDetails = ({ personalInfo, setPersonalInfo }) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setPersonalInfo(prev => ({ ...prev, [name]: value }));
+    setPersonalInfo((prev) => ({ ...prev, [name]: value }));
   };
 
   return (
     <div className="flex flex-col items-center justify-center w-full px-10 mt-10">
-      <h2 className="text-xl font-semibold mb-6">Tell Us About Yourself</h2>
-      
-      <div className="w-96 space-y-4">
+      <h2 className="text-2xl font-semibold mb-6">Tell Us About Yourself</h2>
+
+      <div className="w-lg space-y-4">
         <div className="flex space-x-4">
           <div className="w-1/2">
-            <label className="block text-sm font-medium text-gray-700 mb-1">First Name</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              First Name
+            </label>
             <input
               type="text"
               name="firstName"
@@ -71,7 +114,9 @@ const PersonalDetails = ({ personalInfo, setPersonalInfo }) => {
             />
           </div>
           <div className="w-1/2">
-            <label className="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Last Name
+            </label>
             <input
               type="text"
               name="lastName"
@@ -84,7 +129,9 @@ const PersonalDetails = ({ personalInfo, setPersonalInfo }) => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Date of Birth</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Date of Birth
+          </label>
           <div className="relative">
             <input
               type="date"
@@ -98,7 +145,9 @@ const PersonalDetails = ({ personalInfo, setPersonalInfo }) => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Email Address
+          </label>
           <input
             type="email"
             name="email"
@@ -110,15 +159,24 @@ const PersonalDetails = ({ personalInfo, setPersonalInfo }) => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Phone Number
+          </label>
+          <div className="flex items-center mb-1 justify-between">
+            <div className="p-3 pb-2 border-2 border-gray-300 rounded-lg mr-2">
+              +91
+            </div>
           <input
             type="tel"
             name="phone"
             value={personalInfo.phone}
             onChange={handleChange}
             className="w-full p-2 border-2 border-gray-300 rounded-lg"
-            placeholder="+1 (555) 000-0000"
+            placeholder="000-0000-00"
           />
+
+          </div>
+         
         </div>
       </div>
     </div>
@@ -128,26 +186,41 @@ const PersonalDetails = ({ personalInfo, setPersonalInfo }) => {
 // Step 3: Location Component
 const LocationPreferences = ({ locationInfo, setLocationInfo }) => {
   const cities = [
-    "Mumbai", "Delhi", "Bangalore", "Hyderabad", "Chennai", "Kolkata", 
-    "Pune", "Ahmedabad", "Jaipur", "Lucknow", "New York", "London", 
-    "Tokyo", "Paris", "Singapore", "Dubai", "Berlin", "Sydney"
+    "Mumbai",
+    "Delhi",
+    "Bangalore",
+    "Hyderabad",
+    "Chennai",
+    "Kolkata",
+    "Pune",
+    "Ahmedabad",
+    "Jaipur",
+    "Lucknow",
+    "New York",
+    "London",
+    "Tokyo",
+    "Paris",
+    "Singapore",
+    "Dubai",
+    "Berlin",
+    "Sydney",
   ];
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setLocationInfo(prev => ({ ...prev, [name]: value }));
+    setLocationInfo((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleCheckboxChange = (city) => {
-    setLocationInfo(prev => {
+    setLocationInfo((prev) => {
       const isSelected = prev.preferredCities.includes(city);
       return {
         ...prev,
-        preferredCities: isSelected 
-          ? prev.preferredCities.filter(c => c !== city)
-          : prev.preferredCities.length < 3 
-            ? [...prev.preferredCities, city] 
-            : prev.preferredCities
+        preferredCities: isSelected
+          ? prev.preferredCities.filter((c) => c !== city)
+          : prev.preferredCities.length < 3
+          ? [...prev.preferredCities, city]
+          : prev.preferredCities,
       };
     });
   };
@@ -155,11 +228,13 @@ const LocationPreferences = ({ locationInfo, setLocationInfo }) => {
   return (
     <div className="flex flex-col items-center justify-center w-full px-10 mt-10">
       <h2 className="text-xl font-semibold mb-6">Your Location Preferences</h2>
-      
-      <div className="w-96 space-y-6">
+
+      <div className="w-lg space-y-6">
         {/* Current City Selection */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Current City</label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Current City
+          </label>
           <div className="relative">
             <select
               name="currentCity"
@@ -169,7 +244,9 @@ const LocationPreferences = ({ locationInfo, setLocationInfo }) => {
             >
               <option value="">Select your current city</option>
               {cities.map((city, index) => (
-                <option key={index} value={city}>{city}</option>
+                <option key={index} value={city}>
+                  {city}
+                </option>
               ))}
             </select>
             <FaMapMarkerAlt className="absolute right-3 top-3 text-gray-400" />
@@ -178,34 +255,47 @@ const LocationPreferences = ({ locationInfo, setLocationInfo }) => {
 
         {/* Preferred Work Locations */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Preferred Work Locations</label>
-          
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Preferred Work Locations
+          </label>
+
           {/* Additional City Selection */}
           <div className="mt-2">
             <select
-              className="w-full p-2 border-2 border-gray-300 rounded-lg mt-2"
+              className="w-full p-2 border-2 border-gray-300 rounded-lg mt-1"
               onChange={(e) => {
                 const selectedCity = e.target.value;
-                if (selectedCity && !locationInfo.preferredCities.includes(selectedCity) && locationInfo.preferredCities.length < 3) {
+                if (
+                  selectedCity &&
+                  !locationInfo.preferredCities.includes(selectedCity) &&
+                  locationInfo.preferredCities.length < 3
+                ) {
                   handleCheckboxChange(selectedCity);
                 }
               }}
             >
               <option value="">Select more cities</option>
               {cities.slice(8).map((city, index) => (
-                <option key={index} value={city} disabled={locationInfo.preferredCities.includes(city)}>
+                <option
+                  key={index}
+                  value={city}
+                  disabled={locationInfo.preferredCities.includes(city)}
+                >
                   {city}
                 </option>
               ))}
             </select>
           </div>
-          
+
           {/* Selected Cities Display */}
           <div className="flex flex-col gap-2 mt-2">
             {locationInfo.preferredCities.map((city, index) => (
-              <div key={index} className="bg-blue-100 px-4 py-2 rounded-full text-lg flex items-center justify-between">
+              <div
+                key={index}
+                className="bg-blue-100 px-4 py-2 rounded-full text-lg flex items-center justify-between"
+              >
                 {city}
-                <button 
+                <button
                   className="ml-1 text-gray-500 hover:text-gray-700 text-lg"
                   onClick={() => handleCheckboxChange(city)}
                 >
@@ -220,32 +310,41 @@ const LocationPreferences = ({ locationInfo, setLocationInfo }) => {
   );
 };
 
-
 // Step 4: Current Status Component
 const CurrentStatus = ({ statusInfo, setStatusInfo }) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setStatusInfo(prev => ({ ...prev, [name]: value }));
+    setStatusInfo((prev) => ({ ...prev, [name]: value }));
   };
 
   return (
     <div className="flex flex-col items-center justify-center w-full px-10 mt-10">
       <h2 className="text-xl font-semibold mb-6">Your Current Status</h2>
-      
-      <div className="w-96 space-y-6">
+
+      <div className="w-lg space-y-6">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">I am currently a:</label>
+          <label className="block text-md font-medium text-gray-700 mb-2">
+            I am currently a:
+          </label>
           <div className="grid grid-cols-2 gap-3">
-            {["College Student", "Fresher", "Working Professional", "School Student", "Women Returning to Work"].map((status, index) => (
+            {[
+              "College Student",
+              "Fresher",
+              "Working Professional",
+              "School Student",
+              "Women Returning to Work",
+            ].map((status, index) => (
               <button
                 key={index}
                 type="button"
-                className={`p-2 rounded-lg border-2 ${
-                  statusInfo.currentStatus === status 
-                    ? 'border-blue-500 bg-blue-50 text-blue-700' 
-                    : 'border-gray-300 hover:bg-gray-50'
+                className={`p-2 rounded-lg border-2 cursor-pointer ${
+                  statusInfo.currentStatus === status
+                    ? "border-blue-500 bg-blue-50 text-blue-700"
+                    : "border-gray-300 hover:bg-gray-50"
                 }`}
-                onClick={() => setStatusInfo(prev => ({ ...prev, currentStatus: status }))}
+                onClick={() =>
+                  setStatusInfo((prev) => ({ ...prev, currentStatus: status }))
+                }
               >
                 {status}
               </button>
@@ -254,12 +353,16 @@ const CurrentStatus = ({ statusInfo, setStatusInfo }) => {
         </div>
 
         {/* Conditional fields based on current status */}
-        {(statusInfo.currentStatus === "College Student" || statusInfo.currentStatus === "Fresher" || statusInfo.currentStatus === "Working Professional") && (
+        {(statusInfo.currentStatus === "College Student" ||
+          statusInfo.currentStatus === "Fresher" ||
+          statusInfo.currentStatus === "Working Professional") && (
           <div className="space-y-4 border-t pt-4">
             <h3 className="font-medium text-gray-700">Education Details</h3>
-            
+
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Degree</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Degree
+              </label>
               <input
                 type="text"
                 name="degree"
@@ -269,9 +372,11 @@ const CurrentStatus = ({ statusInfo, setStatusInfo }) => {
                 placeholder="e.g., B.Tech, MBA, BCA"
               />
             </div>
-            
+
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Specialization</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Specialization
+              </label>
               <input
                 type="text"
                 name="specialization"
@@ -281,9 +386,11 @@ const CurrentStatus = ({ statusInfo, setStatusInfo }) => {
                 placeholder="e.g., Computer Science, Marketing, Finance"
               />
             </div>
-            
+
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">College/University Name</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                College/University Name
+              </label>
               <input
                 type="text"
                 name="collegeName"
@@ -293,9 +400,11 @@ const CurrentStatus = ({ statusInfo, setStatusInfo }) => {
                 placeholder="Enter your institution name"
               />
             </div>
-            
+
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Year of Completion</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Year of Completion
+              </label>
               <input
                 type="number"
                 name="yearOfCompletion"
@@ -310,9 +419,12 @@ const CurrentStatus = ({ statusInfo, setStatusInfo }) => {
           </div>
         )}
 
-        {(statusInfo.currentStatus === "Working Professional" || statusInfo.currentStatus === "Women Returning to Work") && (
+        {(statusInfo.currentStatus === "Working Professional" ||
+          statusInfo.currentStatus === "Women Returning to Work") && (
           <div className="border-t pt-4">
-            <label className="block text-sm font-medium text-gray-700 mb-1">Years of Experience</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Years of Experience
+            </label>
             <select
               name="yearsOfExperience"
               value={statusInfo.yearsOfExperience}
@@ -342,25 +454,34 @@ const WorkHistory = ({ workEntries, setWorkEntries }) => {
     startDate: "",
     endDate: "",
     location: "",
-    currently: false
+    currently: false,
   });
 
   const employmentTypes = [
-    "Full-Time", "Part-Time", "Contract", "Internship", 
-    "Freelance", "Temporary", "Volunteer"
+    "Full-Time",
+    "Part-Time",
+    "Contract",
+    "Internship",
+    "Freelance",
+    "Temporary",
+    "Volunteer",
   ];
 
   const handleEntryChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setCurrentEntry(prev => ({
+    setCurrentEntry((prev) => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value,
-      ...(name === 'currently' && checked ? { endDate: "" } : {})
+      [name]: type === "checkbox" ? checked : value,
+      ...(name === "currently" && checked ? { endDate: "" } : {}),
     }));
   };
 
   const addWorkEntry = () => {
-    if (currentEntry.jobTitle && currentEntry.company && currentEntry.startDate) {
+    if (
+      currentEntry.jobTitle &&
+      currentEntry.company &&
+      currentEntry.startDate
+    ) {
       setWorkEntries([...workEntries, { ...currentEntry, id: Date.now() }]);
       setCurrentEntry({
         jobTitle: "",
@@ -369,36 +490,40 @@ const WorkHistory = ({ workEntries, setWorkEntries }) => {
         startDate: "",
         endDate: "",
         location: "",
-        currently: false
+        currently: false,
       });
     }
   };
 
   const removeWorkEntry = (id) => {
-    setWorkEntries(workEntries.filter(entry => entry.id !== id));
+    setWorkEntries(workEntries.filter((entry) => entry.id !== id));
   };
 
   return (
     <div className="flex flex-col items-center justify-center w-full px-10 mt-10">
       <h2 className="text-xl font-semibold mb-6">Your Work History</h2>
-      
-      <div className="w-full max-w-lg space-y-6">
+
+      <div className="w-lg space-y-6">
         {/* Existing work entries */}
         {workEntries.length > 0 && (
           <div className="space-y-4">
             <h3 className="font-medium text-gray-700">Previous Entries</h3>
             {workEntries.map((entry, index) => (
-              <div key={entry.id} className="p-3 border-2 border-gray-200 rounded-lg relative">
-                <button 
-                  className="absolute top-2 right-2 text-gray-400 hover:text-red-500"
+              <div
+                key={entry.id}
+                className="p-3 border-2 border-gray-200 rounded-lg relative "
+              >
+                <div
+                  className="absolute top-2 right-2 text-gray-600 hover:text-red-500 text-lg font-semibold cursor-pointer"
                   onClick={() => removeWorkEntry(entry.id)}
                 >
-                  ×
-                </button>
+                  <RxCross1 />
+                </div>
                 <div className="font-medium">{entry.jobTitle}</div>
                 <div className="text-gray-600">{entry.company}</div>
                 <div className="text-sm text-gray-500">
-                  {entry.startDate} - {entry.currently ? "Present" : entry.endDate}
+                  {entry.startDate} -{" "}
+                  {entry.currently ? "Present" : entry.endDate}
                 </div>
                 <div className="text-sm text-gray-500">
                   {entry.employmentType} • {entry.location}
@@ -410,11 +535,15 @@ const WorkHistory = ({ workEntries, setWorkEntries }) => {
 
         {/* Form to add new entry */}
         <div className="border-t pt-4">
-          <h3 className="font-medium text-gray-700 mb-4">Add Work Experience</h3>
-          
+          <h3 className="font-medium text-gray-700 mb-4">
+            Add Work Experience
+          </h3>
+
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Job Title</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Job Title
+              </label>
               <input
                 type="text"
                 name="jobTitle"
@@ -424,9 +553,11 @@ const WorkHistory = ({ workEntries, setWorkEntries }) => {
                 placeholder="e.g., Software Engineer, Marketing Manager"
               />
             </div>
-            
+
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Employment Type</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Employment Type
+              </label>
               <select
                 name="employmentType"
                 value={currentEntry.employmentType}
@@ -435,13 +566,17 @@ const WorkHistory = ({ workEntries, setWorkEntries }) => {
               >
                 <option value="">Select employment type</option>
                 {employmentTypes.map((type, index) => (
-                  <option key={index} value={type}>{type}</option>
+                  <option key={index} value={type}>
+                    {type}
+                  </option>
                 ))}
               </select>
             </div>
-            
+
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Company/Organization</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Company/Organization
+              </label>
               <input
                 type="text"
                 name="company"
@@ -451,10 +586,12 @@ const WorkHistory = ({ workEntries, setWorkEntries }) => {
                 placeholder="Enter company name"
               />
             </div>
-            
+
             <div className="flex space-x-4">
               <div className="w-1/2">
-                <label className="block text-sm font-medium text-gray-700 mb-1">Start Date</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Start Date
+                </label>
                 <input
                   type="month"
                   name="startDate"
@@ -464,7 +601,9 @@ const WorkHistory = ({ workEntries, setWorkEntries }) => {
                 />
               </div>
               <div className="w-1/2">
-                <label className="block text-sm font-medium text-gray-700 mb-1">End Date</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  End Date
+                </label>
                 <input
                   type="month"
                   name="endDate"
@@ -472,12 +611,14 @@ const WorkHistory = ({ workEntries, setWorkEntries }) => {
                   onChange={handleEntryChange}
                   disabled={currentEntry.currently}
                   className={`w-full p-2 border-2 rounded-lg ${
-                    currentEntry.currently ? "bg-gray-100 border-gray-200" : "border-gray-300"
+                    currentEntry.currently
+                      ? "bg-gray-100 border-gray-200"
+                      : "border-gray-300"
                   }`}
                 />
               </div>
             </div>
-            
+
             <div className="flex items-center">
               <input
                 type="checkbox"
@@ -487,11 +628,15 @@ const WorkHistory = ({ workEntries, setWorkEntries }) => {
                 onChange={handleEntryChange}
                 className="mr-2"
               />
-              <label htmlFor="currently" className="text-sm">I currently work here</label>
+              <label htmlFor="currently" className="text-sm">
+                I currently work here
+              </label>
             </div>
-            
+
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Location</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Location
+              </label>
               <input
                 type="text"
                 name="location"
@@ -501,16 +646,22 @@ const WorkHistory = ({ workEntries, setWorkEntries }) => {
                 placeholder="e.g., Mumbai, Remote"
               />
             </div>
-            
+
             <button
               type="button"
               onClick={addWorkEntry}
               className={`w-full p-2 rounded-lg ${
-                currentEntry.jobTitle && currentEntry.company && currentEntry.startDate
+                currentEntry.jobTitle &&
+                currentEntry.company &&
+                currentEntry.startDate
                   ? "bg-blue-600 text-white hover:bg-blue-700"
                   : "bg-gray-200 text-gray-500 cursor-not-allowed"
               }`}
-              disabled={!currentEntry.jobTitle || !currentEntry.company || !currentEntry.startDate}
+              disabled={
+                !currentEntry.jobTitle ||
+                !currentEntry.company ||
+                !currentEntry.startDate
+              }
             >
               Add Work Experience
             </button>
@@ -526,33 +677,34 @@ const CreateProfile = () => {
   // State to track current step
   const [currentStep, setCurrentStep] = useState(1);
   const totalSteps = 5;
-  
+  const navigate = useNavigate();
+
   // States for each step
   const [language, setLanguage] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
-  
+
   const [personalInfo, setPersonalInfo] = useState({
     firstName: "",
     lastName: "",
     dob: "",
     email: "",
-    phone: ""
+    phone: "",
   });
-  
+
   const [locationInfo, setLocationInfo] = useState({
     currentCity: "",
-    preferredCities: []
+    preferredCities: [],
   });
-  
+
   const [statusInfo, setStatusInfo] = useState({
     currentStatus: "",
     degree: "",
     specialization: "",
     collegeName: "",
     yearOfCompletion: "",
-    yearsOfExperience: ""
+    yearsOfExperience: "",
   });
-  
+
   const [workEntries, setWorkEntries] = useState([]);
 
   // Function to go to next step
@@ -576,33 +728,37 @@ const CreateProfile = () => {
         return language !== "";
       case 2: // Personal details
         return (
-          personalInfo.firstName !== "" && 
-          personalInfo.lastName !== "" && 
-          personalInfo.dob !== "" && 
-          personalInfo.email !== "" && 
+          personalInfo.firstName !== "" &&
+          personalInfo.lastName !== "" &&
+          personalInfo.dob !== "" &&
+          personalInfo.email !== "" &&
           personalInfo.phone !== ""
         );
       case 3: // Location
         return locationInfo.currentCity !== "";
       case 4: // Current status
         if (!statusInfo.currentStatus) return false;
-        
-        if (statusInfo.currentStatus === "College Student" || 
-            statusInfo.currentStatus === "Fresher" ||
-            statusInfo.currentStatus === "Working Professional") {
+
+        if (
+          statusInfo.currentStatus === "College Student" ||
+          statusInfo.currentStatus === "Fresher" ||
+          statusInfo.currentStatus === "Working Professional"
+        ) {
           return (
-            statusInfo.degree !== "" && 
-            statusInfo.specialization !== "" && 
-            statusInfo.collegeName !== "" && 
+            statusInfo.degree !== "" &&
+            statusInfo.specialization !== "" &&
+            statusInfo.collegeName !== "" &&
             statusInfo.yearOfCompletion !== ""
           );
         }
-        
-        if (statusInfo.currentStatus === "Working Professional" || 
-            statusInfo.currentStatus === "Women Returning to Work") {
+
+        if (
+          statusInfo.currentStatus === "Working Professional" ||
+          statusInfo.currentStatus === "Women Returning to Work"
+        ) {
           return statusInfo.yearsOfExperience !== "";
         }
-        
+
         return true;
       case 5: // Work history
         return true; // Work history is optional
@@ -615,20 +771,42 @@ const CreateProfile = () => {
   const renderStep = () => {
     switch (currentStep) {
       case 1:
-        return <ChooseLanguage 
-                 language={language} 
-                 setLanguage={setLanguage} 
-                 searchQuery={searchQuery} 
-                 setSearchQuery={setSearchQuery} 
-               />;
+        return (
+          <ChooseLanguage
+            language={language}
+            setLanguage={setLanguage}
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+          />
+        );
       case 2:
-        return <PersonalDetails personalInfo={personalInfo} setPersonalInfo={setPersonalInfo} />;
+        return (
+          <PersonalDetails
+            personalInfo={personalInfo}
+            setPersonalInfo={setPersonalInfo}
+          />
+        );
       case 3:
-        return <LocationPreferences locationInfo={locationInfo} setLocationInfo={setLocationInfo} />;
+        return (
+          <LocationPreferences
+            locationInfo={locationInfo}
+            setLocationInfo={setLocationInfo}
+          />
+        );
       case 4:
-        return <CurrentStatus statusInfo={statusInfo} setStatusInfo={setStatusInfo} />;
+        return (
+          <CurrentStatus
+            statusInfo={statusInfo}
+            setStatusInfo={setStatusInfo}
+          />
+        );
       case 5:
-        return <WorkHistory workEntries={workEntries} setWorkEntries={setWorkEntries} />;
+        return (
+          <WorkHistory
+            workEntries={workEntries}
+            setWorkEntries={setWorkEntries}
+          />
+        );
       default:
         return null;
     }
@@ -642,84 +820,94 @@ const CreateProfile = () => {
       personalInfo,
       locationInfo,
       statusInfo,
-      workEntries
+      workEntries,
     };
 
     console.log("Profile Data:", profileData);
     // Here you would typically send the data to your API
-    alert("Profile created successfully!");
+    // alert("Profile created successfully!");
+    navigate("/profile");
+    
   };
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-50 py-10">
-      <div className="bg-white rounded-xl shadow-lg p-8 w-full max-w-2xl">
+      <div className="bg-white rounded-xl shadow-lg p-8 w-full max-w-4xl">
         {/* Progress Bar */}
         <div className="mb-8">
           <div className="flex justify-between items-center mb-2">
-            <span className="text-sm font-medium text-gray-500">
+            <span className="text-md font-medium text-gray-500">
               Step {currentStep} of {totalSteps}
             </span>
-            <span className="text-sm font-medium text-gray-500">
+            <span className="text-md font-medium text-gray-500">
               {Math.round((currentStep / totalSteps) * 100)}% Complete
             </span>
           </div>
-          
+
           <div className="h-2 bg-gray-200 rounded-full">
-            <div 
+            <div
               className="h-2 bg-blue-600 rounded-full transition-all duration-300"
               style={{ width: `${(currentStep / totalSteps) * 100}%` }}
             ></div>
           </div>
-          
+
           <div className="flex justify-between mt-2">
             <div className="flex items-center">
-              <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs ${
-                currentStep >= 1 ? "bg-blue-600 text-white" : "bg-gray-200"
-              }`}>
+              <div
+                className={`w-6 h-6 rounded-full flex items-center justify-center text-sm ${
+                  currentStep >= 1 ? "bg-blue-600 text-white" : "bg-gray-200"
+                }`}
+              >
                 <FaUser />
               </div>
-              <span className="ml-1 text-xs">Language</span>
+              <span className="ml-1 text-sm">Language</span>
             </div>
             <div className="flex items-center">
-              <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs ${
-                currentStep >= 2 ? "bg-blue-600 text-white" : "bg-gray-200"
-              }`}>
+              <div
+                className={`w-6 h-6 rounded-full flex items-center justify-center text-sm ${
+                  currentStep >= 2 ? "bg-blue-600 text-white" : "bg-gray-200"
+                }`}
+              >
                 <FaUser />
               </div>
-              <span className="ml-1 text-xs">Personal</span>
+              <span className="ml-1 text-sm">Personal</span>
             </div>
             <div className="flex items-center">
-              <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs ${
-                currentStep >= 3 ? "bg-blue-600 text-white" : "bg-gray-200"
-              }`}>
+              <div
+                className={`w-6 h-6 rounded-full flex items-center justify-center text-sm ${
+                  currentStep >= 3 ? "bg-blue-600 text-white" : "bg-gray-200"
+                }`}
+              >
                 <FaMapMarkerAlt />
               </div>
-              <span className="ml-1 text-xs">Location</span>
+              <span className="ml-1 text-sm">Location</span>
             </div>
             <div className="flex items-center">
-              <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs ${
-                currentStep >= 4 ? "bg-blue-600 text-white" : "bg-gray-200"
-              }`}>
+              <div
+                className={`w-6 h-6 rounded-full flex items-center justify-center text-sm ${
+                  currentStep >= 4 ? "bg-blue-600 text-white" : "bg-gray-200"
+                }`}
+              >
                 <FaGraduationCap />
               </div>
-              <span className="ml-1 text-xs">Status</span>
+              <span className="ml-1 text-sm">Status</span>
             </div>
             <div className="flex items-center">
-              <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs ${
-                currentStep >= 5 ? "bg-blue-600 text-white" : "bg-gray-200"
-              }`}>
+              <div
+                className={`w-6 h-6 rounded-full flex items-center justify-center text-sm ${
+                  currentStep >= 5 ? "bg-blue-600 text-white" : "bg-gray-200"
+                }`}
+              >
                 <FaBriefcase />
               </div>
-              <span className="ml-1 text-xs">Work</span>
+              <span className="ml-1 text-sm">Work</span>
             </div>
           </div>
         </div>
-        
+
         {/* Current Step Content */}
-        <div className="min-h-96">
-          {renderStep()}
-        </div>
-        
+        <div className="min-h-96">{renderStep()}</div>
+
         {/* Navigation Buttons */}
         <div className="flex justify-between mt-10">
           <button
@@ -734,14 +922,14 @@ const CreateProfile = () => {
           >
             <IoIosArrowBack className="mr-1" /> Back
           </button>
-          
+
           {currentStep < totalSteps ? (
             <button
               type="button"
               onClick={nextStep}
-              className={`flex items-center px-4 py-2 rounded-lg ${
+              className={`flex items-center px-4 py-2 rounded-lg cursor-pointer ${
                 isStepValid()
-                  ? "bg-blue-600 text-white hover:bg-blue-700"
+                  ? "bg-blue-600 text-white hover:bg-blue-700 cursor-pointer"
                   : "bg-gray-200 text-gray-500 cursor-not-allowed"
               }`}
               disabled={!isStepValid()}
@@ -752,7 +940,7 @@ const CreateProfile = () => {
             <button
               type="button"
               onClick={handleSubmit}
-              className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700"
+              className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 cursor-pointer"
             >
               Complete Profile
             </button>
