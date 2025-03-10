@@ -138,17 +138,32 @@ const LocationPreferences = ({ locationInfo, setLocationInfo }) => {
     setLocationInfo(prev => ({ ...prev, [name]: value }));
   };
 
+  const handleCheckboxChange = (city) => {
+    setLocationInfo(prev => {
+      const isSelected = prev.preferredCities.includes(city);
+      return {
+        ...prev,
+        preferredCities: isSelected 
+          ? prev.preferredCities.filter(c => c !== city)
+          : prev.preferredCities.length < 3 
+            ? [...prev.preferredCities, city] 
+            : prev.preferredCities
+      };
+    });
+  };
+
   return (
     <div className="flex flex-col items-center justify-center w-full px-10 mt-10">
       <h2 className="text-xl font-semibold mb-6">Your Location Preferences</h2>
       
       <div className="w-96 space-y-6">
+        {/* Current City Selection */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Current City</label>
           <div className="relative">
             <select
               name="currentCity"
-              value={locationInfo.currentCity}
+              value={locationInfo.currentCity || ""}
               onChange={handleChange}
               className="w-full p-2 border-2 border-gray-300 rounded-lg appearance-none"
             >
@@ -161,51 +176,18 @@ const LocationPreferences = ({ locationInfo, setLocationInfo }) => {
           </div>
         </div>
 
+        {/* Preferred Work Locations */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Preferred Work Locations</label>
-          <p className="text-xs text-gray-500 mb-2">Select up to 3 cities where you'd like to work</p>
           
-          <div className="grid grid-cols-2 gap-2">
-            {cities.slice(0, 8).map((city, index) => (
-              <div key={index} className="flex items-center">
-                <input
-                  type="checkbox"
-                  id={`city-${index}`}
-                  name="preferredCities"
-                  value={city}
-                  checked={locationInfo.preferredCities.includes(city)}
-                  onChange={(e) => {
-                    if (e.target.checked) {
-                      if (locationInfo.preferredCities.length < 3) {
-                        setLocationInfo(prev => ({
-                          ...prev,
-                          preferredCities: [...prev.preferredCities, city]
-                        }));
-                      }
-                    } else {
-                      setLocationInfo(prev => ({
-                        ...prev,
-                        preferredCities: prev.preferredCities.filter(c => c !== city)
-                      }));
-                    }
-                  }}
-                  className="mr-2"
-                />
-                <label htmlFor={`city-${index}`} className="text-sm">{city}</label>
-              </div>
-            ))}
-          </div>
-          
+          {/* Additional City Selection */}
           <div className="mt-2">
             <select
               className="w-full p-2 border-2 border-gray-300 rounded-lg mt-2"
               onChange={(e) => {
-                if (e.target.value && !locationInfo.preferredCities.includes(e.target.value) && locationInfo.preferredCities.length < 3) {
-                  setLocationInfo(prev => ({
-                    ...prev,
-                    preferredCities: [...prev.preferredCities, e.target.value]
-                  }));
-                  e.target.value = "";
+                const selectedCity = e.target.value;
+                if (selectedCity && !locationInfo.preferredCities.includes(selectedCity) && locationInfo.preferredCities.length < 3) {
+                  handleCheckboxChange(selectedCity);
                 }
               }}
             >
@@ -218,18 +200,14 @@ const LocationPreferences = ({ locationInfo, setLocationInfo }) => {
             </select>
           </div>
           
-          <div className="flex flex-wrap gap-2 mt-2">
+          {/* Selected Cities Display */}
+          <div className="flex flex-col gap-2 mt-2">
             {locationInfo.preferredCities.map((city, index) => (
-              <div key={index} className="bg-blue-100 px-2 py-1 rounded-full text-xs flex items-center">
+              <div key={index} className="bg-blue-100 px-4 py-2 rounded-full text-lg flex items-center justify-between">
                 {city}
                 <button 
-                  className="ml-1 text-gray-500 hover:text-gray-700"
-                  onClick={() => {
-                    setLocationInfo(prev => ({
-                      ...prev,
-                      preferredCities: prev.preferredCities.filter(c => c !== city)
-                    }));
-                  }}
+                  className="ml-1 text-gray-500 hover:text-gray-700 text-lg"
+                  onClick={() => handleCheckboxChange(city)}
                 >
                   ×
                 </button>
@@ -241,6 +219,7 @@ const LocationPreferences = ({ locationInfo, setLocationInfo }) => {
     </div>
   );
 };
+
 
 // Step 4: Current Status Component
 const CurrentStatus = ({ statusInfo, setStatusInfo }) => {
