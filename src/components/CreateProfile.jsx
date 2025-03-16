@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useRef } from "react";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import {
   FaCalendarAlt,
@@ -10,6 +10,8 @@ import {
 import { IoCheckmarkDoneCircle } from "react-icons/io5";
 import { RxCross1 } from "react-icons/rx";
 import { useNavigate } from "react-router-dom";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 // Step 1: Choose Language Component
 const ChooseLanguage = ({
@@ -87,11 +89,17 @@ const ChooseLanguage = ({
   );
 };
 
-// Step 2: Personal Details Component
 const PersonalDetails = ({ personalInfo, setPersonalInfo }) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setPersonalInfo((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleDateChange = (date) => {
+    setPersonalInfo((prev) => ({
+      ...prev,
+      dob: date, // Store the date object
+    }));
   };
 
   return (
@@ -128,19 +136,22 @@ const PersonalDetails = ({ personalInfo, setPersonalInfo }) => {
           </div>
         </div>
 
+        {/* Date of Birth */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Date of Birth
           </label>
-          <div className="relative">
-            <input
-              type="date"
-              name="dob"
-              value={personalInfo.dob}
-              onChange={handleChange}
-              className="w-full p-2 border-2 border-gray-300 rounded-lg"
+          <div className="relative w-full border-2 border-gray-300 rounded-lg">
+            <DatePicker
+              selected={personalInfo.dob}
+              onChange={handleDateChange}
+              className="w-full p-2 outline-none"
+              placeholderText="Select your birth date"
             />
-            <FaCalendarAlt className="absolute right-3 top-3 text-gray-400" />
+            <FaCalendarAlt
+              className="absolute right-3 top-3 text-gray-400 cursor-pointer"
+              onClick={() => document.querySelector(".react-datepicker__input-container input").focus()}
+            />
           </div>
         </div>
 
@@ -166,17 +177,15 @@ const PersonalDetails = ({ personalInfo, setPersonalInfo }) => {
             <div className="p-3 pb-2 border-2 border-gray-300 rounded-lg mr-2">
               +91
             </div>
-          <input
-            type="tel"
-            name="phone"
-            value={personalInfo.phone}
-            onChange={handleChange}
-            className="w-full p-2 border-2 border-gray-300 rounded-lg"
-            placeholder="000-0000-00"
-          />
-
+            <input
+              type="tel"
+              name="phone"
+              value={personalInfo.phone}
+              onChange={handleChange}
+              className="w-full p-2 border-2 border-gray-300 rounded-lg"
+              placeholder="000-0000-00"
+            />
           </div>
-         
         </div>
       </div>
     </div>

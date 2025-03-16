@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { LuShare2 } from "react-icons/lu";
 import { RiVerifiedBadgeFill } from "react-icons/ri";
 import { GiHealthPotion } from "react-icons/gi";
@@ -9,10 +9,13 @@ import { TbCoffee } from "react-icons/tb";
 import { FaHandHoldingHeart } from "react-icons/fa";
 import { MdHolidayVillage } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import { IoMdStarOutline } from "react-icons/io";
+import { IoStar } from "react-icons/io5";
 
 
 const JobDescription = ({setShowJobDescription}) => {
   const navigate = useNavigate();
+  const [isStart, setIsStart] = useState(false);
   return (
     <div className="min-h-screen bg-gray-50 py-8 px-4 top-30 left-25 z-50 absolute ">
        {/* Hide Job Description */}
@@ -40,6 +43,13 @@ const JobDescription = ({setShowJobDescription}) => {
               </div>
             </div>
             <div className="flex items-center gap-4">
+              {/* Start button */}
+            <button className="p-2 hover:bg-gray-100 rounded-full" onClick={()=> setIsStart(!isStart)}>
+                {isStart ? (<IoStar   className="w-7 h-7 text-yellow-400" />) : (<IoMdStarOutline  className="w-7 h-7 text-gray-800" />)}
+               
+            </button>
+
+              {/* Share button */}
               <button className="p-2 hover:bg-gray-100 rounded-full">
                 <LuShare2 className="w-5 h-5 text-gray-800" />
               </button>

@@ -40,7 +40,7 @@ const Navbar = ({ setShowOptions, showOptions }) => {
   //  To redirect to the selected options page
   useEffect(() => {
     if (selectedOpt === "Profile") {
-      navigate("/profile");
+      navigate("/CreateProfile");
     } else if (selectedOpt === "My Applications") {
       navigate("/myapplications");
     } else if (selectedOpt === "Post New Gig") {
