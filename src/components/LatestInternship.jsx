@@ -301,114 +301,70 @@ const LatestInternship = ({ setShowJobDescription, setShowOptions }) => {
   const clampedProgress = Math.min(progress, 100);
 
   return (
-    <div>
-      <div className="flex flex-col justify-around items-center mx-auto">
-        <div className="text-3xl font-bold">
-          Latest internship on Intern Dude
+    <div className="mt-10 px-4">
+      <div className="flex flex-col items-center">
+        <div className="text-lg sm:text-xl md:text-2xl font-bold text-center">
+          Internship Projects on Intern Dude
         </div>
-        <div className="flex justify-around items-center mt-10">
-          <div
-            className={`w-auto border-1 border-blue-700 rounded-xl pl-2 pr-2 pt-1 pb-1 ${category == "All" ? "bg-gray-100" : ""
-              }   mr-2 font-semibold cursor-pointer`}
-            onClick={() => setCategory("All")}
-          >
+
+        {/* Category Buttons */}
+        <div className="flex flex-wrap justify-center gap-2 mt-6 text-xs sm:text-sm">
+          <div className="border border-blue-700 rounded-lg px-3 py-1 bg-gray-100 font-semibold cursor-pointer">
             All
           </div>
-          <div
-            className={`w-auto border-1 border-blue-700 rounded-xl pl-2 pr-2 pt-1 pb-1 ${category == "IT Services" ? "bg-gray-100" : ""
-              }   mr-2 font-semibold cursor-pointer`}
-            onClick={() => setCategory("IT Services")}
-          >
+          <div className="border border-blue-700 rounded-lg px-3 py-1 cursor-pointer">
             IT Services
           </div>
-          <div
-            className={`w-auto border-1 border-blue-700 rounded-xl pl-2 pr-2 pt-1 pb-1 ${category == "Technology" ? "bg-gray-100" : ""
-              }   mr-2 font-semibold cursor-pointer`}
-            onClick={() => setCategory("Technology")}
-          >
+          <div className="border border-blue-700 rounded-lg px-3 py-1 cursor-pointer">
             Technology
           </div>
-          <div
-            className={`w-auto border-1 border-blue-700 rounded-xl pl-2 pr-2 pt-1 pb-1 ${category == "Manufacturing & Production" ? "bg-gray-100" : ""
-              }   mr-2 font-semibold cursor-pointer`}
-            onClick={() => setCategory("Manufacturing & Production")}
-          >
+          <div className="border border-blue-700 rounded-lg px-3 py-1 cursor-pointer">
             Manufacturing & Production
           </div>
-          <div
-            className={`w-auto border-1 border-blue-700 rounded-xl pl-2 pr-2 pt-1 pb-1 ${category == "Healthcare & Life Sciences" ? "bg-gray-100" : ""
-              }   mr-2 font-semibold cursor-pointer`}
-            onClick={() => setCategory("Healthcare & Life Sciences")}
-          >
+          <div className="border border-blue-700 rounded-lg px-3 py-1 cursor-pointer">
             Healthcare & Life Sciences
           </div>
-          <div
-            className={`w-auto border-1 border-blue-700 rounded-xl pl-2 pr-2 pt-1 pb-1 ${category == "BFSI" ? "bg-gray-100" : ""
-              }   mr-2 font-semibold cursor-pointer`}
-            onClick={() => setCategory("BFSI")}
-          >
+          <div className="border border-blue-700 rounded-lg px-3 py-1 cursor-pointer">
             BFSI
           </div>
-          <div
-            className={`w-auto border-1 border-blue-700 rounded-xl pl-2 pr-2 pt-1 pb-1 ${category == "Infrastructure , Transport & Real Estate"
-                ? "bg-gray-100"
-                : ""
-              }   mr-2 font-semibold cursor-pointer`}
-            onClick={() =>
-              setCategory("Infrastructure , Transport & Real Estate")
-            }
-          >
-            Infrastructure , Transport & Real Estate
+          <div className="border border-blue-700 rounded-lg px-3 py-1 cursor-pointer">
+            Infrastructure & Real Estate
           </div>
-          <div className="font-bold text-sm">+4 more</div>
+          <div className="font-bold text-xs">+4 more</div>
         </div>
 
-        <div className="flex justify-around items-center mt-10">
-          <div className="flex justify-between items-center gap-5">
-            {filteredInternships.length === 0 ? (
-              <div className="text-2xl font-semibold">No internships found</div>
-            ) : (
-              <> </>
-            )}
-
-            {filteredInternships
-              .slice(currentIndex, currentIndex + ITEMS_PER_PAGE)
-              .map((job, index) => (
-                <JobCard
-                  key={index}
-                  {...job}
-                  setShowJobDescription={setShowJobDescription}
-                  setShowOptions={setShowOptions}
-                />
-              ))}
-          </div>
+        {/* Job Cards Grid */}
+        <div className="grid sm:grid-cols-1 md:grid-cols-4 gap-5 justify-items-center mt-10 w-full max-w-7xl mx-auto">
+          {Internship.slice(currentIndex, currentIndex + ITEMS_PER_PAGE).map(
+            (job, index) => (
+              <JobCard key={index} {...job} />
+            )
+          )}
         </div>
 
-        {/* Updated Pagination Controls */}
-        <div className="flex items-center gap-4 mt-5 w-md">
+        {/* Pagination Controls */}
+        <div className="flex items-center gap-4 mt-5 w-full max-w-md">
           <button
             onClick={prevSlide}
             disabled={currentIndex === 0}
-            className="p-2 rounded-full border"
+            className="p-3 rounded-full border bg-gray-100 disabled:opacity-50"
           >
-            <ChevronLeft />
+            <ChevronLeft className="w-6 h-6" />
           </button>
 
           <div className="w-full h-2 bg-gray-200 rounded-lg">
             <div
               className="h-2 bg-blue-600 rounded-lg"
-              style={{ width: `${clampedProgress}%` }}
+              style={{ width: `${progress}%` }}
             ></div>
           </div>
 
           <button
             onClick={nextSlide}
-            disabled={
-              currentIndex + ITEMS_PER_PAGE >= filteredInternships.length
-            }
-            className="p-2 rounded-full border"
+            disabled={currentIndex + ITEMS_PER_PAGE >= Internship.length}
+            className="p-3 rounded-full border bg-gray-100 disabled:opacity-50"
           >
-            <ChevronRight />
+            <ChevronRight className="w-6 h-6" />
           </button>
         </div>
       </div>
