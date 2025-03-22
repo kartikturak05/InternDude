@@ -10,12 +10,19 @@ import { LuMessagesSquare } from "react-icons/lu";
 
 const Mob = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate(); // You need to import useNavigate here
+  const menuItems = [
+    { label: "Internship", href: "/Internships" },
+    { label: "Jobs", href: "/Jobs" },
+    { label: "Profile", href: "/CreateProfile" },
+    { label: "Application", href: "/myapplications" },
+    { label: "Post New Gig", href: "/PostNewGig" },
+    { label: "Edit Resume", href: "/editresume" },
+  ];
 
   const toggleDrawer = () => {
     setIsOpen(!isOpen);
   };
-
-  const navigate = useNavigate();
 
   const handleNavigation = (hash) => {
     toggleDrawer(); // Close the drawer when a link is clicked
@@ -72,20 +79,19 @@ const Mob = () => {
             <X size={24} />
           </button>
   
-          <ul className="mt-10 space-y-4">
-            {[
-              { label: "Internship", href: "/Internships" },
-              { label: "Jobs", href: "/Jobs" },
-              { label: "Profile", href: "/CreateProfile" },
-              { label: "Application", href: "/myapplications" },
-              { label: "Post New Gig", href: "/PostNewGig" },
-              { label: "Edit Resume", href: "/editresume" },
-            ].map(({ label, href }) => (
-              <li key={label} className="p-3 hover:bg-white/10 rounded-md">
-                <a href={href} className="block">{label}</a>
-              </li>
-            ))}
-          </ul>
+          <div className="mt-10 space-y-4">
+      {menuItems.map(({ label, href }) => (
+        <div
+          key={label}
+          className="p-3 hover:bg-white/10 rounded-md cursor-pointer"
+          onClick={() => { 
+            toggleDrawer()
+            navigate(href) }}
+        >
+          {label}
+        </div>
+      ))}
+    </div>
   
           {/* Social Icons */}
           <div className="flex justify-around mt-6">
