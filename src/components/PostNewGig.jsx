@@ -50,7 +50,7 @@ const GitOverview = ({ setSaveAndContinue, saveAndContinue }) => {
   return (
     <>
       {/* Form */}
-      <div className="flex flex-col items-center justify-center border-1 border-gray-400 p-6 rounded-lg mt-5 w-[450px] pl-10 pr-10 mb-20">
+      <div className="flex flex-col items-center justify-center border-1 border-gray-400 p-6 rounded-lg mt-5 md:w-[550px] w-[400px] pl-10 pr-10 mb-20">
         {/* Gig Title */}
         <div className="mt-4 w-full">
           <label htmlFor="Title">
@@ -110,36 +110,34 @@ const GitOverview = ({ setSaveAndContinue, saveAndContinue }) => {
         </div>
 
         {/* Git Tags */}
-          <div className="mt-4 w-full">
+        <div className="mt-4 w-full">
           <label htmlFor="GitTags">
             Git Tags <br />
           </label>
-        <div className="border p-2 rounded flex flex-wrap gap-2 w-full mt-2">
-        
-          {tags.map((tag, index) => (
-            <div
-              key={index}
-              className="bg-gray-500 text-white px-2 py-1 rounded flex items-center text-sm "
-            >
-              {tag}
-              <button
-                onClick={() => removeTag(index)}
-                className="ml-2 text-white "
+          <div className="border p-2 rounded flex flex-wrap gap-2 w-full mt-2">
+            {tags.map((tag, index) => (
+              <div
+                key={index}
+                className="bg-gray-500 text-white px-2 py-1 rounded flex items-center text-sm "
               >
-                <RxCross2 size={20} />
-                
-              </button>
-            </div>
-          ))}
-          <input
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={handleKeyDown}
-            placeholder="Type and press Enter..."
-            className="outline-none border-none p-1 w-full"
-          />
-        </div>
+                {tag}
+                <button
+                  onClick={() => removeTag(index)}
+                  className="ml-2 text-white "
+                >
+                  <RxCross2 size={20} />
+                </button>
+              </div>
+            ))}
+            <input
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={handleKeyDown}
+              placeholder="Type and press Enter..."
+              className="outline-none border-none p-1 w-full"
+            />
+          </div>
         </div>
 
         {/* Save & Continue */}
@@ -327,7 +325,6 @@ const Pricing = ({ setSaveAndContinue, saveAndContinue }) => {
   );
 };
 
-
 const Description = ({ setSaveAndContinue, saveAndContinue }) => {
   const [description, setDescription] = useState("Website Design");
   const [spaceCount, setSpaceCount] = useState(0);
@@ -359,7 +356,7 @@ const Description = ({ setSaveAndContinue, saveAndContinue }) => {
 
   return (
     <>
-      <div className="flex flex-col items-start justify-center border border-gray-400 p-6 rounded-lg mt-5 w-xl">
+      <div className="flex flex-col items-start justify-center border border-gray-400 p-6 rounded-lg mt-5 md:w-2xl w-full">
         <div className="font-semibold text-left">Describe Your Gig</div>
         <div className="w-full h-full">
           <textarea
@@ -391,7 +388,6 @@ const Description = ({ setSaveAndContinue, saveAndContinue }) => {
     </>
   );
 };
-
 
 const Gallery = ({ setSaveAndContinue, saveAndContinue }) => {
   const [uploadedFile, setUploadedFile] = useState(null);
@@ -583,43 +579,45 @@ const PostNewGig = () => {
       </div>
 
       {/* Progress Steps */}
-      <div className="flex items-center justify-around mt-5 w-auto border border-gray-800 rounded-lg pt-3 pb-3 px-6">
+      <div className="flex flex-wrap items-center justify-center md:justify-around mt-5 w-auto border border-gray-800 rounded-lg p-3 md:pt-3 md:pb-3 md:px-6 gap-5 md:gap-10">
         <div
-          className={`text-lg ${
+          className={`text-md md:text-lg ${
             saveAndContinue == "overview" ? "text-gray-900" : "text-gray-500"
-          } font-semibold ml-5 mr-5 cursor-pointer`}
-          onClick={() => setSaveAndContinue("overview")} // Set to overview
+          } font-semibold cursor-pointer`}
+          onClick={() => setSaveAndContinue("overview")}
         >
           Overview
         </div>
-        <PiGreaterThanBold />
+        <PiGreaterThanBold className="hidden md:block" />
+
         <div
-          className={`text-lg ${
+          className={`text-md md:text-lg ${
             saveAndContinue == "pricing" ? "text-gray-900" : "text-gray-500"
-          } font-semibold ml-5 mr-5 cursor-pointer`}
-          onClick={() => setSaveAndContinue("pricing")} // Set to pricing
+          } font-semibold cursor-pointer`}
+          onClick={() => setSaveAndContinue("pricing")}
         >
           Pricing
         </div>
-        <PiGreaterThanBold />
+        <PiGreaterThanBold className="hidden md:block" />
+
         <div
-          className={`text-lg ${
+          className={`text-md md:text-lg ${
             saveAndContinue == "description" ? "text-gray-900" : "text-gray-500"
-          } font-semibold ml-5 mr-5 cursor-pointer`}
-          onClick={() => setSaveAndContinue("description")} // Set to desciption
+          } font-semibold cursor-pointer`}
+          onClick={() => setSaveAndContinue("description")}
         >
           Description
         </div>
-        <PiGreaterThanBold />
+        <PiGreaterThanBold className="hidden md:block" />
+
         <div
-          className={`text-lg ${
+          className={`text-md md:text-lg ${
             saveAndContinue == "gallery" ? "text-gray-900" : "text-gray-500"
-          } font-semibold ml-5 mr-5 cursor-pointer`}
-          onClick={() => setSaveAndContinue("gallery")} // Set to gallery
+          } font-semibold cursor-pointer`}
+          onClick={() => setSaveAndContinue("gallery")}
         >
           Gallery
         </div>
-        <PiGreaterThanBold />
       </div>
 
       {showComponent == "overview" && (

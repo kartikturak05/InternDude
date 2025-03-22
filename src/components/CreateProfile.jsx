@@ -800,7 +800,7 @@ const CreateProfile = () => {
         </div>
 
         {/* Step Indicators */}
-        <div className="flex justify-between mt-3 overflow-x-auto whitespace-nowrap">
+        <div className=" hidden md:flex  flex justify-between mt-3 overflow-x-auto whitespace-nowrap">
           {[
             { step: 1, label: "Language", icon: <FaUser /> },
             { step: 2, label: "Personal", icon: <FaUser /> },
