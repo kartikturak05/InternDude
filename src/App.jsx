@@ -13,6 +13,7 @@ import ProfilePage from "./components/ProfilePage";
 import CreateProfile from "./components/CreateProfile";
 import Apply from "./components/Apply";
 import Mob from "./components/Mob";
+import MyApplication from "./components/MyApplication";
 
 function App() {
   const [showOptions, setShowOptions] = useState("");
@@ -56,6 +57,7 @@ function App() {
             <Route path="/Profile" element={<ProfilePage />} />
             <Route path="/CreateProfile" element={<CreateProfile />} />
             <Route path="/Apply" element={<Apply/>} />
+            <Route path="/myapplications" element={<MyApplication/>} />
           </Routes>
         </div>
 
