@@ -1,7 +1,7 @@
 import React from "react";
 import { FaLinkedin, FaEnvelope, FaPencilAlt, FaPlus } from "react-icons/fa";
 import { MdLocationOn, MdWork } from "react-icons/md";
-import Footer from "./Footer";
+import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
 
 const ProfilePage = () => {

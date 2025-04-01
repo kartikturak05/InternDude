@@ -13,10 +13,10 @@ import { WiTime3 } from "react-icons/wi";
 import { IoWalletOutline } from "react-icons/io5";
 import { BsBarChart } from "react-icons/bs";
 import { HiOutlineBriefcase, HiOutlineWallet } from "react-icons/hi2";
-import SuccessStories from "./SuccessStories";
-import ReviewsAndRatings from "./ReviewsAndRatings";
-import JobNotification from "./JobNotification";
-import Footer from "./Footer";
+import SuccessStories from "../components/SuccessStories";
+import ReviewsAndRatings from "../components/ReviewsAndRatings";
+import JobNotification from "../components/JobNotification";
+import Footer from "../components/Footer";
 
 const JobCard = ({
   title,

@@ -1,19 +1,20 @@
 import { useState,useEffect } from "react";
-import Home from "./components/Home";
+import Home from "./pages/Home";
 import { Route, Routes } from "react-router-dom";
-import SignUp from "./components/SignUp";
+// import SignUp from "./components/SignUp";
+import SignUp from './pages/SignUp';
 import Navbar from "./components/Navbar";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import JobDescription from "./components/JobDescription";
-import PostNewGig from "./components/PostNewGig";
-import FindInternShip from "./components/FindInternShip";
-import FindJobs from "./components/FindJobs";
-import ProfilePage from "./components/ProfilePage";
-import CreateProfile from "./components/CreateProfile";
-import Apply from "./components/Apply";
+import JobDescription from "./pages/JobDescription";
+import PostNewGig from "./pages/PostNewGig";
+import FindInternShip from "./pages/FindInternShip";
+import FindJobs from "./pages/FindJobs";
+import ProfilePage from "./pages/ProfilePage";
+import CreateProfile from "./pages/CreateProfile";
+import Apply from "./pages/Apply";
 import Mob from "./components/Mob";
-import MyApplication from "./components/MyApplication";
+import MyApplication from "./pages/MyApplication";
 
 function App() {
   const [showOptions, setShowOptions] = useState("");

@@ -2,7 +2,7 @@ import React from "react";
 import { FaLocationDot, FaRegMoneyBill1 } from "react-icons/fa6";
 import { IoBagSharp, IoTimeSharp } from "react-icons/io5";
 import { FaCloudDownloadAlt } from "react-icons/fa";
-import Footer from "./Footer";
+import Footer from "../components/Footer";
 
 const Apply = () => {
   return (

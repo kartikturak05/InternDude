@@ -5,7 +5,8 @@ import { MdCurrencyRupee } from "react-icons/md";
 import { CiCalendar } from "react-icons/ci";
 import { MdVerified } from "react-icons/md";
 import { span } from "framer-motion/client";
-import JobDescription from "./JobDescription";
+// import JobDescription from "./JobDescription";
+import JobDescription from "../pages/JobDescription";
 import { useNavigate } from "react-router-dom";
 
 const JobCard = ({ title,categories, Post, company, location, stipend, duration,paymentVerified,setShowJobDescription,setShowOptions}) => {

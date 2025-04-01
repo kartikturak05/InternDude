@@ -17,12 +17,12 @@ import { WiTime3 } from "react-icons/wi";
 import { IoWalletOutline } from "react-icons/io5";
 import { BsBarChart } from "react-icons/bs";
 import { HiOutlineWallet } from "react-icons/hi2";
-import TopCompaniesHiring from "./TopCompaniesHiring";
-import BoostYourChances from "./BoostYourChances";
-import SuccessStories from "./SuccessStories";
-import ReviewsAndRatings from "./ReviewsAndRatings";
-import JobNotification from "./JobNotification";
-import Footer from "./Footer";
+import TopCompaniesHiring from "../components/TopCompaniesHiring";
+import BoostYourChances from "../components/BoostYourChances";
+import SuccessStories from "../components/SuccessStories";
+import ReviewsAndRatings from "../components/ReviewsAndRatings";
+import JobNotification from "../components/JobNotification";
+import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
 
 const AdvancedFilter = ({ onApplyFilters }) => {

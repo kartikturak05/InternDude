@@ -14,7 +14,7 @@ import {
   FiMessageSquare,
 } from "react-icons/fi";
 import { TbCircleDashed } from "react-icons/tb";
-import Footer from "./Footer";
+import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
 
 const applications = [

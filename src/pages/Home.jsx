@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
-import FindYourJobs from "./FindYourJobs";
-import LatestInternship from "./LatestInternship";
-import LatestJob from "./LatestJob";
-import TopCompaniesHiring from "./TopCompaniesHiring";
-import FreelanceProject from './FreelanceProject';
+import FindYourJobs from "../components/FindYourJobs";
+import LatestInternship from '../components/LatestInternship';
+import LatestJob from "../components/LatestJob";
+import TopCompaniesHiring from "../components/TopCompaniesHiring";
+import FreelanceProject from '../components/FreelanceProject';
 import JobDescription from './JobDescription';
-import BoostYourChances from './BoostYourChances';
-import SuccessStories from './SuccessStories';
-import ReviewsAndRatings from './ReviewsAndRatings';
-import JobNotification from './JobNotification';
-import Footer from './Footer';
+import BoostYourChances from '../components/BoostYourChances';
+import SuccessStories from '../components/SuccessStories';
+import ReviewsAndRatings from '../components/ReviewsAndRatings';
+import JobNotification from '../components/JobNotification';
+import Footer from '../components/Footer';
 
 const Home = ({setShowOptions}) => {
   const [showJobDescription, setShowJobDescription] = useState(false);

@@ -18,7 +18,7 @@ import {
   RecaptchaVerifier,
   signInWithPhoneNumber,
 } from "firebase/auth";
-import { app } from "./firebase.js";
+import { app } from "../components/firebase.js";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
