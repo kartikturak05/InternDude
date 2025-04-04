@@ -18,6 +18,8 @@ import { RxCross1 } from "react-icons/rx";
 import { AiOutlineStock } from "react-icons/ai";
 import { FaRegStar } from "react-icons/fa6";
 import { MdAvTimer } from "react-icons/md";
+import { Search, FileText, MessageCircle, CheckCircle, XCircle } from 'lucide-react';
+
 
 const EmployeeNavigator = ({ showContent, setShowContent }) => {
   return (
@@ -330,9 +332,7 @@ const DashBoard = () => {
                       </div>
                     </div>
                     <div className="flex items-center gap-4">
-                      <span className=" text-gray-500">
-                        {applicant.time}
-                      </span>
+                      <span className=" text-gray-500">{applicant.time}</span>
                       <button className="text-blue-500  pt-1 pb-1 pl-2 pr-2 border-1 border-blue-900 rounded-lg cursor-pointer">
                         View
                       </button>
@@ -375,18 +375,14 @@ const DashBoard = () => {
                         <div className="font-medium text-gray-800">
                           {interview.name}
                         </div>
-                        <div className=" text-gray-500">
-                          {interview.job}
-                        </div>
+                        <div className=" text-gray-500">{interview.job}</div>
                       </div>
                     </div>
                     <div className="text-right">
                       <div className="font-medium text-gray-800">
                         {interview.time}
                       </div>
-                      <div className=" text-gray-500">
-                        {interview.date}
-                      </div>
+                      <div className=" text-gray-500">{interview.date}</div>
                     </div>
                   </div>
                 ))}
@@ -405,18 +401,20 @@ const DashBoard = () => {
                     className="flex justify-between items-center p-3 bg-gray-50 rounded-lg"
                   >
                     <div>
-                      <div className=" text-gray-500">
-                        {metric.label}
-                      </div>
+                      <div className=" text-gray-500">{metric.label}</div>
                       <div className="font-semibold text-gray-800">
                         {metric.value}
                       </div>
                     </div>
-                    <div className={`flex gap-2 items-center ${metric.trend[0] == '+'? 'text-green-500':'text-red-500'} `}>
-                        {metric.icon}
-                      <span className="font-medium">
-                        {metric.trend}
-                      </span>
+                    <div
+                      className={`flex gap-2 items-center ${
+                        metric.trend[0] == "+"
+                          ? "text-green-500"
+                          : "text-red-500"
+                      } `}
+                    >
+                      {metric.icon}
+                      <span className="font-medium">{metric.trend}</span>
                     </div>
                   </div>
                 ))}
@@ -428,7 +426,9 @@ const DashBoard = () => {
         {/* Upgrade to Premium */}
         <div className="flex justify-between items-center bg-blue-900 p-4 mt-6 rounded-lg shadow-md w-full">
           <div>
-            <h3 className="text-2xl font-semibold text-white">Upgrade to Premium</h3>
+            <h3 className="text-2xl font-semibold text-white">
+              Upgrade to Premium
+            </h3>
             <p className=" text-xl mt-3 text-gray-400">
               Get more applications and premium features
             </p>
@@ -444,9 +444,24 @@ const DashBoard = () => {
 
 const Jobs = () => {
   const JobsData = [
-    { title: "UI/UX Intern", applications: 58, status: "Active", DateOfPost: "2023-10-01" },
-    { title: "Frontend Developer", applications: 42, status: "Active", DateOfPost: "2023-10-02" },
-    { title: "Content Writer", applications: 23, status: "Under Review", DateOfPost: "2023-10-03" },
+    {
+      title: "UI/UX Intern",
+      applications: 58,
+      status: "Active",
+      DateOfPost: "2023-10-01",
+    },
+    {
+      title: "Frontend Developer",
+      applications: 42,
+      status: "Active",
+      DateOfPost: "2023-10-02",
+    },
+    {
+      title: "Content Writer",
+      applications: 23,
+      status: "Under Review",
+      DateOfPost: "2023-10-03",
+    },
   ];
 
   return (
@@ -454,9 +469,13 @@ const Jobs = () => {
       {/* Job Listings */}
       <div className="w-full lg:w-[70%] bg-white rounded-lg shadow-md p-6">
         <h2 className="text-2xl font-semibold mb-4">Manage Job Listings</h2>
-        
+
         {/* Search Bar */}
-        <input type="text" placeholder="Search jobs Title ..." className="w-full p-2 border rounded mb-4" />
+        <input
+          type="text"
+          placeholder="Search jobs Title ..."
+          className="w-full p-2 border rounded mb-4"
+        />
 
         {/* Filters */}
         <div className="flex items-center justify-start gap-4 mb-4">
@@ -478,36 +497,65 @@ const Jobs = () => {
           <table className="w-full border-collapse">
             <thead>
               <tr className="border-b border-gray-500 bg-gray-100">
-                <th className="text-left py-3 px-2 text-gray-700 font-medium">Job Title</th>
-                <th className="text-left py-3 px-2 text-gray-700 font-medium">Applications</th>
-                <th className="text-left py-3 px-2 text-gray-700 font-medium">Status</th>
-                <th className="text-left py-3 px-2 text-gray-700 font-medium">Posted Date</th>
-                <th className="text-left py-3 px-2 text-gray-700 font-medium">Actions</th>
+                <th className="text-left py-3 px-2 text-gray-700 font-medium">
+                  Job Title
+                </th>
+                <th className="text-left py-3 px-2 text-gray-700 font-medium">
+                  Applications
+                </th>
+                <th className="text-left py-3 px-2 text-gray-700 font-medium">
+                  Status
+                </th>
+                <th className="text-left py-3 px-2 text-gray-700 font-medium">
+                  Posted Date
+                </th>
+                <th className="text-left py-3 px-2 text-gray-700 font-medium">
+                  Actions
+                </th>
               </tr>
             </thead>
             <tbody>
               {JobsData.map((job, index) => (
-                <tr key={index} className="border-b border-gray-400 hover:bg-gray-50">
+                <tr
+                  key={index}
+                  className="border-b border-gray-400 hover:bg-gray-50"
+                >
                   <td className="py-4 px-3">{job.title}</td>
                   <td className="py-4 px-3">{job.applications} Applicants</td>
                   <td className="py-4 px-3">
                     <span
                       className={`rounded-full px-3 py-1 text-sm font-medium ${
-                        job.status === "Active" ? "bg-green-100 text-green-800" :
-                        job.status === "Under Review" ? "bg-yellow-100 text-yellow-800" :
-                        ""
+                        job.status === "Active"
+                          ? "bg-green-100 text-green-800"
+                          : job.status === "Under Review"
+                          ? "bg-yellow-100 text-yellow-800"
+                          : ""
                       }`}
                     >
                       {job.status}
                     </span>
                   </td>
-                  <td className="py-4 px-3">{new Date(job.DateOfPost).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}</td>
+                  <td className="py-4 px-3">
+                    {new Date(job.DateOfPost).toLocaleDateString("en-IN", {
+                      day: "numeric",
+                      month: "short",
+                      year: "numeric",
+                    })}
+                  </td>
                   <td className="py-4 px-3">
                     <div className="flex gap-3 text-blue-600">
-                      <button className="hover:text-gray-500"><FaRegEye size={18} /></button>
-                      <button className="hover:text-gray-500"><FaRegEdit size={18} /></button>
-                      <button className="hover:text-gray-500"><IoIosRocket size={18} /></button>
-                      <button className="hover:text-gray-500"><RxCross1 size={18} /></button>
+                      <button className="hover:text-gray-500">
+                        <FaRegEye size={18} />
+                      </button>
+                      <button className="hover:text-gray-500">
+                        <FaRegEdit size={18} />
+                      </button>
+                      <button className="hover:text-gray-500">
+                        <IoIosRocket size={18} />
+                      </button>
+                      <button className="hover:text-gray-500">
+                        <RxCross1 size={18} />
+                      </button>
                     </div>
                   </td>
                 </tr>
@@ -520,10 +568,12 @@ const Jobs = () => {
       {/* Performance Overview */}
       <div className="w-full lg:w-[30%] bg-white rounded-lg shadow-md p-6">
         <h2 className="text-2xl font-semibold mb-8">Performance Overview</h2>
-        
+
         <div className="space-y-6">
           <div className="flex items-center gap-3">
-            <div className="px-1 py-1 bg-indigo-100 text-indigo-900 rounded-lg"><BsEye size={30} className="text-indigo-600" /></div>
+            <div className="px-1 py-1 bg-indigo-100 text-indigo-900 rounded-lg">
+              <BsEye size={30} className="text-indigo-600" />
+            </div>
             <div>
               <p className="text-gray-500 ">Total Job Views</p>
               <p className="text-lg font-medium">2,456</p>
@@ -531,7 +581,9 @@ const Jobs = () => {
           </div>
 
           <div className="flex items-center gap-3">
-            <div className="px-1 py-1 bg-indigo-100 text-indigo-900 rounded-lg"><AiOutlineStock  size={30} className="text-indigo-600" /></div>
+            <div className="px-1 py-1 bg-indigo-100 text-indigo-900 rounded-lg">
+              <AiOutlineStock size={30} className="text-indigo-600" />
+            </div>
             <div>
               <p className="text-gray-500 text-lg">Most Applied Job</p>
               <p className="text-lg font-medium">58</p>
@@ -539,7 +591,9 @@ const Jobs = () => {
           </div>
 
           <div className="flex items-center gap-3">
-            <div className="px-1 py-1 bg-indigo-100 text-indigo-900 rounded-lg"><FaRegStar  size={30} className="text-indigo-600" /></div>
+            <div className="px-1 py-1 bg-indigo-100 text-indigo-900 rounded-lg">
+              <FaRegStar size={30} className="text-indigo-600" />
+            </div>
             <div>
               <p className="text-gray-500 text-lg">Best Performing</p>
               <p className="text-lg font-medium">Frontend Dev</p>
@@ -547,7 +601,9 @@ const Jobs = () => {
           </div>
 
           <div className="flex items-center gap-3">
-            <div className="px-1 py-1 bg-indigo-100 text-indigo-900 rounded-lg"><MdAvTimer size={30} className="text-indigo-500" /></div>
+            <div className="px-1 py-1 bg-indigo-100 text-indigo-900 rounded-lg">
+              <MdAvTimer size={30} className="text-indigo-500" />
+            </div>
             <div>
               <p className="text-gray-500 text-lg">Avg. Applications</p>
               <p className="text-lg font-medium">45</p>
@@ -560,9 +616,206 @@ const Jobs = () => {
 };
 
 const Applications = () => {
+  const applications = [
+    {
+      id: 1,
+      name: "Sarah Wilson",
+      email: "sarah.wilson@example.com",
+      position: "Senior UX Designer",
+      department: "Design Team",
+      dateApplied: "Nov 15, 2024",
+      timeApplied: "2:30 PM",
+      status: "New"
+    },
+    {
+      id: 2,
+      name: "Michael Chen",
+      email: "michael.chen@example.com",
+      position: "Frontend Developer",
+      department: "Engineering",
+      dateApplied: "Nov 14, 2024",
+      timeApplied: "11:45 AM",
+      status: "Reviewed"
+    },
+    {
+      id: 3,
+      name: "Emily Brown",
+      email: "emily.brown@example.com",
+      position: "Product Manager",
+      department: "Product",
+      dateApplied: "Nov 14, 2024",
+      timeApplied: "9:15 AM",
+      status: "Shortlisted"
+    }
+  ];
+
+  const getStatusClass = (status) => {
+    switch(status) {
+      case "New":
+        return "bg-blue-500 text-white text-xs font-medium px-2 py-1 rounded";
+      case "Reviewed":
+        return "bg-purple-500 text-white text-xs font-medium px-2 py-1 rounded";
+      case "Shortlisted":
+        return "bg-green-500 text-white text-xs font-medium px-2 py-1 rounded";
+      default:
+        return "bg-gray-200 text-gray-800 text-xs font-medium px-2 py-1 rounded";
+    }
+  };
+
   return (
-    <div className="flex items-center justify-center w-full h-96  mt-10">
-      <h1 className="text-3xl font-bold">Applications Section</h1>
+    <div className="p-10 w-full mx-auto">
+      {/* Header */}
+      <div className="w-full flex justify-between items-center mb-8">
+        <h1 className="text-3xl font-bold">Manage Applications</h1>
+        <div className="flex items-center gap-3 px-5">
+          <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center mr-1">
+            {/* <span className="text-sm font-medium text-gray-700">JS</span> */}
+            <img src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" className="rounded-full"/>
+          </div>
+          <div>
+            <p className="font-medium text-md">John Smith</p>
+            <p className="text-md text-gray-500">HR Manager</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Filters */}
+      <div className="flex flex-wrap gap-4 mb-6">
+        <div className="relative flex-grow max-w-md">
+          <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+            <Search className="h-4 w-4 text-gray-400" />
+          </div>
+          <input
+            type="text"
+            className="pl-10 pr-4 py-2 w-full border border-gray-300 rounded-md"
+            placeholder="Search by candidate, job title, or status..."
+          />
+        </div>
+        
+        <div className="flex-shrink-0">
+          <select className="border border-gray-300 rounded-md px-3 py-2">
+            <option value="">Job Title</option>
+          </select>
+        </div>
+        
+        <div className="flex-shrink-0">
+          <select className="border border-gray-300 rounded-md px-3 py-2">
+            <option value="">Status</option>
+          </select>
+        </div>
+        
+        <div className="flex-shrink-0">
+          <select className="border border-gray-300 rounded-md px-3 py-2">
+            <option value="">Date Applied</option>
+          </select>
+        </div>
+        
+        <div className="flex-shrink-0">
+          <select className="border border-gray-300 rounded-md px-3 py-2">
+            <option value="">Experience Level</option>
+          </select>
+        </div>
+      </div>
+
+      {/* Selection controls */}
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center gap-4">
+          <div className="flex items-center">
+            <input type="checkbox" id="selectAll" className="mr-2" />
+            <label htmlFor="selectAll" className="text-sm">Select All</label>
+          </div>
+          <span className="text-sm text-gray-500">Selected: 0 items</span>
+        </div>
+        
+        <div className="flex gap-2">
+          <button className="bg-green-500 text-white px-4 py-2 rounded-md text-sm">
+            Shortlist Selected
+          </button>
+          <button className="bg-red-500 text-white px-4 py-2 rounded-md text-sm">
+            Reject Selected
+          </button>
+          <button className="bg-blue-500 text-white px-4 py-2 rounded-md text-sm">
+            Message Selected
+          </button>
+        </div>
+      </div>
+
+      {/* Table */}
+      <div className="border rounded-md overflow-hidden">
+        <table className="min-w-full divide-y divide-gray-200">
+          <thead className="bg-gray-50">
+            <tr>
+              <th scope="col" className="w-12 py-3 px-4">
+                <input type="checkbox" />
+              </th>
+              <th scope="col" className="py-3 px-4 text-left text-sm font-medium text-gray-500">
+                Candidate
+              </th>
+              <th scope="col" className="py-3 px-4 text-left text-sm font-medium text-gray-500">
+                Applied For
+              </th>
+              <th scope="col" className="py-3 px-4 text-left text-sm font-medium text-gray-500">
+                Date Applied
+              </th>
+              <th scope="col" className="py-3 px-4 text-left text-sm font-medium text-gray-500">
+                Status
+              </th>
+              <th scope="col" className="py-3 px-4 text-left text-sm font-medium text-gray-500">
+                Actions
+              </th>
+            </tr>
+          </thead>
+          <tbody className="bg-white divide-y divide-gray-200">
+            {applications.map((application) => (
+              <tr key={application.id}>
+                <td className="py-4 px-4">
+                  <input type="checkbox" />
+                </td>
+                <td className="py-4 px-4">
+                  <div className="flex items-center">
+                    <div className="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center mr-3">
+                    <img src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" className="rounded-full"/>
+                    </div>
+                    <div>
+                      <div className="font-medium">{application.name}</div>
+                      <div className="text-sm text-gray-500">{application.email}</div>
+                    </div>
+                  </div>
+                </td>
+                <td className="py-4 px-4">
+                  <div className="font-medium">{application.position}</div>
+                  <div className="text-sm text-gray-500">{application.department}</div>
+                </td>
+                <td className="py-4 px-4">
+                  <div>{application.dateApplied}</div>
+                  <div className="text-sm text-gray-500">{application.timeApplied}</div>
+                </td>
+                <td className="py-4 px-4">
+                  <span className={getStatusClass(application.status)}>
+                    {application.status}
+                  </span>
+                </td>
+                <td className="py-4 px-0">
+                  <div className="flex gap-6">
+                    <button className="p-1 text-gray-400 hover:text-gray-600">
+                      <FileText size={18} />
+                    </button>
+                    <button className="p-1 text-gray-400 hover:text-gray-600">
+                      <MessageCircle size={18} />
+                    </button>
+                    <button className="p-1 text-gray-400 hover:text-green-600">
+                      <CheckCircle size={18} />
+                    </button>
+                    <button className="p-1 text-gray-400 hover:text-red-600">
+                      <XCircle size={18} />
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
