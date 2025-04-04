@@ -1,6 +1,6 @@
 // Removed incorrect import of div
 import React, { useState } from "react";
-import { BsGiftFill } from "react-icons/bs";
+import { BsEye, BsGiftFill } from "react-icons/bs";
 import { IoPeopleSharp } from "react-icons/io5";
 import { GrFormSchedule } from "react-icons/gr";
 import { MdOutlineEventAvailable } from "react-icons/md";
@@ -13,6 +13,11 @@ import { FaRegEye } from "react-icons/fa";
 import { FaRegEdit } from "react-icons/fa";
 import { FaArrowUp } from "react-icons/fa";
 import { FaArrowDown } from "react-icons/fa";
+import { IoIosRocket } from "react-icons/io";
+import { RxCross1 } from "react-icons/rx";
+import { AiOutlineStock } from "react-icons/ai";
+import { FaRegStar } from "react-icons/fa6";
+import { MdAvTimer } from "react-icons/md";
 
 const EmployeeNavigator = ({ showContent, setShowContent }) => {
   return (
@@ -438,9 +443,118 @@ const DashBoard = () => {
 };
 
 const Jobs = () => {
+  const JobsData = [
+    { title: "UI/UX Intern", applications: 58, status: "Active", DateOfPost: "2023-10-01" },
+    { title: "Frontend Developer", applications: 42, status: "Active", DateOfPost: "2023-10-02" },
+    { title: "Content Writer", applications: 23, status: "Under Review", DateOfPost: "2023-10-03" },
+  ];
+
   return (
-    <div className="flex items-center justify-center w-full h-96  mt-10">
-      <h1 className="text-3xl font-bold">Jobs Section</h1>
+    <div className="flex flex-col lg:flex-row items-start justify-center w-full h-auto mt-10 gap-6 px-4">
+      {/* Job Listings */}
+      <div className="w-full lg:w-[70%] bg-white rounded-lg shadow-md p-6">
+        <h2 className="text-2xl font-semibold mb-4">Manage Job Listings</h2>
+        
+        {/* Search Bar */}
+        <input type="text" placeholder="Search jobs Title ..." className="w-full p-2 border rounded mb-4" />
+
+        {/* Filters */}
+        <div className="flex items-center justify-start gap-4 mb-4">
+          <select className="p-2 border border-gray-500  rounded">
+            <option value="">Select Status</option>
+            <option value="Active">Active</option>
+            <option value="Under Review">Under Review</option>
+          </select>
+          <select className="p-2 border border-gray-500 rounded">
+            <option value="">Select Job Type</option>
+          </select>
+          <select className="p-2 border border-gray-500 rounded ">
+            <option value="">Date Posted</option>
+          </select>
+        </div>
+
+        {/* Job Table */}
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse">
+            <thead>
+              <tr className="border-b border-gray-500 bg-gray-100">
+                <th className="text-left py-3 px-2 text-gray-700 font-medium">Job Title</th>
+                <th className="text-left py-3 px-2 text-gray-700 font-medium">Applications</th>
+                <th className="text-left py-3 px-2 text-gray-700 font-medium">Status</th>
+                <th className="text-left py-3 px-2 text-gray-700 font-medium">Posted Date</th>
+                <th className="text-left py-3 px-2 text-gray-700 font-medium">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {JobsData.map((job, index) => (
+                <tr key={index} className="border-b border-gray-400 hover:bg-gray-50">
+                  <td className="py-4 px-3">{job.title}</td>
+                  <td className="py-4 px-3">{job.applications} Applicants</td>
+                  <td className="py-4 px-3">
+                    <span
+                      className={`rounded-full px-3 py-1 text-sm font-medium ${
+                        job.status === "Active" ? "bg-green-100 text-green-800" :
+                        job.status === "Under Review" ? "bg-yellow-100 text-yellow-800" :
+                        ""
+                      }`}
+                    >
+                      {job.status}
+                    </span>
+                  </td>
+                  <td className="py-4 px-3">{new Date(job.DateOfPost).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}</td>
+                  <td className="py-4 px-3">
+                    <div className="flex gap-3 text-blue-600">
+                      <button className="hover:text-gray-500"><FaRegEye size={18} /></button>
+                      <button className="hover:text-gray-500"><FaRegEdit size={18} /></button>
+                      <button className="hover:text-gray-500"><IoIosRocket size={18} /></button>
+                      <button className="hover:text-gray-500"><RxCross1 size={18} /></button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Performance Overview */}
+      <div className="w-full lg:w-[30%] bg-white rounded-lg shadow-md p-6">
+        <h2 className="text-2xl font-semibold mb-8">Performance Overview</h2>
+        
+        <div className="space-y-6">
+          <div className="flex items-center gap-3">
+            <div className="px-1 py-1 bg-indigo-100 text-indigo-900 rounded-lg"><BsEye size={30} className="text-indigo-600" /></div>
+            <div>
+              <p className="text-gray-500 ">Total Job Views</p>
+              <p className="text-lg font-medium">2,456</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <div className="px-1 py-1 bg-indigo-100 text-indigo-900 rounded-lg"><AiOutlineStock  size={30} className="text-indigo-600" /></div>
+            <div>
+              <p className="text-gray-500 text-lg">Most Applied Job</p>
+              <p className="text-lg font-medium">58</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <div className="px-1 py-1 bg-indigo-100 text-indigo-900 rounded-lg"><FaRegStar  size={30} className="text-indigo-600" /></div>
+            <div>
+              <p className="text-gray-500 text-lg">Best Performing</p>
+              <p className="text-lg font-medium">Frontend Dev</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <div className="px-1 py-1 bg-indigo-100 text-indigo-900 rounded-lg"><MdAvTimer size={30} className="text-indigo-500" /></div>
+            <div>
+              <p className="text-gray-500 text-lg">Avg. Applications</p>
+              <p className="text-lg font-medium">45</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
