@@ -17,6 +17,7 @@ import Mob from "./components/Mob";
 import MyApplication from "./pages/MyApplication";
 import CreateResume from "./pages/CreateResume";
 import EmployerHome from "./pages/EmployerHome";
+import FreelanceProjectDescription from "./pages/FreelanceProjectDescription";
 
 function App() {
   const [showOptions, setShowOptions] = useState("");
@@ -64,6 +65,7 @@ function App() {
             <Route path="/myapplications" element={<MyApplication/>} />
             <Route path="/editresume" element={<CreateResume/>} />
             <Route path="/employer" element={<EmployerHome/>} />
+            <Route path="/freelanceProject" element={<FreelanceProjectDescription/>} />
           </Routes>
         </div>
 
