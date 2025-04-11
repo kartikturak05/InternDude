@@ -34,6 +34,7 @@ import { FaListUl } from "react-icons/fa";
 import { IoCheckmarkDoneCircleOutline } from "react-icons/io5";
 import { Check, Copy } from "lucide-react";
 import AnalyticsDashboard from "./AnalyticsDashboard";
+import { useNavigate } from "react-router-dom";
 
 const EmployeeNavigator = ({ showContent, setShowContent }) => {
   return (
@@ -158,6 +159,7 @@ const metrics = [
 ];
 
 const DashBoard = () => {
+  const navigate = useNavigate();
   return (
     <>
       <div className="bg-gray-50 min-h-screen p-6">
@@ -209,7 +211,7 @@ const DashBoard = () => {
 
         <div className="grid grid-cols-2 md:grid-cols-5 gap-6 mt-10 mb-10">
           {/* Post New Job */}
-          <div className="flex items-center gap-3 p-4 bg-gray-100 rounded-lg shadow hover:shadow-lg transition cursor-pointer">
+          <div className="flex items-center gap-3 p-4 bg-gray-100 rounded-lg shadow hover:shadow-lg transition cursor-pointer" onClick={()=> navigate("PostOpportunity")}>
             <IoMdAdd className="text-blue-600 text-3xl" />
             <div className="text-gray-800 font-semibold">Post New Job</div>
           </div>
