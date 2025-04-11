@@ -33,6 +33,7 @@ import { IoGrid } from "react-icons/io5";
 import { FaListUl } from "react-icons/fa";
 import { IoCheckmarkDoneCircleOutline } from "react-icons/io5";
 import { Check, Copy } from "lucide-react";
+import AnalyticsDashboard from "./AnalyticsDashboard";
 
 const EmployeeNavigator = ({ showContent, setShowContent }) => {
   return (
@@ -1208,9 +1209,9 @@ const FreelanceProjects = () => {
 
 const Analytics = () => {
   return (
-    <div className="flex items-center justify-center w-full h-96  mt-10">
-      <h1 className="text-3xl font-bold">Analytics Section</h1>
-    </div>
+    <>
+    <AnalyticsDashboard/>
+    </>
   );
 };
 
