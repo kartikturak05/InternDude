@@ -1,4 +1,5 @@
-import React,{useState} from "react";
+import React,{useEffect, useState} from "react";
+import { useNavigate } from "react-router-dom";
 
 const OpportunityCard = ({ type, title, description, selectedType, onSelect }) => {
   const isSelected = selectedType === type;
@@ -20,6 +21,7 @@ const OpportunityCard = ({ type, title, description, selectedType, onSelect }) =
 
 const PostOpportunity = () => {
   const [selectedType, setSelectedType] = useState("");
+  const navigate = useNavigate();
 
   const handleContinue = () => {
     if (selectedType) {
@@ -29,6 +31,15 @@ const PostOpportunity = () => {
       alert("Please select one option");
     }
   };
+
+  useEffect(() => {
+    // Check if the user is logged in or not
+
+    {selectedType == "job" && navigate("/employer/PostOpportunity/PostNewJob")}
+    {selectedType == "internship" && navigate("/PostNewInternship")}
+    {selectedType == "freelance" && navigate("/PostNewFreelance")}
+    
+  }, [selectedType]);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen px-4 bg-gray-50">

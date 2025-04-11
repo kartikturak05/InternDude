@@ -19,6 +19,7 @@ import CreateResume from "./pages/CreateResume";
 import EmployerHome from "./pages/EmployerHome";
 import FreelanceProjectDescription from "./pages/FreelanceProjectDescription";
 import PostOpportunity from "./pages/PostOpportunity";
+import PostNewJob from "./pages/PostNewJob";
 
 function App() {
   const [showOptions, setShowOptions] = useState("");
@@ -68,6 +69,7 @@ function App() {
             <Route path="/employer" element={<EmployerHome/>} />
             <Route path="/freelanceProject" element={<FreelanceProjectDescription/>} />
             <Route path="/employer/PostOpportunity" element={<PostOpportunity/>} />
+            <Route path="/employer/PostOpportunity/PostNewJob" element={<PostNewJob/>} />
           </Routes>
         </div>
 
