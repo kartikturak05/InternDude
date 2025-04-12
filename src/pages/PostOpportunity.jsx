@@ -36,7 +36,7 @@ const PostOpportunity = () => {
     // Check if the user is logged in or not
 
     {selectedType == "job" && navigate("/employer/PostOpportunity/PostNewJob")}
-    {selectedType == "internship" && navigate("/PostNewInternship")}
+    {selectedType == "internship" && navigate("/employer/PostOpportunity/PostNewInternship")}
     {selectedType == "freelance" && navigate("/PostNewFreelance")}
     
   }, [selectedType]);
