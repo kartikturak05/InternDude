@@ -10,10 +10,13 @@ import {
 import { BsCalendar, BsGeoAlt, BsClock, BsPlusCircle } from "react-icons/bs";
 import { IoMdInformationCircleOutline } from "react-icons/io";
 import { AiOutlineUpload } from "react-icons/ai";
-import { div } from "framer-motion/client";
 import Footer from "../components/Footer";
+import { useNavigate } from "react-router-dom";
 
 const PostNewJob = () => {
+
+  const navigate = useNavigate();
+
   const [requiredSkills, setRequiredSkills] = useState([
     "React",
     "Figma",
@@ -482,7 +485,9 @@ const PostNewJob = () => {
               <FaChevronLeft className="mr-2" />
               Back
             </button>
-            <button className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+            <button className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer"
+            onClick={()=> navigate('/employer/PostOpportunity/PreviewJobPosted')}
+            >
               Preview Job
             </button>
           </div>
