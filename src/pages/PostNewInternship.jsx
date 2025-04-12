@@ -12,8 +12,12 @@ import {
   FaGlobe,
 } from "react-icons/fa";
 import Footer from "../components/Footer";
+import { useNavigate } from "react-router-dom";
 
 const PostNewInternship = () => {
+
+    const navigate = useNavigate();
+
   // State management for form data
   const [formData, setFormData] = useState({
     title: "",
@@ -547,6 +551,7 @@ const PostNewInternship = () => {
             <button
               type="submit"
               className="px-5 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+              onClick={()=> navigate("/employer/PostOpportunity/PreviewInternship")}
             >
               Preview Internship
             </button>

@@ -23,6 +23,7 @@ import PostNewJob from "./pages/PostNewJob";
 import PreviewJobPosted from "./pages/PreviewJobPosted";
 import JobPostLive from "./pages/JobPostLive";
 import PostNewInternship from "./pages/PostNewInternship";
+import PreviewInternship from "./pages/PreviewInternship";
 
 function App() {
   const [showOptions, setShowOptions] = useState("");
@@ -77,6 +78,7 @@ function App() {
             <Route path="/employer/PostOpportunity/PreviewJobPosted/success" element={<JobPostLive/>} />
 
             <Route path="/employer/PostOpportunity/PostNewInternship" element={<PostNewInternship/>} />
+            <Route path="/employer/PostOpportunity/PreviewInternship" element={<PreviewInternship/>} />
           </Routes>
         </div>
 
