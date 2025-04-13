@@ -37,7 +37,7 @@ const PostOpportunity = () => {
 
     {selectedType == "job" && navigate("/employer/PostOpportunity/PostNewJob")}
     {selectedType == "internship" && navigate("/employer/PostOpportunity/PostNewInternship")}
-    {selectedType == "freelance" && navigate("/PostNewFreelance")}
+    {selectedType == "freelance" && navigate("/employer/PostOpportunity/PostNewFreelance")}
     
   }, [selectedType]);
 
