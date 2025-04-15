@@ -633,6 +633,9 @@ const Jobs = () => {
 };
 
 const Applications = () => {
+
+  const navigate = useNavigate();
+
   const applications = [
     {
       id: 1,
@@ -678,6 +681,8 @@ const Applications = () => {
         return "bg-gray-200 text-gray-800 text-xs font-medium px-2 py-1 rounded";
     }
   };
+
+  
 
   return (
     <div className="p-10 w-full mx-auto">
@@ -757,7 +762,9 @@ const Applications = () => {
           <button className="bg-red-500 text-white px-4 py-2 rounded-md text-sm">
             Reject Selected
           </button>
-          <button className="bg-blue-500 text-white px-4 py-2 rounded-md text-sm">
+          <button className="bg-blue-500 text-white px-4 py-2 rounded-md text-sm cursor-pointer"
+          onClick={()=> navigate("/employer/ChatWithApplicants")}
+          >
             Message Selected
           </button>
         </div>
@@ -848,7 +855,9 @@ const Applications = () => {
                     <button className="p-1 text-gray-400 hover:text-gray-600">
                       <FileText size={18} />
                     </button>
-                    <button className="p-1 text-gray-400 hover:text-gray-600">
+                    <button className="p-1 text-gray-400 hover:text-gray-600 cursor-pointer"
+                    onClick={()=> navigate("/employer/ChatWithApplicants")}
+                    >
                       <MessageCircle size={18} />
                     </button>
                     <button className="p-1 text-gray-400 hover:text-green-600">
@@ -869,6 +878,9 @@ const Applications = () => {
 };
 
 const FreelanceProjects = () => {
+
+  const navigate = useNavigate();
+
   const projects = [
     {
       id: 1,
@@ -1178,7 +1190,10 @@ const FreelanceProjects = () => {
                 <button className="bg-blue-600 text-white py-2 px-4 rounded-md text-md font-medium hover:bg-blue-700">
                   View Details
                 </button>
-                <button className="border border-blue-600 text-blue-600 py-2 px-4 rounded-md text-md font-medium hover:bg-blue-50">
+                <button className="border border-blue-600 text-blue-600 py-2 px-4 rounded-md text-md font-medium hover:bg-blue-50 cursor-pointer"
+                onClick={()=> navigate("/employer/ChatWithApplicants")}
+                
+                >
                   Message
                 </button>
               </div>
@@ -1232,6 +1247,8 @@ const EmployerHome = () => {
       {showContent === "Applications" && <Applications />}
       {showContent === "Freelance Project" && <FreelanceProjects />}
       {showContent === "Analytics" && <Analytics />}
+
+      <Footer/>
     </div>
   );
 };

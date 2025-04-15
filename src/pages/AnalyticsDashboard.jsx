@@ -319,7 +319,6 @@ const AnalyticsDashboard = () => {
         </div>
       </div>
     </div>
-    <Footer/>
     </>
   );
 };
