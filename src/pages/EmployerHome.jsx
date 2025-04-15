@@ -35,6 +35,7 @@ import { IoCheckmarkDoneCircleOutline } from "react-icons/io5";
 import { Check, Copy } from "lucide-react";
 import AnalyticsDashboard from "./AnalyticsDashboard";
 import { useNavigate } from "react-router-dom";
+import Footer from "../components/Footer";
 
 const EmployeeNavigator = ({ showContent, setShowContent }) => {
   return (
@@ -1231,6 +1232,8 @@ const EmployerHome = () => {
       {showContent === "Applications" && <Applications />}
       {showContent === "Freelance Project" && <FreelanceProjects />}
       {showContent === "Analytics" && <Analytics />}
+
+      <Footer/>
     </div>
   );
 };

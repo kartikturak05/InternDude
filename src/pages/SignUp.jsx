@@ -39,6 +39,8 @@ const SignUp = () => {
   const [showPasswordInput, setShowPasswordInput] = useState(true);
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
+
+  const [loginAs,setLoginAs] = useState('employer');
   const auth = getAuth(app);
 
   // Monitor auth state changes
@@ -219,7 +221,7 @@ const SignUp = () => {
       const result = await signInWithPopup(auth, provider);
       if (result.user) {
         toast.success("Logged in successfully!");
-        navigate("/");
+        navigate(loginAs === "Student" ? "/" : "/employer");
       }
     } catch (error) {
       console.error(error);
@@ -240,6 +242,13 @@ const SignUp = () => {
         }}
       >
         <div className="w-full sm:w-1/2 flex flex-col items-center bg-transparent p-6 rounded-lg pb-10 pt-10">
+
+        <div className="flex flex-col sm:flex-row items-center justify-evenly gap-4 p-4">
+  <div className="text-lg font-medium">Student</div>
+  <div className="text-lg font-medium">Employer</div>
+</div>
+
+
           <h2 className="text-3xl font-bold mb-6 text-white">
             {isSignup ? "Sign Up" : "Sign In"}
           </h2>
