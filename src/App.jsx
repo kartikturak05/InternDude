@@ -28,6 +28,7 @@ import PostFreelanceProject from "./pages/PostFreelanceProject";
 import PreviewFreelancePosted from "./pages/PreviewFreelancePosted";
 import ChatWithApplicants from "./pages/ChatWithApplicants";
 import ApplicantProfile from "./pages/ApplicantsProfile";
+import PaymentOptions from "./pages/PaymentOptions";
 
 function App() {
   const [showOptions, setShowOptions] = useState("");
@@ -91,6 +92,8 @@ function App() {
             <Route path="/employer/ChatWithApplicants" element={<ChatWithApplicants/>} />
 
             <Route path="/employer/ViewApplicantsProfile" element={<ApplicantProfile/>} />
+
+            <Route path="/employer/Freelance/PaymentOptions" element={<PaymentOptions/>} />
 
           </Routes>
         </div>

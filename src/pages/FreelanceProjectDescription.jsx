@@ -227,7 +227,9 @@ const FreelanceProjectDescription = () => {
           <button className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700">
             Cancel
           </button>
-          <button className="px-4 py-2 bg-blue-500 text-white rounded-lg">
+          <button className="px-4 py-2 bg-blue-500 text-white rounded-lg cursor-pointer"
+          onClick={()=> navigate('/employer/Freelance/PaymentOptions')}
+          >
             Proceed to Payment
           </button>
         </div>
