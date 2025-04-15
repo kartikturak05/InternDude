@@ -1232,8 +1232,6 @@ const EmployerHome = () => {
       {showContent === "Applications" && <Applications />}
       {showContent === "Freelance Project" && <FreelanceProjects />}
       {showContent === "Analytics" && <Analytics />}
-
-      <Footer/>
     </div>
   );
 };
