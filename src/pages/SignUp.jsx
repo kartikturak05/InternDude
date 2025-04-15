@@ -40,7 +40,7 @@ const SignUp = () => {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
-  const [loginAs,setLoginAs] = useState('employer');
+  const [loginAs, setLoginAs] = useState("Student");
   const auth = getAuth(app);
 
   // Monitor auth state changes
@@ -60,14 +60,14 @@ const SignUp = () => {
 
   const handleAuth = async () => {
     if (showPhoneInput && !showOtpInput) {
-      if(!phone || phone.length < 10) { 
+      if (!phone || phone.length < 10) {
         toast.error("Please enter a valid phone number");
         return;
       }
       await onSignup(); // Send OTP
     } else if (showOtpInput) {
       await onOTPVerify(); // Verify OTP
-    }  else if (showEmailInput == true && showPasswordInput == true) {
+    } else if (showEmailInput == true && showPasswordInput == true) {
       if (!email || !password) {
         toast.error("Please enter both email and password");
         return;
@@ -174,7 +174,7 @@ const SignUp = () => {
 
     try {
       setupRecaptcha();
-      console.log(phone)
+      console.log(phone);
       const formattedPhone = phone.startsWith("+") ? phone : `+91${phone}`; // Default to India code
       const appVerifier = window.recaptchaVerifier;
 
@@ -243,11 +243,30 @@ const SignUp = () => {
       >
         <div className="w-full sm:w-1/2 flex flex-col items-center bg-transparent p-6 rounded-lg pb-10 pt-10">
 
-        <div className="flex flex-col sm:flex-row items-center justify-evenly gap-4 p-4">
-  <div className="text-lg font-medium">Student</div>
-  <div className="text-lg font-medium">Employer</div>
-</div>
-
+          <div className="flex items-center justify-around p-4">
+            <div className="flex bg-gray-700 rounded-lg p-1">
+              <button
+                onClick={() => setLoginAs("Student")}
+                className={`px-8 py-2 rounded-lg transition font-medium cursor-pointer mr-10 text-lg ${
+                  loginAs === "Student"
+                    ? "bg-white text-gray-900"
+                    : "text-white hover:bg-gray-700"
+                }`}
+              >
+                Student
+              </button>
+              <button
+                onClick={() => setLoginAs("Employer")}
+                className={`px-8 py-2 rounded-lg transition font-medium cursor-pointer  text-lg ${
+                  loginAs === "Employer"
+                    ? "bg-white text-gray-900"
+                    : "text-white hover:bg-gray-700"
+                }`}
+              >
+                Employer
+              </button>
+            </div>
+          </div>
 
           <h2 className="text-3xl font-bold mb-6 text-white">
             {isSignup ? "Sign Up" : "Sign In"}
@@ -352,7 +371,7 @@ const SignUp = () => {
             <hr className="flex-grow border-gray-300" />
           </div>
 
-            {/* Button to select what to choose phone of email */}
+          {/* Button to select what to choose phone of email */}
           {/* <button
             className="w-full cursor-pointer flex items-center justify-center border border-white text-white font-semibold rounded-xl text-base py-3 mt-2 hover:bg-white hover:text-black"
             onClick={() => {
