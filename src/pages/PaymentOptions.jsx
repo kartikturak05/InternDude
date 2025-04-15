@@ -15,6 +15,7 @@ import { SiAmericanexpress } from "react-icons/si";
 import { FaGooglePay } from "react-icons/fa";
 
 import Footer from '../components/Footer';
+import { useNavigate } from 'react-router-dom';
 
 const PaymentOptions = () => {
   const [selectedPayment, setSelectedPayment] = useState('credit');
@@ -25,6 +26,8 @@ const PaymentOptions = () => {
   const [saveCard, setSaveCard] = useState(false);
   const [showPromoField, setShowPromoField] = useState(false);
   const [promoCode, setPromoCode] = useState('');
+
+  const navigate = useNavigate();
 
   // Format card number with spaces every 4 digits
   const formatCardNumber = (value) => {
@@ -60,6 +63,7 @@ const PaymentOptions = () => {
   const handlePayment = () => {
     // In a real app, this would handle the payment processing
     console.log('Processing payment...');
+    navigate("/employer/Freelance/PaymentSuccess");
     
   };
 

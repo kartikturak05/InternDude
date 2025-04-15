@@ -29,6 +29,7 @@ import PreviewFreelancePosted from "./pages/PreviewFreelancePosted";
 import ChatWithApplicants from "./pages/ChatWithApplicants";
 import ApplicantProfile from "./pages/ApplicantsProfile";
 import PaymentOptions from "./pages/PaymentOptions";
+import PaymentSuccess from "./pages/PaymentSuccess";
 
 function App() {
   const [showOptions, setShowOptions] = useState("");
@@ -94,6 +95,7 @@ function App() {
             <Route path="/employer/ViewApplicantsProfile" element={<ApplicantProfile/>} />
 
             <Route path="/employer/Freelance/PaymentOptions" element={<PaymentOptions/>} />
+            <Route path="/employer/Freelance/PaymentSuccess" element={<PaymentSuccess/>} />
 
           </Routes>
         </div>
