@@ -1,8 +1,12 @@
 import React from 'react';
 import { Star, MapPin, Clock, Check, ChevronRight, MessageCircle, X } from 'lucide-react';
 import Footer from '../components/Footer';
+import { useNavigate } from 'react-router-dom';
 
 const FreelanceProjectDescription = () => {
+
+  const navigate = useNavigate();
+
   return (
     <>
     <div className="bg-white rounded-lg shadow-lg max-w-7xl mx-auto mt-5">
@@ -53,7 +57,9 @@ const FreelanceProjectDescription = () => {
             </div>
           </div>
         </div>
-        <a href="#" className="text-blue-600 text-md font-semibold">View Full Profile</a>
+        <a href="#" className="text-blue-600 text-md font-semibold cursor-pointer"
+        onClick={()=> navigate("/employer/ViewApplicantsProfile")}
+        >View Full Profile</a>
       </div>
 
       {/* Pricing Plans */}

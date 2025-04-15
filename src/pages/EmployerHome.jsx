@@ -1187,7 +1187,9 @@ const FreelanceProjects = () => {
 
               {/* Action Buttons */}
               <div className="grid grid-cols-2 gap-3 mb-4">
-                <button className="bg-blue-600 text-white py-2 px-4 rounded-md text-md font-medium hover:bg-blue-700">
+                <button className="bg-blue-600 text-white py-2 px-4 rounded-md text-md font-medium hover:bg-blue-700 cursor-pointer"
+                onClick={()=> navigate("/employer/freelanceProject")}
+                >
                   View Details
                 </button>
                 <button className="border border-blue-600 text-blue-600 py-2 px-4 rounded-md text-md font-medium hover:bg-blue-50 cursor-pointer"
