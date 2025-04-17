@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { MessageSquare, FileText, Calendar, Check, ArrowRight, Download, Paperclip } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const ChatWithApplicants = () => {
   // State for active tab and selected candidate
   const [activeTab, setActiveTab] = useState('All');
   const [selectedCandidate, setSelectedCandidate] = useState('Sarah Johnson');
   const [messageInput, setMessageInput] = useState('');
+
+  const navigate = useNavigate();
 
   // Dummy data for candidates
   const candidates = {
@@ -254,7 +257,9 @@ const ChatWithApplicants = () => {
                   <FileText size={16} className="mr-1" />
                   Resume
                 </button>
-                <button className="flex items-center text-blue-900 font-semibold text-md">
+                <button className="flex items-center text-blue-900 font-semibold text-md cursor-pointer hover:text-gray-500"
+                onClick={()=> navigate("/employer/InterviewSchedule")}
+                >
                   <Calendar size={16} className="mr-1" />
                   Schedule
                 </button>

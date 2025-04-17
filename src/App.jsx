@@ -30,6 +30,8 @@ import ChatWithApplicants from "./pages/ChatWithApplicants";
 import ApplicantProfile from "./pages/ApplicantsProfile";
 import PaymentOptions from "./pages/PaymentOptions";
 import PaymentSuccess from "./pages/PaymentSuccess";
+import InterviewSchedule from "./pages/InternviewSchedule";
+import InterviewScheduleSuccessful from "./pages/InterviewScheduleSuccessfull";
 
 function App() {
   const [showOptions, setShowOptions] = useState("");
@@ -96,6 +98,10 @@ function App() {
 
             <Route path="/employer/Freelance/PaymentOptions" element={<PaymentOptions/>} />
             <Route path="/employer/Freelance/PaymentSuccess" element={<PaymentSuccess/>} />
+
+
+            <Route path="/employer/InterviewSchedule" element={<InterviewSchedule/>} />
+            <Route path="/employer/InterviewScheduleSuccessful" element={<InterviewScheduleSuccessful/>} />
 
           </Routes>
         </div>
