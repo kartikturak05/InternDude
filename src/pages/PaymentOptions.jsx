@@ -120,7 +120,7 @@ const PaymentOptions = () => {
 
         {/* Payment Method Selection */}
         <div className="space-y-4 mb-6">
-          <div 
+          {/* <div 
             className={`border rounded-lg p-4 flex items-center cursor-pointer ${selectedPayment === 'credit' ? 'border-blue-500' : 'border-gray-200'}`}
             onClick={() => setSelectedPayment('credit')}
           >
@@ -133,7 +133,7 @@ const PaymentOptions = () => {
             />
             <CreditCard className="text-gray-600 mr-3" />
             <span>Credit/Debit Card</span>
-          </div>
+          </div> */}
 
           <div 
             className={`border rounded-lg p-4 flex items-center cursor-pointer ${selectedPayment === 'upi' ? 'border-blue-500' : 'border-gray-200'}`}
@@ -152,7 +152,7 @@ const PaymentOptions = () => {
             <span>UPI</span>
           </div>
 
-          <div 
+          {/* <div 
             className={`border rounded-lg p-4 flex items-center cursor-pointer ${selectedPayment === 'netbanking' ? 'border-blue-500' : 'border-gray-200'}`}
             onClick={() => setSelectedPayment('netbanking')}
           >
@@ -165,7 +165,7 @@ const PaymentOptions = () => {
             />
             <Building className="text-gray-600 mr-3" />
             <span>Net Banking</span>
-          </div>
+          </div> */}
 
           <div 
             className={`border rounded-lg p-4 flex items-center cursor-pointer ${selectedPayment === 'wallets' ? 'border-blue-500' : 'border-gray-200'}`}
@@ -184,7 +184,7 @@ const PaymentOptions = () => {
         </div>
 
         {/* Credit Card Form (shown when credit card is selected) */}
-        {selectedPayment === 'credit' && (
+        {/* {selectedPayment === 'credit' && (
           <div className="space-y-4">
             <div>
               <label htmlFor="cardNumber" className="block text-gray-700 mb-2">Card Number</label>
@@ -259,7 +259,7 @@ const PaymentOptions = () => {
               <label htmlFor="saveCard" className="text-gray-700">Save card for future payments</label>
             </div>
           </div>
-        )}
+        )} */}
 
         {/* Other Payment Methods Content */}
         {selectedPayment === 'upi' && (
@@ -273,7 +273,7 @@ const PaymentOptions = () => {
           </div>
         )}
 
-        {selectedPayment === 'netbanking' && (
+        {/* {selectedPayment === 'netbanking' && (
           <div className="p-4 border border-gray-200 rounded-lg">
             <p className="text-center text-gray-600">Select your bank</p>
             <select className="w-full px-4 py-2 mt-3 border border-gray-300 rounded-lg">
@@ -284,7 +284,7 @@ const PaymentOptions = () => {
               <option>Axis Bank</option>
             </select>
           </div>
-        )}
+        )} */}
 
         {selectedPayment === 'wallets' && (
           <div className="p-4 border border-gray-200 rounded-lg">
