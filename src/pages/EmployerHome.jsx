@@ -36,6 +36,8 @@ import { Check, Copy } from "lucide-react";
 import AnalyticsDashboard from "./AnalyticsDashboard";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const EmployeeNavigator = ({ showContent, setShowContent }) => {
   return (
@@ -570,7 +572,6 @@ const Jobs = () => {
       jobType: "Full-Time",
     },
   ];
-
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedStatus, setSelectedStatus] = useState("");
   const [selectedJobType, setSelectedJobType] = useState("");
@@ -627,17 +628,16 @@ const Jobs = () => {
             <option value="Part-Time">Part-Time</option>
             <option value="Freelance">Freelance</option>
           </select>
-          <select
-            className="p-2 border border-gray-500 rounded"
-            onChange={(e) => setSelectedDate(e.target.value)}
-          >
-            <option value="">Date Posted</option>
-            {JobsData.map((job, index) => (
-              <option key={index} value={job.DateOfPost}>
-                {job.DateOfPost}
-              </option>
-            ))}
-          </select>
+          <DatePicker
+            selected={selectedDate ? new Date(selectedDate) : null}
+            onChange={(date) =>
+              setSelectedDate(date ? date.toISOString().split("T")[0] : "")
+            }
+            placeholderText="Select a date"
+            className="p-2 border border-gray-500 rounded w-full"
+            dateFormat="yyyy-MM-dd"
+            isClearable
+          />
         </div>
 
         {/* Job Table */}
@@ -769,162 +769,162 @@ const Jobs = () => {
     </div>
   );
 };
-
+const allApplications = [
+  {
+    id: 1,
+    name: "Sarah Wilson",
+    email: "sarah@example.com",
+    position: "UX Designer",
+    department: "Design",
+    dateApplied: "2024-11-15",
+    timeApplied: "2:30 PM",
+    status: "New",
+  },
+  {
+    id: 2,
+    name: "Michael Chen",
+    email: "michael@example.com",
+    position: "Frontend Developer",
+    department: "Engineering",
+    dateApplied: "2024-11-14",
+    timeApplied: "11:45 AM",
+    status: "Reviewed",
+  },
+  {
+    id: 3,
+    name: "Emily Brown",
+    email: "emily@example.com",
+    position: "Product Manager",
+    department: "Product",
+    dateApplied: "2024-11-14",
+    timeApplied: "9:15 AM",
+    status: "Shortlisted",
+  },
+  {
+    id: 4,
+    name: "John Doe",
+    email: "john@example.com",
+    position: "Backend Developer",
+    department: "Engineering",
+    dateApplied: "2024-11-12",
+    timeApplied: "3:00 PM",
+    status: "New",
+  },
+  {
+    id: 5,
+    name: "Jane Lee",
+    email: "jane@example.com",
+    position: "Data Analyst",
+    department: "Analytics",
+    dateApplied: "2024-11-13",
+    timeApplied: "12:15 PM",
+    status: "Reviewed",
+  },
+  {
+    id: 6,
+    name: "Chris Johnson",
+    email: "chris@example.com",
+    position: "DevOps Engineer",
+    department: "Engineering",
+    dateApplied: "2024-11-11",
+    timeApplied: "2:45 PM",
+    status: "New",
+  },
+  {
+    id: 7,
+    name: "Lara Smith",
+    email: "lara@example.com",
+    position: "UI Developer",
+    department: "Design",
+    dateApplied: "2024-11-10",
+    timeApplied: "4:15 PM",
+    status: "Shortlisted",
+  },
+  {
+    id: 8,
+    name: "Robert Blake",
+    email: "robert@example.com",
+    position: "UX Designer",
+    department: "Design",
+    dateApplied: "2024-11-09",
+    timeApplied: "1:00 PM",
+    status: "Reviewed",
+  },
+  {
+    id: 9,
+    name: "Nina Patel",
+    email: "nina@example.com",
+    position: "Product Manager",
+    department: "Product",
+    dateApplied: "2024-11-08",
+    timeApplied: "10:45 AM",
+    status: "New",
+  },
+  {
+    id: 10,
+    name: "Amit Verma",
+    email: "amit@example.com",
+    position: "Frontend Developer",
+    department: "Engineering",
+    dateApplied: "2024-11-07",
+    timeApplied: "9:00 AM",
+    status: "Reviewed",
+  },
+  {
+    id: 11,
+    name: "Tina Gomez",
+    email: "tina@example.com",
+    position: "Backend Developer",
+    department: "Engineering",
+    dateApplied: "2024-11-06",
+    timeApplied: "5:00 PM",
+    status: "Shortlisted",
+  },
+  {
+    id: 12,
+    name: "Daniel Rad",
+    email: "daniel@example.com",
+    position: "UI Developer",
+    department: "Design",
+    dateApplied: "2024-11-05",
+    timeApplied: "2:00 PM",
+    status: "New",
+  },
+  {
+    id: 13,
+    name: "Meera Jain",
+    email: "meera@example.com",
+    position: "DevOps Engineer",
+    department: "Engineering",
+    dateApplied: "2024-11-04",
+    timeApplied: "11:15 AM",
+    status: "Reviewed",
+  },
+  {
+    id: 14,
+    name: "Zayn Malik",
+    email: "zayn@example.com",
+    position: "Data Analyst",
+    department: "Analytics",
+    dateApplied: "2024-11-03",
+    timeApplied: "3:45 PM",
+    status: "Shortlisted",
+  },
+  {
+    id: 15,
+    name: "Ravi Singh",
+    email: "ravi@example.com",
+    position: "Product Manager",
+    department: "Product",
+    dateApplied: "2024-11-02",
+    timeApplied: "10:30 AM",
+    status: "New",
+  },
+];
 const Applications = () => {
   const navigate = useNavigate();
 
-  const allApplications = [
-    {
-      id: 1,
-      name: "Sarah Wilson",
-      email: "sarah@example.com",
-      position: "UX Designer",
-      department: "Design",
-      dateApplied: "2024-11-15",
-      timeApplied: "2:30 PM",
-      status: "New",
-    },
-    {
-      id: 2,
-      name: "Michael Chen",
-      email: "michael@example.com",
-      position: "Frontend Developer",
-      department: "Engineering",
-      dateApplied: "2024-11-14",
-      timeApplied: "11:45 AM",
-      status: "Reviewed",
-    },
-    {
-      id: 3,
-      name: "Emily Brown",
-      email: "emily@example.com",
-      position: "Product Manager",
-      department: "Product",
-      dateApplied: "2024-11-14",
-      timeApplied: "9:15 AM",
-      status: "Shortlisted",
-    },
-    {
-      id: 4,
-      name: "John Doe",
-      email: "john@example.com",
-      position: "Backend Developer",
-      department: "Engineering",
-      dateApplied: "2024-11-12",
-      timeApplied: "3:00 PM",
-      status: "New",
-    },
-    {
-      id: 5,
-      name: "Jane Lee",
-      email: "jane@example.com",
-      position: "Data Analyst",
-      department: "Analytics",
-      dateApplied: "2024-11-13",
-      timeApplied: "12:15 PM",
-      status: "Reviewed",
-    },
-    {
-      id: 6,
-      name: "Chris Johnson",
-      email: "chris@example.com",
-      position: "DevOps Engineer",
-      department: "Engineering",
-      dateApplied: "2024-11-11",
-      timeApplied: "2:45 PM",
-      status: "New",
-    },
-    {
-      id: 7,
-      name: "Lara Smith",
-      email: "lara@example.com",
-      position: "UI Developer",
-      department: "Design",
-      dateApplied: "2024-11-10",
-      timeApplied: "4:15 PM",
-      status: "Shortlisted",
-    },
-    {
-      id: 8,
-      name: "Robert Blake",
-      email: "robert@example.com",
-      position: "UX Designer",
-      department: "Design",
-      dateApplied: "2024-11-09",
-      timeApplied: "1:00 PM",
-      status: "Reviewed",
-    },
-    {
-      id: 9,
-      name: "Nina Patel",
-      email: "nina@example.com",
-      position: "Product Manager",
-      department: "Product",
-      dateApplied: "2024-11-08",
-      timeApplied: "10:45 AM",
-      status: "New",
-    },
-    {
-      id: 10,
-      name: "Amit Verma",
-      email: "amit@example.com",
-      position: "Frontend Developer",
-      department: "Engineering",
-      dateApplied: "2024-11-07",
-      timeApplied: "9:00 AM",
-      status: "Reviewed",
-    },
-    {
-      id: 11,
-      name: "Tina Gomez",
-      email: "tina@example.com",
-      position: "Backend Developer",
-      department: "Engineering",
-      dateApplied: "2024-11-06",
-      timeApplied: "5:00 PM",
-      status: "Shortlisted",
-    },
-    {
-      id: 12,
-      name: "Daniel Rad",
-      email: "daniel@example.com",
-      position: "UI Developer",
-      department: "Design",
-      dateApplied: "2024-11-05",
-      timeApplied: "2:00 PM",
-      status: "New",
-    },
-    {
-      id: 13,
-      name: "Meera Jain",
-      email: "meera@example.com",
-      position: "DevOps Engineer",
-      department: "Engineering",
-      dateApplied: "2024-11-04",
-      timeApplied: "11:15 AM",
-      status: "Reviewed",
-    },
-    {
-      id: 14,
-      name: "Zayn Malik",
-      email: "zayn@example.com",
-      position: "Data Analyst",
-      department: "Analytics",
-      dateApplied: "2024-11-03",
-      timeApplied: "3:45 PM",
-      status: "Shortlisted",
-    },
-    {
-      id: 15,
-      name: "Ravi Singh",
-      email: "ravi@example.com",
-      position: "Product Manager",
-      department: "Product",
-      dateApplied: "2024-11-02",
-      timeApplied: "10:30 AM",
-      status: "New",
-    },
-  ];
+ 
 
   const [search, setSearch] = useState("");
   const [filters, setFilters] = useState({
@@ -1015,20 +1015,19 @@ const Applications = () => {
         </div>
 
         <div className="flex-shrink-0">
-          <select
-            className="border border-gray-300 rounded-md px-3 py-2"
-            value={filters.date}
-            onChange={(e) => setFilters({ ...filters, date: e.target.value })}
-          >
-            <option value="">Date Applied</option>
-            {[...new Set(allApplications.map((a) => a.dateApplied))].map(
-              (date) => (
-                <option key={date} value={date}>
-                  {date}
-                </option>
-              )
-            )}
-          </select>
+          <DatePicker
+            selected={filters.date ? new Date(filters.date) : null}
+            onChange={(date) =>
+              setFilters({
+                ...filters,
+                date: date ? date.toISOString().split("T")[0] : "",
+              })
+            }
+            placeholderText="Date Applied"
+            className="border border-gray-300 rounded-md px-3 py-2 w-full"
+            dateFormat="yyyy-MM-dd"
+            isClearable
+          />
         </div>
 
         <div className="flex-shrink-0">
@@ -1642,7 +1641,9 @@ const FreelanceProjects = () => {
   const [filteredProjects, setFilteredProjects] = useState(projects);
   const [showAll, setShowAll] = useState(false);
 
-  const visibleProjects = showAll ? filteredProjects : filteredProjects.slice(0, 6);
+  const visibleProjects = showAll
+    ? filteredProjects
+    : filteredProjects.slice(0, 6);
 
   const handleToggle = () => setShowAll(!showAll);
 
@@ -2057,129 +2058,135 @@ const FreelanceProjects = () => {
 
       {/* Project Cards */}
       <>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pl-5 pr-5">
-        {visibleProjects.map((project) => (
-          <div
-            key={project.id}
-            className="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden max-w-lg"
-          >
-            <div className="p-5">
-              <h3 className="text-lg font-semibold text-gray-800 mb-3">
-                {project.title}
-              </h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pl-5 pr-5">
+          {visibleProjects.map((project) => (
+            <div
+              key={project.id}
+              className="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden max-w-lg"
+            >
+              <div className="p-5">
+                <h3 className="text-lg font-semibold text-gray-800 mb-3">
+                  {project.title}
+                </h3>
 
-              {/* Freelancer Info */}
-              <div className="flex items-center mb-3">
-                <img
-                  src={project.freelancer.avatar}
-                  alt={project.freelancer.name}
-                  className="w-10 h-10 rounded-full mr-3"
-                />
-                <div>
-                  <div className="font-medium text-gray-800">
-                    {project.freelancer.name}
+                {/* Freelancer Info */}
+                <div className="flex items-center mb-3">
+                  <img
+                    src={project.freelancer.avatar}
+                    alt={project.freelancer.name}
+                    className="w-10 h-10 rounded-full mr-3"
+                  />
+                  <div>
+                    <div className="font-medium text-gray-800">
+                      {project.freelancer.name}
+                    </div>
+                    {renderStars(project.freelancer.rating)}
                   </div>
-                  {renderStars(project.freelancer.rating)}
                 </div>
-              </div>
 
-              {/* Skills */}
-              <div className="flex flex-wrap gap-2 mb-4">
-                {project.skills.map((skill, index) => (
-                  <span
-                    key={index}
-                    className="bg-blue-50 text-blue-600 text-xs px-2 py-1 rounded"
+                {/* Skills */}
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {project.skills.map((skill, index) => (
+                    <span
+                      key={index}
+                      className="bg-blue-50 text-blue-600 text-xs px-2 py-1 rounded"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Budget & Deadline */}
+                <div className="flex items-center justify-between">
+                  <div>
+                    <div className="text-md text-gray-500 font-medium mb-1">
+                      Budget
+                    </div>
+                    <div className="text-gray-800 font-bold">
+                      {project.budget}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-md text-gray-500 font-medium mb-1">
+                      Deadline
+                    </div>
+                    <div className="text-gray-800 font-bold mb-1">
+                      {project.deadline}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Applications & Status */}
+                <div className="flex justify-between items-center mb-4">
+                  <div className="text-md text-gray-600 mb-1">
+                    {project.applications} Applications
+                  </div>
+                  <div
+                    className={`text-sm font-medium mt-1 mb-1 pt-1 pb-1 pr-2 pl-2 bg-blue-100 rounded-full  ${getStatusClass(
+                      project.status
+                    )}`}
                   >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-
-              {/* Budget & Deadline */}
-              <div className="flex items-center justify-between">
-                <div>
-                  <div className="text-md text-gray-500 font-medium mb-1">
-                    Budget
-                  </div>
-                  <div className="text-gray-800 font-bold">
-                    {project.budget}
+                    {project.status}
                   </div>
                 </div>
-                <div>
-                  <div className="text-md text-gray-500 font-medium mb-1">
-                    Deadline
-                  </div>
-                  <div className="text-gray-800 font-bold mb-1">
-                    {project.deadline}
-                  </div>
+
+                {/* Action Buttons */}
+                <div className="grid grid-cols-2 gap-3 mb-4">
+                  <button
+                    onClick={() => {
+                      navigate("/employer/freelanceProject")
+                      window.location.reload();}}
+                    className="bg-blue-600 text-white py-2 px-4 rounded-md text-md font-medium hover:bg-blue-700 cursor-pointer"
+                  >
+                    View Details
+                  </button>
+                  <button
+                    className="border border-blue-600 text-blue-600 py-2 px-4 rounded-md text-md font-medium hover:bg-blue-50 cursor-pointer"
+                    onClick={() => {
+                      navigate("/employer/ChatWithApplicants")
+                      window.location.reload();
+                    }}
+                  >
+                    Message
+                  </button>
                 </div>
-              </div>
 
-              {/* Applications & Status */}
-              <div className="flex justify-between items-center mb-4">
-                <div className="text-md text-gray-600 mb-1">
-                  {project.applications} Applications
-                </div>
-                <div
-                  className={`text-sm font-medium mt-1 mb-1 pt-1 pb-1 pr-2 pl-2 bg-blue-100 rounded-full  ${getStatusClass(
-                    project.status
-                  )}`}
-                >
-                  {project.status}
-                </div>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="grid grid-cols-2 gap-3 mb-4">
-              <button className="bg-blue-600 text-white py-2 px-4 rounded-md text-md font-medium hover:bg-blue-700 cursor-pointer"
-                 onClick={()=> navigate("/employer/freelanceProject")}
-                 >  View Details
-                 </button>
-                 <button className="border border-blue-600 text-blue-600 py-2 px-4 rounded-md text-md font-medium hover:bg-blue-50 cursor-pointer"
-                 onClick={()=> navigate("/employer/ChatWithApplicants")}
-                 
-                 >  Message
-                 </button>
-              </div>
-
-
-
-              {/* Footer Actions */}
-              <div className="grid grid-cols-2 gap-3 mb-4">
-                <button className="flex items-center justify-around bg-green-600 text-white py-2 px-4 rounded-md text-md font-medium hover:bg-green-700">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <Check className="h-4 w-4 mr-1" />
+                {/* Footer Actions */}
+                <div className="grid grid-cols-2 gap-3 mb-4">
+                  <button className="flex items-center justify-around bg-green-600 text-white py-2 px-4 rounded-md text-md font-medium hover:bg-green-700">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <Check className="h-4 w-4 mr-1" />
+                      </div>
+                      <div>Hire</div>
                     </div>
-                    <div>Hire</div>
-                  </div>
-                </button>
-                <button className="flex items-center justify-around border border-gray-600 text-gray-600 py-2 px-4 rounded-md text-md font-medium hover:bg-gray-50">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <Copy className="h-4 w-4 mr-1" />
+                  </button>
+                  <button className="flex items-center justify-around border border-gray-600 text-gray-600 py-2 px-4 rounded-md text-md font-medium hover:bg-gray-50">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <Copy className="h-4 w-4 mr-1" />
+                      </div>
+                      <div>Clone</div>
                     </div>
-                    <div>Clone</div>
-                  </div>
-                </button>
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Toggle Button */}
-      {filteredProjects.length > 6 && (
-        <div className="flex justify-center mt-6 mb-10">
-          <button
-            onClick={handleToggle}
-            className="text-blue-600 border border-blue-600 px-5 py-2 rounded-md hover:bg-blue-50"
-          >
-            {showAll ? "Show Less" : "Show More"}
-          </button>
+          ))}
         </div>
-      )}
-    </>
+
+        {/* Toggle Button */}
+        {filteredProjects.length > 6 && (
+          <div className="flex justify-center mt-6 mb-10">
+            <button
+              onClick={handleToggle}
+              className="text-blue-600 border border-blue-600 px-5 py-2 rounded-md hover:bg-blue-50"
+            >
+              {showAll ? "Show Less" : "Show More"}
+            </button>
+          </div>
+        )}
+      </>
     </div>
   );
 };

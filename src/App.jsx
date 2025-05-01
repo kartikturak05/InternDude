@@ -91,7 +91,6 @@ function App() {
 
             <Route path="/employer/PostOpportunity/PostNewFreelance" element={<PostFreelanceProject/>} />
             <Route path="/employer/PostOpportunity/PreviewFreelancePosted" element={<PreviewFreelancePosted/>} />
-            
             <Route path="/employer/ChatWithApplicants" element={<ChatWithApplicants/>} />
 
             <Route path="/employer/ViewApplicantsProfile" element={<ApplicantProfile/>} />
