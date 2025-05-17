@@ -175,13 +175,15 @@ const JobCard = ({ application }) => {
       </div>
 
       <div className="flex gap-2 mt-auto">
-        <button className="flex items-center justify-center text-blue-600 border border-blue-600 px-4 py-2 rounded-md hover:bg-blue-50 w-1/2"
+        <button className="flex items-center justify-center text-blue-600 border border-blue-600 px-4 py-2 rounded-md hover:bg-blue-50 w-1/2 cursor-pointer"
         onClick={()=> navigate("/InternshipDetails")}
         >
           <FiEye className="mr-2" />
           View
         </button>
-        <button className="flex items-center justify-center bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 w-1/2">
+        <button className="flex items-center justify-center bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 w-1/2 cursor-pointer"
+        onClick={()=> navigate("/employer/ChatWithApplicants")}
+        >
           <FiMessageSquare className="mr-2" />
           Message
         </button>

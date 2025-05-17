@@ -17,6 +17,7 @@ import { useNavigate } from "react-router-dom";
 const PostNewInternship = () => {
 
     const navigate = useNavigate();
+    const [isRemote, setIsRemote] = useState(false);
 
   // State management for form data
   const [formData, setFormData] = useState({
@@ -232,6 +233,7 @@ const PostNewInternship = () => {
                   onChange={handleChange}
                   placeholder="Enter location"
                   className="w-full border border-gray-300 rounded p-2 pl-10 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  disabled={formData.workMode === "Remote"}
                 />
               </div>
             </div>
@@ -259,7 +261,7 @@ const PostNewInternship = () => {
               </div>
               <div className="w-1/2">
                 <label className="block text-lg font-medium text-gray-900 mb-1">
-                  Duration
+                  Duration (in months)
                 </label>
                 <select
                   name="duration"

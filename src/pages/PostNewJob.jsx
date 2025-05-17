@@ -14,6 +14,7 @@ import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
 
 const PostNewJob = () => {
+  const [isLocation, setIsLocation] = useState(false);
 
   const navigate = useNavigate();
 
@@ -97,6 +98,7 @@ const PostNewJob = () => {
                       id="remote"
                       name="workMode"
                       className="mr-2"
+                      onClick={() => setIsLocation(true)}
                     />
                     <label htmlFor="remote" className="text-md text-gray-700">
                       Remote
@@ -108,6 +110,7 @@ const PostNewJob = () => {
                       id="onsite"
                       name="workMode"
                       className="mr-2"
+                      onClick={() => setIsLocation(false)}
                     />
                     <label htmlFor="onsite" className="text-md text-gray-700">
                       On-site
@@ -119,6 +122,7 @@ const PostNewJob = () => {
                       id="hybrid"
                       name="workMode"
                       className="mr-2"
+                      onClick={() => setIsLocation(false)}
                     />
                     <label htmlFor="hybrid" className="text-md text-gray-700">
                       Hybrid
@@ -141,6 +145,7 @@ const PostNewJob = () => {
                     type="text"
                     placeholder="Enter location"
                     className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    disabled={isLocation}
                   />
                 </div>
               </div>
@@ -153,8 +158,7 @@ const PostNewJob = () => {
                     <BsCalendar className="text-gray-400" />
                   </div>
                   <input
-                    type="text"
-                    placeholder="Select date"
+                    type="date"
                     className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                 </div>
@@ -420,7 +424,7 @@ const PostNewJob = () => {
                     className="mt-4 w-32 h-32 object-contain border rounded-md"
                   />
                 ) : (
-                    <label className="border border-dashed border-gray-300 rounded-md p-6 flex flex-col items-center justify-center cursor-pointer hover:border-blue-400 transition">
+                  <label className="border border-dashed border-gray-300 rounded-md p-6 flex flex-col items-center justify-center cursor-pointer hover:border-blue-400 transition">
                     <AiOutlineUpload className="text-gray-400 text-3xl mb-2" />
                     <span className="text-blue-600 hover:text-blue-800 font-medium">
                       Upload Logo
@@ -428,7 +432,7 @@ const PostNewJob = () => {
                     <p className="text-xs text-gray-500 mt-1">
                       Supported formats: JPG, PNG
                     </p>
-  
+
                     {/* Hidden file input */}
                     <input
                       type="file"
@@ -439,10 +443,7 @@ const PostNewJob = () => {
                   </label>
                 )}
 
-               
-
                 {/* Show Preview if selected */}
-                
               </div>
 
               {/* Textarea Section */}
@@ -485,8 +486,11 @@ const PostNewJob = () => {
               <FaChevronLeft className="mr-2" />
               Back
             </button>
-            <button className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer"
-            onClick={()=> navigate('/employer/PostOpportunity/PreviewJobPosted')}
+            <button
+              className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer"
+              onClick={() =>
+                navigate("/employer/PostOpportunity/PreviewJobPosted")
+              }
             >
               Preview Job
             </button>

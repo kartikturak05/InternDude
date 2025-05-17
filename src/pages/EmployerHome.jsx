@@ -38,6 +38,13 @@ import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import {
+  FaEnvelope,
+  FaLink,
+  FaFileAlt,
+  FaRegCalendarAlt,
+} from "react-icons/fa";
+import { ExternalLink, Mail, FileCheck, Calendar, X } from "lucide-react";
 
 const EmployeeNavigator = ({ showContent, setShowContent }) => {
   return (
@@ -256,7 +263,7 @@ const DashBoard = () => {
                 <h2 className="text-xl font-bold text-gray-800">
                   Active Job Postings
                 </h2>
-                {/* <button className="bg-blue-500 text-white px-4 py-2 rounded-md text-sm hover:bg-blue-600 transition">
+                {/* <button className="bg-blue-500 text-white px-4 py-2 rounded-md text-md hover:bg-blue-600 transition">
                   + New Job
                 </button> */}
               </div>
@@ -327,7 +334,7 @@ const DashBoard = () => {
                 <h2 className="text-xl font-semibold text-gray-800">
                   Recent Applications
                 </h2>
-                {/* <button className="text-blue-500 hover:text-blue-600 text-sm font-medium">
+                {/* <button className="text-blue-500 hover:text-blue-600 text-md font-medium">
                   View All
                 </button> */}
               </div>
@@ -376,7 +383,7 @@ const DashBoard = () => {
                 <h2 className="text-xl font-semibold text-gray-800">
                   Upcoming Interviews
                 </h2>
-                <button className="text-blue-500 hover:text-blue-600 text-sm font-medium">
+                <button className="text-blue-500 hover:text-blue-600 text-md font-medium">
                   Schedule
                 </button>
               </div>
@@ -672,7 +679,7 @@ const Jobs = () => {
                   <td className="py-4 px-3">{job.applications} Applicants</td>
                   <td className="py-4 px-3">
                     <span
-                      className={`rounded-full px-3 py-1 text-sm font-medium ${
+                      className={`rounded-full px-3 py-1 text-md font-medium ${
                         job.status === "Active"
                           ? "bg-green-100 text-green-800"
                           : job.status === "Under Review"
@@ -924,14 +931,364 @@ const allApplications = [
 const Applications = () => {
   const navigate = useNavigate();
 
- 
-
   const [search, setSearch] = useState("");
   const [filters, setFilters] = useState({
     position: "",
     status: "",
     date: "",
   });
+
+  // CandidateProfileCard component defined inline
+  const CandidateProfileCard = ({
+    name = "Sarah Johnson",
+    email = "sarah.johnson@email.com",
+    position = "Frontend Developer Intern",
+    department = "Engineering",
+    applicationDate = "Jan 15, 2024",
+    status = "New",
+    education = {
+      degree: "Bachelor of Computer Science",
+      school: "University of Technology",
+      graduationYear: "2024",
+    },
+    experience = {
+      company: "Tech Solutions Inc.",
+      role: "Web Development Intern",
+      duration: "3 months",
+    },
+    skills = ["React", "TypeScript", "UI/UX", "HTML/CSS"],
+    portfolioUrl = "www.sarahportfolio.com",
+    coverLetter = "I am excited to apply for the Frontend Developer Intern position. With my strong foundation in React and TypeScript, combined with my passion for creating intuitive user interfaces, I believe I would be a valuable addition to your team...",
+  }) => {
+    const [expanded, setExpanded] = useState(false);
+
+    // Generate appropriate background color for each skill
+    const getSkillColor = (skill) => {
+      const skillColors = {
+        React: "bg-blue-100 text-blue-700",
+        TypeScript: "bg-blue-50 text-blue-600",
+        "UI/UX": "bg-purple-100 text-purple-700",
+        "HTML/CSS": "bg-orange-100 text-orange-700",
+        JavaScript: "bg-yellow-100 text-yellow-700",
+        "Node.js": "bg-green-100 text-green-700",
+        Python: "bg-cyan-100 text-cyan-700",
+        Java: "bg-red-100 text-red-700",
+        MongoDB: "bg-green-100 text-green-700",
+        Express: "bg-gray-100 text-gray-700",
+        Figma: "bg-purple-100 text-purple-700",
+        "Adobe XD": "bg-pink-100 text-pink-700",
+        Sketch: "bg-blue-100 text-blue-700",
+        PostgreSQL: "bg-blue-100 text-blue-700",
+        R: "bg-blue-100 text-blue-700",
+        "Machine Learning": "bg-yellow-100 text-yellow-700",
+        SQL: "bg-orange-100 text-orange-700",
+        AWS: "bg-orange-100 text-orange-700",
+        Docker: "bg-blue-100 text-blue-700",
+        Kubernetes: "bg-blue-100 text-blue-700",
+        "CI/CD": "bg-gray-100 text-gray-700",
+      };
+
+      return skillColors[skill] || "bg-gray-100 text-gray-700";
+    };
+
+    // Generate background color for status
+    const getStatusColor = (status) => {
+      const statusColors = {
+        New: "bg-blue-100 text-blue-700",
+        Reviewing: "bg-yellow-100 text-yellow-700",
+        Reviewed: "bg-yellow-100 text-yellow-700",
+        Interviewed: "bg-purple-100 text-purple-700",
+        Rejected: "bg-red-100 text-red-700",
+        Accepted: "bg-green-100 text-green-700",
+        Shortlisted: "bg-green-100 text-green-700",
+      };
+
+      return statusColors[status] || "bg-gray-100 text-gray-700";
+    };
+
+    return (
+      <div className="w-full border rounded-lg shadow-sm bg-white p-6">
+        <div className="flex items-start justify-between mb-6">
+          {/* Left: Candidate avatar and info */}
+          <div className="flex items-center">
+            <div className="h-12 w-12 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden mr-4">
+              {/* If there's an avatar prop, use it. Otherwise show initials */}
+              <span className="text-gray-600 font-medium text-lg">
+                {name
+                  .split(" ")
+                  .map((n) => n[0])
+                  .join("")}
+              </span>
+            </div>
+            <div>
+              <h2 className="text-lg font-semibold text-gray-900">{name}</h2>
+              <p className="text-gray-500 text-md">{email}</p>
+            </div>
+          </div>
+
+
+         
+
+          {/* Right: Position and Date */}
+          <div className="text-right">
+            <div className="flex items-center justify-end">
+              <p className="font-medium text-gray-800">{position}</p>
+              <span className="mx-2 text-gray-400">•</span>
+              <p className="text-gray-500">{department}</p>
+            </div>
+            <div className="flex items-center mt-1 justify-end">
+              <p className="text-md text-gray-500">{applicationDate}</p>
+              <span
+                className={`ml-2 px-2 py-1 text-xs rounded-full font-medium ${getStatusColor(
+                  status
+                )}`}
+              >
+                {status}
+              </span>
+            </div>
+          </div>
+        </div>
+
+         <div className="mt-6 flex gap-3 flex-wrap mb-6 justify-end">
+            <button className="flex items-center text-blue-600 hover:text-blue-800 border border-blue-600 rounded-md px-3 py-1 text-md">
+              <Mail size={16} className="mr-1" /> Message
+            </button>
+            <button className="flex items-center text-gray-600 hover:text-gray-800 border border-gray-300 rounded-md px-3 py-1 text-md">
+              <FileText size={16} className="mr-1" /> View Resume
+            </button>
+            <button className="flex items-center text-gray-600 hover:text-gray-800 border border-gray-300 rounded-md px-3 py-1 text-md">
+              <FileCheck size={16} className="mr-1" /> Notes
+            </button>
+            <button className="flex items-center text-green-600 hover:text-green-800 border border-green-300 rounded-md px-3 py-1 text-md">
+              <Calendar size={16} className="mr-1" /> Schedule Interview
+            </button>
+            {/* <div className="flex-grow"></div> */}
+            <button className="flex items-center text-red-600 hover:text-red-800 border border-red-300 rounded-md px-3 py-1 text-md">
+              <X size={16} className="mr-1" /> Reject
+            </button>
+            <button className="flex items-center text-green-600 hover:text-green-800 border border-green-300 rounded-md px-3 py-1 text-md">
+              <Check size={16} className="mr-1" /> Shortlist
+            </button>
+          </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Left column */}
+          <div>
+            <h3 className="text-md font-medium text-gray-500 mb-2">
+              Education
+            </h3>
+            <p className="font-medium text-gray-800">{education.degree}</p>
+            <p className="text-md text-gray-600">
+              {education.school} • Class of {education.graduationYear}
+            </p>
+
+            <h3 className="text-md font-medium text-gray-500 mt-6 mb-2">
+              Skills
+            </h3>
+            <div className="flex flex-wrap gap-2">
+              {skills.map((skill, index) => (
+                <span
+                  key={index}
+                  className={`px-3 py-1 text-md rounded-full ${getSkillColor(
+                    skill
+                  )}`}
+                >
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Right column */}
+          <div>
+            <h3 className="text-md font-medium text-gray-500 mb-2">
+              Experience
+            </h3>
+            <p className="font-medium text-gray-800">{experience.company}</p>
+            <p className="text-md text-gray-600">
+              {experience.role} • {experience.duration}
+            </p>
+
+            <h3 className="text-md font-medium text-gray-500 mt-6 mb-2">
+              Portfolio
+            </h3>
+            <a
+              href={`https://${portfolioUrl}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center text-blue-600 hover:text-blue-800 text-md"
+            >
+              <ExternalLink size={16} className="mr-1" />
+              {portfolioUrl}
+            </a>
+          </div>
+        </div>
+
+        <div className="mt-6">
+          <h3 className="text-md font-medium text-gray-500 mb-2">
+            Cover Letter
+          </h3>
+          <p className="text-gray-700 text-md">
+            {expanded
+              ? coverLetter
+              : `${coverLetter.substring(0, 150)}${
+                  coverLetter.length > 150 ? "..." : ""
+                }`}
+          </p>
+          {coverLetter.length > 150 && (
+            <button
+              onClick={() => setExpanded(!expanded)}
+              className="text-blue-600 hover:text-blue-800 text-md mt-1"
+            >
+              {expanded ? "Read Less" : "Read More"}
+            </button>
+          )}
+        </div>
+      </div>
+    );
+  };
+
+  // Sample application data
+  const allApplications = [
+    {
+      id: 1,
+      name: "Sarah Johnson",
+      email: "sarah.johnson@email.com",
+      position: "Frontend Developer Intern",
+      department: "Engineering",
+      dateApplied: "2024-01-15",
+      status: "New",
+      education: {
+        degree: "Bachelor of Computer Science",
+        school: "University of Technology",
+        graduationYear: "2024",
+      },
+      experience: {
+        company: "Tech Solutions Inc.",
+        role: "Web Development Intern",
+        duration: "3 months",
+      },
+      skills: ["React", "TypeScript", "UI/UX", "HTML/CSS"],
+      portfolioUrl: "www.sarahportfolio.com",
+      coverLetter:
+        "I am excited to apply for the Frontend Developer Intern position. With my strong foundation in React and TypeScript, combined with my passion for creating intuitive user interfaces, I believe I would be a valuable addition to your team...",
+    },
+    {
+      id: 2,
+      name: "Michael Chen",
+      email: "michael.chen@email.com",
+      position: "Backend Developer",
+      department: "Engineering",
+      dateApplied: "2024-01-20",
+      status: "Reviewed",
+      education: {
+        degree: "Master of Computer Science",
+        school: "State University",
+        graduationYear: "2023",
+      },
+      experience: {
+        company: "DataCore Systems",
+        role: "Software Engineer Intern",
+        duration: "6 months",
+      },
+      skills: ["Node.js", "Python", "MongoDB", "Express"],
+      portfolioUrl: "www.michaelchendev.com",
+      coverLetter:
+        "As a recent graduate with a Master's in Computer Science and hands-on experience with Node.js and Python, I am well-equipped to contribute to your Backend Developer position. My previous internship at DataCore Systems has given me practical experience in developing RESTful APIs and working with database systems.",
+    },
+    {
+      id: 3,
+      name: "Emma Rodriguez",
+      email: "emma.r@email.com",
+      position: "UX/UI Designer",
+      department: "Design",
+      dateApplied: "2024-01-25",
+      status: "Shortlisted",
+      education: {
+        degree: "Bachelor of Design",
+        school: "Creative Arts Institute",
+        graduationYear: "2022",
+      },
+      experience: {
+        company: "VisualWorks Agency",
+        role: "Junior Designer",
+        duration: "1 year",
+      },
+      skills: ["Figma", "UI/UX", "Adobe XD", "Sketch"],
+      portfolioUrl: "www.emmarodriguez.design",
+      coverLetter:
+        "With my background in UX/UI design and one year of professional experience at VisualWorks Agency, I would love to bring my creative vision and user-centered design approach to your team. I specialize in creating intuitive interfaces that balance aesthetic appeal with functional design principles.",
+    },
+    {
+      id: 4,
+      name: "Jason Park",
+      email: "j.park@email.com",
+      position: "Full Stack Developer",
+      department: "Engineering",
+      dateApplied: "2024-01-10",
+      status: "New",
+      education: {
+        degree: "Bachelor of Software Engineering",
+        school: "Tech Institute",
+        graduationYear: "2023",
+      },
+      experience: {
+        company: "StartupLabs",
+        role: "Junior Developer",
+        duration: "8 months",
+      },
+      skills: ["React", "Node.js", "PostgreSQL", "TypeScript"],
+      portfolioUrl: "www.jasonpark.dev",
+      coverLetter:
+        "Having worked as a Junior Developer at StartupLabs, I've gained valuable experience across the full development stack. I'm passionate about building end-to-end solutions and am excited about the possibility of bringing my skills in React, Node.js, and database management to your team. I thrive in collaborative environments and am always eager to learn new technologies.",
+    },
+    {
+      id: 5,
+      name: "Priya Sharma",
+      email: "priya.s@email.com",
+      position: "Data Scientist",
+      department: "Analytics",
+      dateApplied: "2024-01-22",
+      status: "Reviewed",
+      education: {
+        degree: "Master of Data Science",
+        school: "Global Tech University",
+        graduationYear: "2023",
+      },
+      experience: {
+        company: "DataViz Analytics",
+        role: "Data Analyst",
+        duration: "1 year 2 months",
+      },
+      skills: ["Python", "R", "Machine Learning", "SQL"],
+      portfolioUrl: "www.priyasharma.io",
+      coverLetter:
+        "With my strong background in data science and analytics, I am excited to contribute to your team's data-driven initiatives. My experience at DataViz Analytics has equipped me with the skills to extract meaningful insights from complex datasets and translate them into actionable business strategies.",
+    },
+    {
+      id: 6,
+      name: "David Wilson",
+      email: "d.wilson@email.com",
+      position: "DevOps Engineer",
+      department: "Infrastructure",
+      dateApplied: "2024-01-18",
+      status: "Shortlisted",
+      education: {
+        degree: "Bachelor of Engineering",
+        school: "Tech College",
+        graduationYear: "2021",
+      },
+      experience: {
+        company: "CloudSystems Inc.",
+        role: "System Administrator",
+        duration: "2 years",
+      },
+      skills: ["AWS", "Docker", "Kubernetes", "CI/CD"],
+      portfolioUrl: "www.davidwilsontech.com",
+      coverLetter:
+        "As a DevOps Engineer with 2 years of experience in cloud infrastructure and CI/CD pipelines, I am passionate about optimizing development workflows and ensuring system reliability. My background in CloudSystems Inc. has given me hands-on experience with containerization and orchestration technologies that I'm eager to bring to your team.",
+    },
+  ];
 
   const filteredApplications = allApplications
     .filter((app) => {
@@ -963,7 +1320,15 @@ const Applications = () => {
   return (
     <div className="p-10 w-full mx-auto">
       {/* Header and User Info */}
-      {/* ... same as your original ... */}
+      <div className="flex justify-between items-center mb-8">
+        <h1 className="text-2xl font-bold text-gray-900">Applications</h1>
+        <button
+          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md"
+          onClick={() => navigate("/post-job")}
+        >
+          Post New Job
+        </button>
+      </div>
 
       {/* Filters */}
       <div className="flex flex-wrap gap-4 mb-6">
@@ -1037,138 +1402,76 @@ const Applications = () => {
         </div>
       </div>
 
-      {/* Selection controls */}
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-4">
-          <div className="flex items-center">
-            <input type="checkbox" id="selectAll" className="mr-2" />
-            <label htmlFor="selectAll" className="text-sm">
-              Select All
-            </label>
+      {/* Applications count and showing info */}
+      <div className="flex justify-between items-center mb-4">
+        <p className="text-gray-600">
+          Showing {filteredApplications.length} of {allApplications.length}{" "}
+          applications
+        </p>
+        <div className="flex items-center space-x-2">
+          <span className="text-gray-600">Sort by:</span>
+          <select className="border border-gray-300 rounded-md px-2 py-1 text-md">
+            <option>Most Recent</option>
+            <option>Oldest First</option>
+            <option>Name (A-Z)</option>
+          </select>
+        </div>
+      </div>
+
+      {/* Application Cards */}
+      <div className="space-y-6">
+        {filteredApplications.map((application) => (
+          <div key={application.id} className="mb-6">
+            <CandidateProfileCard
+              name={application.name}
+              email={application.email}
+              position={application.position}
+              department={application.department}
+              applicationDate={new Date(
+                application.dateApplied
+              ).toLocaleDateString("en-US", {
+                month: "short",
+                day: "numeric",
+                year: "numeric",
+              })}
+              status={application.status}
+              education={application.education}
+              experience={application.experience}
+              skills={application.skills}
+              portfolioUrl={application.portfolioUrl}
+              coverLetter={application.coverLetter}
+            />
           </div>
-          <span className="text-sm text-gray-500">Selected: 0 items</span>
-        </div>
+        ))}
 
-        <div className="flex gap-2">
-          <button className="bg-green-500 text-white px-4 py-2 rounded-md text-sm">
-            Shortlist Selected
-          </button>
-          <button className="bg-red-500 text-white px-4 py-2 rounded-md text-sm">
-            Reject Selected
-          </button>
-          <button
-            className="bg-blue-500 text-white px-4 py-2 rounded-md text-sm cursor-pointer"
-            onClick={() => navigate("/employer/ChatWithApplicants")}
-          >
-            Message Selected
-          </button>
-        </div>
+        {filteredApplications.length === 0 && (
+          <div className="text-center py-10 bg-gray-50 rounded-lg">
+            <p className="text-gray-500">
+              No applications match your search criteria.
+            </p>
+          </div>
+        )}
       </div>
 
-      {/* Table */}
-      <div className="border rounded-md overflow-hidden">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
-            <tr>
-              <th scope="col" className="w-12 py-3 px-4">
-                <input type="checkbox" />
-              </th>
-              <th
-                scope="col"
-                className="py-3 px-4 text-left text-sm font-medium text-gray-500"
-              >
-                Candidate
-              </th>
-              <th
-                scope="col"
-                className="py-3 px-4 text-left text-sm font-medium text-gray-500"
-              >
-                Applied For
-              </th>
-              <th
-                scope="col"
-                className="py-3 px-4 text-left text-sm font-medium text-gray-500"
-              >
-                Date Applied
-              </th>
-              <th
-                scope="col"
-                className="py-3 px-4 text-left text-sm font-medium text-gray-500"
-              >
-                Status
-              </th>
-              <th
-                scope="col"
-                className="py-3 px-4 text-left text-sm font-medium text-gray-500"
-              >
-                Actions
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {filteredApplications.map((application) => (
-              <tr key={application.id}>
-                <td className="py-4 px-4">
-                  <input type="checkbox" />
-                </td>
-                <td className="py-4 px-4">
-                  <div className="flex items-center">
-                    <div className="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center mr-3">
-                      <img
-                        src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        alt=""
-                        className="rounded-full"
-                      />
-                    </div>
-                    <div>
-                      <div className="font-medium">{application.name}</div>
-                      <div className="text-sm text-gray-500">
-                        {application.email}
-                      </div>
-                    </div>
-                  </div>
-                </td>
-                <td className="py-4 px-4">
-                  <div className="font-medium">{application.position}</div>
-                  <div className="text-sm text-gray-500">
-                    {application.department}
-                  </div>
-                </td>
-                <td className="py-4 px-4">
-                  <div>{application.dateApplied}</div>
-                  <div className="text-sm text-gray-500">
-                    {application.timeApplied}
-                  </div>
-                </td>
-                <td className="py-4 px-4">
-                  <span className={getStatusClass(application.status)}>
-                    {application.status}
-                  </span>
-                </td>
-                <td className="py-4 px-0">
-                  <div className="flex gap-6">
-                    <button className="p-1 text-gray-400 hover:text-gray-600">
-                      <FileText size={18} />
-                    </button>
-                    <button
-                      className="p-1 text-gray-400 hover:text-gray-600 cursor-pointer"
-                      onClick={() => navigate("/employer/ChatWithApplicants")}
-                    >
-                      <MessageCircle size={18} />
-                    </button>
-                    <button className="p-1 text-gray-400 hover:text-green-600">
-                      <CheckCircle size={18} />
-                    </button>
-                    <button className="p-1 text-gray-400 hover:text-red-600">
-                      <XCircle size={18} />
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      {/* Pagination controls */}
+      {allApplications.length > 4 && (
+        <div className="flex justify-center mt-8">
+          <nav className="flex items-center space-x-2">
+            <button className="px-3 py-1 border border-gray-300 rounded-md disabled:opacity-50">
+              Previous
+            </button>
+            <button className="px-3 py-1 bg-blue-600 text-white rounded-md">
+              1
+            </button>
+            <button className="px-3 py-1 border border-gray-300 rounded-md">
+              2
+            </button>
+            <button className="px-3 py-1 border border-gray-300 rounded-md">
+              Next
+            </button>
+          </nav>
+        </div>
+      )}
     </div>
   );
 };
@@ -1830,7 +2133,7 @@ const FreelanceProjects = () => {
             <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
           </svg>
         ))}
-        <span className="ml-1 text-sm text-gray-600">{rating}</span>
+        <span className="ml-1 text-md text-gray-600">{rating}</span>
       </div>
     );
   };
@@ -2019,7 +2322,7 @@ const FreelanceProjects = () => {
       {/* View Toggle */}
       <div className="flex justify-end mb-6 pl-5 pr-15">
         <div className="inline-flex rounded-md shadow-sm">
-          <button className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-l-md">
+          <button className="px-4 py-2 text-md font-medium text-white bg-blue-600 rounded-l-md">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -2036,7 +2339,7 @@ const FreelanceProjects = () => {
             </svg>
             Grid
           </button>
-          <button className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border-t border-b border-r border-gray-300 rounded-r-md">
+          <button className="px-4 py-2 text-md font-medium text-gray-700 bg-white border-t border-b border-r border-gray-300 rounded-r-md">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -2122,7 +2425,7 @@ const FreelanceProjects = () => {
                     {project.applications} Applications
                   </div>
                   <div
-                    className={`text-sm font-medium mt-1 mb-1 pt-1 pb-1 pr-2 pl-2 bg-blue-100 rounded-full  ${getStatusClass(
+                    className={`text-md font-medium mt-1 mb-1 pt-1 pb-1 pr-2 pl-2 bg-blue-100 rounded-full  ${getStatusClass(
                       project.status
                     )}`}
                   >
@@ -2134,8 +2437,9 @@ const FreelanceProjects = () => {
                 <div className="grid grid-cols-2 gap-3 mb-4">
                   <button
                     onClick={() => {
-                      navigate("/employer/freelanceProject")
-                      window.location.reload();}}
+                      navigate("/employer/freelanceProject");
+                      window.location.reload();
+                    }}
                     className="bg-blue-600 text-white py-2 px-4 rounded-md text-md font-medium hover:bg-blue-700 cursor-pointer"
                   >
                     View Details
@@ -2143,7 +2447,7 @@ const FreelanceProjects = () => {
                   <button
                     className="border border-blue-600 text-blue-600 py-2 px-4 rounded-md text-md font-medium hover:bg-blue-50 cursor-pointer"
                     onClick={() => {
-                      navigate("/employer/ChatWithApplicants")
+                      navigate("/employer/ChatWithApplicants");
                       window.location.reload();
                     }}
                   >
