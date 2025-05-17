@@ -20,6 +20,7 @@ const Navbar = ({ setShowOptions, showOptions }) => {
     "My Applications",
     "Post New Gig",
     "Edit Resume",
+    "My Bookmarks",
     "Help Center",
     "More",
   ];
@@ -51,6 +52,8 @@ const Navbar = ({ setShowOptions, showOptions }) => {
       navigate("/helpcenter");
     } else if (selectedOpt === "More") {
       navigate("/more");
+    }else if (selectedOpt === "My Bookmarks") {
+      navigate("/MyBookmarks");
     }
   }, [selectedOpt]);
   // to check if user is already login or not

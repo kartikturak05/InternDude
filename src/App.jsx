@@ -32,6 +32,7 @@ import PaymentOptions from "./pages/PaymentOptions";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import InterviewSchedule from "./pages/InternviewSchedule";
 import InterviewScheduleSuccessful from "./pages/InterviewScheduleSuccessfull";
+import MyBookmarks from "./pages/MyBookmarks";
 
 function App() {
   const [showOptions, setShowOptions] = useState("");
@@ -78,6 +79,9 @@ function App() {
             <Route path="/myapplications" element={<MyApplication/>} />
             <Route path="/myapplications" element={<MyApplication/>} />
             <Route path="/editresume" element={<CreateResume/>} />
+            <Route path="/MyBookmarks" element={<MyBookmarks/>} />
+
+
             <Route path="/employer" element={<EmployerHome/>} />
             <Route path="/employer/freelanceProject" element={<FreelanceProjectDescription/>} />
             <Route path="/employer/PostOpportunity" element={<PostOpportunity/>} />

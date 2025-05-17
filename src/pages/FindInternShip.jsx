@@ -24,6 +24,8 @@ import ReviewsAndRatings from "../components/ReviewsAndRatings";
 import JobNotification from "../components/JobNotification";
 import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
+import {  IoBookmarkOutline, IoBookmark } from "react-icons/io5";
+
 
 const AdvancedFilter = ({ onApplyFilters }) => {
   const [filters, setFilters] = useState({
@@ -193,9 +195,16 @@ const InternshipCard = ({
   isEasyApply,
 }) => {
   const navigate = useNavigate();
+  const [isBookmarked, setIsBookmarked] = useState(false);
+
+  const toggleBookmark = () => {
+    setIsBookmarked(!isBookmarked);
+  };
+
   return (
-    <div className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition mb-4 border-l-4 border-blue-600 cursor-pointer"
-    onClick={()=> navigate("/InternshipDetails")}
+    <div
+      className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition mb-4 border-l-4 border-blue-600 cursor-pointer"
+      onClick={() => navigate("/InternshipDetails")}
     >
       <div className="flex justify-between items-start pl-10">
         <div className="space-y-2">
@@ -217,21 +226,22 @@ const InternshipCard = ({
             </div>
           </div>
 
-          {/* {isEasyApply && (
-            <div className="flex items-center text-green-600 text-sm font-medium mt-1">
-              <IoCheckmarkCircle className="mr-1" />
-              Easy Apply
-            </div>
-          )} */}
           <button className="mt-4 bg-blue-600 text-white px-4 py-1.5 rounded-md text-sm hover:bg-blue-700 transition">
             Apply Now
           </button>
         </div>
 
         <div className="flex flex-col items-end">
-          <span className="text-sm font-medium text-orange-600">
-            {daysLeft} days left
-          </span>
+          <span className="text-sm font-medium text-orange-600">{daysLeft} days left</span>
+          <div
+            className="mt-4 text-2xl cursor-pointer"
+            onClick={(e) => {
+              e.stopPropagation();
+              toggleBookmark();
+            }}
+          >
+            {isBookmarked ? <IoBookmark className="text-blue-600" /> : <IoBookmarkOutline className="text-gray-600" />}
+          </div>
         </div>
       </div>
     </div>
