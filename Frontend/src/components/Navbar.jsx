@@ -117,6 +117,7 @@ const Navbar = ({ setShowOptions, showOptions }) => {
                 <div
                   className="pl-8 pr-8 pt-1 pb-1 bg-blue-800 text-white font-bold rounded-sm text-base cursor-pointer"
                   onClick={() => {
+                    localStorage.removeItem("token");
                     auth.signOut();
                     toast.success("User logged out successfully");
                   }}

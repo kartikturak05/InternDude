@@ -1,8 +1,8 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import Home from "./pages/Home";
 import { Route, Routes } from "react-router-dom";
 // import SignUp from "./components/SignUp";
-import SignUp from './pages/SignUp';
+import SignUp from "./pages/SignUp";
 import Navbar from "./components/Navbar";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -33,6 +33,7 @@ import PaymentSuccess from "./pages/PaymentSuccess";
 import InterviewSchedule from "./pages/InternviewSchedule";
 import InterviewScheduleSuccessful from "./pages/InterviewScheduleSuccessfull";
 import MyBookmarks from "./pages/MyBookmarks";
+import PrivateRoute from "./pages/PrivateRoute";
 
 function App() {
   const [showOptions, setShowOptions] = useState("");
@@ -41,71 +42,127 @@ function App() {
   useEffect(() => {
     // Function to check screen width
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 600);  // 600px breakpoint for mobile
+      setIsMobile(window.innerWidth < 600); // 600px breakpoint for mobile
     };
 
     // Initial check on mount
     handleResize();
 
     // Add event listener for window resize
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     // Cleanup event listener on unmount
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
-  }, []);  // Empty dependency array to run only once when the component mounts
+  }, []); // Empty dependency array to run only once when the component mounts
 
   return (
     <>
       <div onClick={() => setShowOptions("")} className="relative">
-      {isMobile ? <Mob /> :  <Navbar setShowOptions={setShowOptions} showOptions={showOptions} />}
-       
-        
+        {isMobile ? (
+          <Mob />
+        ) : (
+          <Navbar setShowOptions={setShowOptions} showOptions={showOptions} />
+        )}
+
         {/* Apply blur effect when showOptions is truthy */}
-        <div className={`transition-all duration-300 ${showOptions ? "blur-xs pointer-events-none" : ""}`}>
+        <div
+          className={`transition-all duration-300 ${
+            showOptions ? "blur-xs pointer-events-none" : ""
+          }`}
+        >
           <Routes>
-            <Route path="/" element={<Home setShowOptions={setShowOptions}/>} />
+            {/* Public routes */}
+            <Route
+              path="/"
+              element={<Home setShowOptions={setShowOptions} />}
+            />
             {/* <Route path="/JobDescriptionn" element={<JobDescription/>} /> */}
             <Route path="/signup" element={<SignUp />} />
-            <Route path="/InternshipDetails" element={<JobDescription />} />
-            <Route path="/InternshipDetails" element={<JobDescription />} />
-            <Route path="/PostNewGig" element={<PostNewGig />} />
-            <Route path="/Internships" element={<FindInternShip />} />
-            <Route path="/Jobs" element={<FindJobs />} />
-            <Route path="/Profile" element={<ProfilePage />} />
-            <Route path="/CreateProfile" element={<CreateProfile />} />
-            <Route path="/Apply" element={<Apply/>} />
-            <Route path="/myapplications" element={<MyApplication/>} />
-            <Route path="/myapplications" element={<MyApplication/>} />
-            <Route path="/editresume" element={<CreateResume/>} />
-            <Route path="/MyBookmarks" element={<MyBookmarks/>} />
 
+            {/* Private Routes */}
+            <Route path="/" element={<PrivateRoute />}>
+              <Route path="/InternshipDetails" element={<JobDescription />} />
+              <Route path="/InternshipDetails" element={<JobDescription />} />
+              <Route path="/PostNewGig" element={<PostNewGig />} />
+              <Route path="/Internships" element={<FindInternShip />} />
+              <Route path="/Jobs" element={<FindJobs />} />
+              <Route path="/Profile" element={<ProfilePage />} />
+              <Route path="/CreateProfile" element={<CreateProfile />} />
+              <Route path="/Apply" element={<Apply />} />
+              <Route path="/myapplications" element={<MyApplication />} />
+              <Route path="/myapplications" element={<MyApplication />} />
+              <Route path="/editresume" element={<CreateResume />} />
+              <Route path="/MyBookmarks" element={<MyBookmarks />} />
 
-            <Route path="/employer" element={<EmployerHome/>} />
-            <Route path="/employer/freelanceProject" element={<FreelanceProjectDescription/>} />
-            <Route path="/employer/PostOpportunity" element={<PostOpportunity/>} />
-            <Route path="/employer/PostOpportunity/PostNewJob" element={<PostNewJob/>} />
-            <Route path="/employer/PostOpportunity/PreviewJobPosted" element={<PreviewJobPosted/>} />
-            <Route path="/employer/PostOpportunity/PreviewJobPosted/success" element={<JobPostLive/>} />
+              <Route path="/employer" element={<EmployerHome />} />
+              <Route
+                path="/employer/freelanceProject"
+                element={<FreelanceProjectDescription />}
+              />
+              <Route
+                path="/employer/PostOpportunity"
+                element={<PostOpportunity />}
+              />
+              <Route
+                path="/employer/PostOpportunity/PostNewJob"
+                element={<PostNewJob />}
+              />
+              <Route
+                path="/employer/PostOpportunity/PreviewJobPosted"
+                element={<PreviewJobPosted />}
+              />
+              <Route
+                path="/employer/PostOpportunity/PreviewJobPosted/success"
+                element={<JobPostLive />}
+              />
 
-            <Route path="/employer/PostOpportunity/PostNewInternship" element={<PostNewInternship/>} />
-            <Route path="/employer/PostOpportunity/PreviewInternship" element={<PreviewInternship/>} />
+              <Route
+                path="/employer/PostOpportunity/PostNewInternship"
+                element={<PostNewInternship />}
+              />
+              <Route
+                path="/employer/PostOpportunity/PreviewInternship"
+                element={<PreviewInternship />}
+              />
 
+              <Route
+                path="/employer/PostOpportunity/PostNewFreelance"
+                element={<PostFreelanceProject />}
+              />
+              <Route
+                path="/employer/PostOpportunity/PreviewFreelancePosted"
+                element={<PreviewFreelancePosted />}
+              />
+              <Route
+                path="/employer/ChatWithApplicants"
+                element={<ChatWithApplicants />}
+              />
 
-            <Route path="/employer/PostOpportunity/PostNewFreelance" element={<PostFreelanceProject/>} />
-            <Route path="/employer/PostOpportunity/PreviewFreelancePosted" element={<PreviewFreelancePosted/>} />
-            <Route path="/employer/ChatWithApplicants" element={<ChatWithApplicants/>} />
+              <Route
+                path="/employer/ViewApplicantsProfile"
+                element={<ApplicantProfile />}
+              />
 
-            <Route path="/employer/ViewApplicantsProfile" element={<ApplicantProfile/>} />
+              <Route
+                path="/employer/Freelance/PaymentOptions"
+                element={<PaymentOptions />}
+              />
+              <Route
+                path="/employer/Freelance/PaymentSuccess"
+                element={<PaymentSuccess />}
+              />
 
-            <Route path="/employer/Freelance/PaymentOptions" element={<PaymentOptions/>} />
-            <Route path="/employer/Freelance/PaymentSuccess" element={<PaymentSuccess/>} />
-
-
-            <Route path="/employer/InterviewSchedule" element={<InterviewSchedule/>} />
-            <Route path="/employer/InterviewScheduleSuccessful" element={<InterviewScheduleSuccessful/>} />
-
+              <Route
+                path="/employer/InterviewSchedule"
+                element={<InterviewSchedule />}
+              />
+              <Route
+                path="/employer/InterviewScheduleSuccessful"
+                element={<InterviewScheduleSuccessful />}
+              />
+            </Route>
           </Routes>
         </div>
 

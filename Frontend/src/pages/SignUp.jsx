@@ -21,6 +21,8 @@ import {
 import { app } from "../components/firebase.js";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
 
 const SignUp = () => {
   const [isSignup, setIsSignup] = useState(true);
@@ -219,8 +221,25 @@ const SignUp = () => {
     try {
       const provider = new GoogleAuthProvider();
       const result = await signInWithPopup(auth, provider);
+
       if (result.user) {
+        // Get Firebase ID Token
+        const idToken = await result.user.getIdToken();
+        console.log("ID Token:", idToken); // Debugging
+
+        // Send ID Token to your backend to get JWT
+        const response = await axios.post(
+          "http://localhost:3000/api/auth/google-login",
+          {
+            idToken: idToken,
+          }
+        );
+
+        // Save JWT received from your backend in localStorage
+        localStorage.setItem("authToken", response.data.token);
+        console.log("Token added to local storage")
         toast.success("Logged in successfully!");
+        // Redirect user based on role
         navigate(loginAs === "Student" ? "/" : "/employer");
       }
     } catch (error) {
@@ -242,7 +261,6 @@ const SignUp = () => {
         }}
       >
         <div className="w-full sm:w-1/2 flex flex-col items-center bg-transparent p-6 rounded-lg pb-10 pt-10">
-
           <div className="flex items-center justify-around p-4">
             <div className="flex bg-gray-700 rounded-lg p-1">
               <button
