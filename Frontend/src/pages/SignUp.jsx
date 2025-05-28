@@ -52,13 +52,46 @@ const SignUp = () => {
         // await user.reload(); // 🔄 Force refresh user data
         if (user.emailVerified) {
           toast.success("Email verified successfully!");
-          // navigate("/"); // 🔄 Navigate after verification
+          navigate("/"); // 🔄 Navigate after verification
         }
       }
     });
 
     return () => unsubscribe();
   }, [auth, navigate]);
+
+   const googleSignIn = async () => {
+    try {
+      const provider = new GoogleAuthProvider();
+      const result = await signInWithPopup(auth, provider);
+
+      if (result.user) {
+        // Get Firebase ID Token
+        const idToken = await result.user.getIdToken();
+        console.log("ID Token:", idToken); // Debugging
+
+        // Send ID Token to your backend to get JWT
+        const response = await axios.post(
+          "http://localhost:3000/api/auth/google-login",
+          {
+            idToken: idToken,
+          }
+        );
+        console.log("code after request");
+
+        // Save JWT received from your backend in localStorage
+        localStorage.setItem("token", response.data.token);
+        // localStorage.setItem("token", idToken); // For testing, use Firebase ID Token directly
+        console.log("Token added to local storage")
+        toast.success("Logged in successfully!");
+        // Redirect user based on role
+        navigate(loginAs === "Student" ? "/" : "/employer");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Google sign in failed");
+    }
+  };
 
   const handleAuth = async () => {
     if (showPhoneInput && !showOtpInput) {
@@ -217,36 +250,7 @@ const SignUp = () => {
     }
   };
 
-  const googleSignIn = async () => {
-    try {
-      const provider = new GoogleAuthProvider();
-      const result = await signInWithPopup(auth, provider);
-
-      if (result.user) {
-        // Get Firebase ID Token
-        const idToken = await result.user.getIdToken();
-        console.log("ID Token:", idToken); // Debugging
-
-        // Send ID Token to your backend to get JWT
-        const response = await axios.post(
-          "http://localhost:3000/api/auth/google-login",
-          {
-            idToken: idToken,
-          }
-        );
-
-        // Save JWT received from your backend in localStorage
-        localStorage.setItem("authToken", response.data.token);
-        console.log("Token added to local storage")
-        toast.success("Logged in successfully!");
-        // Redirect user based on role
-        navigate(loginAs === "Student" ? "/" : "/employer");
-      }
-    } catch (error) {
-      console.error(error);
-      toast.error("Google sign in failed");
-    }
-  };
+ 
 
   return (
     <div className="h-auto sm:p-20 w-full flex justify-center">

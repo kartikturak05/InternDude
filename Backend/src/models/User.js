@@ -1,4 +1,3 @@
-// src/models/User.js
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 
@@ -22,6 +21,14 @@ const userSchema = new mongoose.Schema(
       type: String,
       enum: ["Student", "Employer"],
       required: true,
+    },
+    googleId: {
+      type: String,
+      unique: true,
+      sparse: true, // allows null/undefined for non-google users
+    },
+    profileImage: {
+      type: String,
     },
   },
   {
