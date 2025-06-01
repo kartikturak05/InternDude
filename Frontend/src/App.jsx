@@ -34,6 +34,8 @@ import InterviewSchedule from "./pages/InternviewSchedule";
 import InterviewScheduleSuccessful from "./pages/InterviewScheduleSuccessfull";
 import MyBookmarks from "./pages/MyBookmarks";
 import PrivateRoute from "./pages/PrivateRoute";
+import BoostApplicationDialog from "./pages/BoostApplicationDialog";
+import BoostApplicationPayment from "./pages/BoostApplicationPayment";
 
 function App() {
   const [showOptions, setShowOptions] = useState("");
@@ -93,6 +95,10 @@ function App() {
               <Route path="/Apply" element={<Apply />} />
               <Route path="/myapplications" element={<MyApplication />} />
               <Route path="/myapplications" element={<MyApplication />} />
+
+              <Route path="/BoostApplication" element={<BoostApplicationDialog/>} />
+              <Route path="/BoostApplication/PaymentsOptions" element={<BoostApplicationPayment/>} />
+
               <Route path="/editresume" element={<CreateResume />} />
               <Route path="/MyBookmarks" element={<MyBookmarks />} />
 
